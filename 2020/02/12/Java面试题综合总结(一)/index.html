@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Java面试题综合总结（一） | 小小强の博客</title><meta name="keywords" content="面试,Java"><meta name="author" content="小小强"><meta name="copyright" content="小小强"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="走在应届毕业生的路上，特此总结了一些面试题，还望一起学习交流。 1.面向对象和面向过程的区别 面向过程优点：性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux&#x2F;Unix等一般采用面向过程开发，性能是最重要的因素。缺点：没有面向对象易维护、易复用、易扩展  面向对象优点：易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面试题综合总结（一）">
+<meta property="og:url" content="https://codemaster520.github.io/2020/02/12/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E7%BB%BC%E5%90%88%E6%80%BB%E7%BB%93(%E4%B8%80)/index.html">
+<meta property="og:site_name" content="小小强の博客">
+<meta property="og:description" content="走在应届毕业生的路上，特此总结了一些面试题，还望一起学习交流。 1.面向对象和面向过程的区别 面向过程优点：性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux&#x2F;Unix等一般采用面向过程开发，性能是最重要的因素。缺点：没有面向对象易维护、易复用、易扩展  面向对象优点：易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post11.jpg">
+<meta property="article:published_time" content="2020-02-11T20:08:39.000Z">
+<meta property="article:modified_time" content="2020-09-16T12:58:50.863Z">
+<meta property="article:author" content="小小强">
+<meta property="article:tag" content="面试">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post11.jpg"><link rel="shortcut icon" href="/img/web.png"><link rel="canonical" href="https://codemaster520.github.io/2020/02/12/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E7%BB%BC%E5%90%88%E6%80%BB%E7%BB%93(%E4%B8%80)/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: 小小强","link":"链接: ","source":"来源: 小小强の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-09-16 20:58:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 放松</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post11.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">小小强の博客</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友人帐</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 放松</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">Java面试题综合总结（一）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-02-11T20:08:39.000Z" title="发表于 2020-02-12 04:08:39">2020-02-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-09-16T12:58:50.863Z" title="更新于 2020-09-16 20:58:50">2020-09-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>  走在应届毕业生的路上，特此总结了一些面试题，还望一起学习交流。</p>
+<h2 id="1-面向对象和面向过程的区别"><a href="#1-面向对象和面向过程的区别" class="headerlink" title="1.面向对象和面向过程的区别"></a><strong>1.面向对象和面向过程的区别</strong></h2><ul>
+<li><p>面向过程<br>优点：性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。<br>缺点：没有面向对象易维护、易复用、易扩展</p>
+</li>
+<li><p>面向对象<br>优点：易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护<br>缺点：性能比面向过程低</p>
+</li>
+</ul>
+<h2 id="2-Java的四个基本特性（抽象、封装、继承，多态）"><a href="#2-Java的四个基本特性（抽象、封装、继承，多态）" class="headerlink" title="2.Java的四个基本特性（抽象、封装、继承，多态）"></a><strong>2.Java的四个基本特性（抽象、封装、继承，多态）</strong></h2><ul>
+<li><p>抽象：就是把现实生活中的某一类东西提取出来，用程序代码表示，我们通常叫做类或者接口。抽象包括两个方面：一个是数据抽象，一个是过程抽象。数据抽象也就是对象的属性。过程抽象是对象的行为特征。</p>
+</li>
+<li><p>封装：把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行封装隐藏。封装分为属性的封装和方法的封装。</p>
+</li>
+<li><p>继承：是对有着共同特性的多类事物，进行再抽象成一个类。这个类就是多类事物的父类。父类的意义在于抽取多类事物的共性。</p>
+</li>
+<li><p>多态：允许不同类的对象对同一消息做出响应。方法的重载、类的覆盖正体现了多态。</p>
+</li>
+</ul>
+<h2 id="3-重载和重写的区别"><a href="#3-重载和重写的区别" class="headerlink" title="3.重载和重写的区别"></a><strong>3.重载和重写的区别</strong></h2><ul>
+<li><p>重载：发生在同一个类中，方法名必须相同，参数类型不同、个数不同、顺序不同，方法返回值和访问修饰符可以不同，发生在编译时。</p>
+</li>
+<li><p>重写：发生在父子类中，方法名、参数列表必须相同，返回值类型小于等于父类，抛出的异常小于等于父类，访问修饰符大于等于父类；如果父类方法访问修饰符为private则子类中就不是重写。</p>
+</li>
+</ul>
+<h2 id="4-构造器Constructor是否可被override"><a href="#4-构造器Constructor是否可被override" class="headerlink" title="4.构造器Constructor是否可被override"></a><strong>4.构造器Constructor是否可被override</strong></h2><p>构造器不能被重写，不能用static修饰构造器，只能用public<br>private protected这三个权限修饰符，且不能有返回语句。</p>
+<h2 id="5-访问控制符public-protected-private-以及默认的区别"><a href="#5-访问控制符public-protected-private-以及默认的区别" class="headerlink" title="5.访问控制符public,protected,private,以及默认的区别"></a><strong>5.访问控制符public,protected,private,以及默认的区别</strong></h2><ul>
+<li><p>private只有在本类中才能访问；</p>
+</li>
+<li><p>public在任何地方都能访问；</p>
+</li>
+<li><p>protected在同包内的类及包外的子类能访问；<br>默认不写在同包内能访问。</p>
+</li>
+</ul>
+<h2 id="6是否可以继承String类"><a href="#6是否可以继承String类" class="headerlink" title="6是否可以继承String类#"></a><strong>6是否可以继承String类#</strong></h2><ul>
+<li>String类是final类故不可以继承，一切由final修饰过的都不能继承。</li>
+</ul>
+<h2 id="7-String和StringBuffer、StringBuilder的区别"><a href="#7-String和StringBuffer、StringBuilder的区别" class="headerlink" title="7.String和StringBuffer、StringBuilder的区别"></a><strong>7.String和StringBuffer、StringBuilder的区别</strong></h2><ul>
+<li><p>可变性<br>String类中使用字符数组保存字符串，private<br>final char value[]，所以string对象是不可变的。StringBuilder与StringBuffer都继承自AbstractStringBuilder类，在AbstractStringBuilder中也是使用字符数组保存字符串，char[]<br>value，这两种对象都是可变的。</p>
+</li>
+<li><p>线程安全性<br>String中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder是StringBuilder与StringBuffer的公共父类，定义了一些字符串的基本操作，如expandCapacity、append、insert、indexOf等公共方法。StringBuffer对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder并没有对方法进行加同步锁，所以是非线程安全的。</p>
+</li>
+<li><p>性能<br>每次对String 类型进行改变的时候，都会生成一个新的String 对象，然后将指针指向新的String 对象。StringBuffer每次都会对<br>StringBuffer 对象本身进行操作，而不是生成新的对象并改变对象引用。相同情况下使用<br>StirngBuilder 相比使用<br>StringBuffer 仅能获得10%~15% 左右的性能提升，但却要冒多线程不安全的风险。</p>
+</li>
+</ul>
+<h2 id="8-hashCode和equals方法的关系"><a href="#8-hashCode和equals方法的关系" class="headerlink" title="8.hashCode和equals方法的关系"></a><strong>8.hashCode和equals方法的关系</strong></h2><p>equals相等，hashcode必相等；hashcode相等，equals可能不相等。</p>
+<h2 id="9-抽象类和接口的区别"><a href="#9-抽象类和接口的区别" class="headerlink" title="9.抽象类和接口的区别"></a><strong>9.抽象类和接口的区别</strong></h2><ul>
+<li><p>语法层次<br>抽象类和接口分别给出了不同的语法定义。</p>
+</li>
+<li><p>设计层次<br>抽象层次不同，抽象类是对类抽象，而接口是对行为的抽象。抽象类是对整个类整体进行抽象，包括属性、行为，但是接口却是对类局部（行为）进行抽象。抽象类是自底向上抽象而来的，接口是自顶向下设计出来的。</p>
+</li>
+<li><p>跨域不同<br>抽象类所体现的是一种继承关系，要想使得继承关系合理，父类和派生类之间必须存在”is-a”<br>关系，即父类和派生类在概念本质上应该是相同的。对于接口则不然，并不要求接口的实现者和接口定义在概念本质上是一致的，仅仅是实现了接口定义的契约而已，”like-a”的关系。</p>
+</li>
+</ul>
+<h2 id="10-自动装箱与拆箱"><a href="#10-自动装箱与拆箱" class="headerlink" title="10.自动装箱与拆箱"></a><strong>10.自动装箱与拆箱</strong></h2><ul>
+<li><p>装箱：将基本类型用它们对应的引用类型包装起来；</p>
+</li>
+<li><p>拆箱：将包装类型转换为基本数据类型；<br>Java使用自动装箱和拆箱机制，节省了常用数值的内存开销和创建对象的开销，提高了效率，由编译器来完成，编译器会在编译期根据语法决定是否进行装箱和拆箱动作。</p>
+</li>
+</ul>
+<h2 id="11-什么是泛型、为什么要使用以及泛型擦除"><a href="#11-什么是泛型、为什么要使用以及泛型擦除" class="headerlink" title="11.什么是泛型、为什么要使用以及泛型擦除"></a><strong>11.什么是泛型、为什么要使用以及泛型擦除</strong></h2><p>泛型，即“参数化类型”。<br>    创建集合时就指定集合元素的类型，该集合只能保存其指定类型的元素，避免使用强制类型转换。<br>Java编译器生成的字节码是不包涵泛型信息的，泛型类型信息将在编译处理是被擦除，这个过程即类型擦除。泛型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。<br>类型擦除的主要过程如下：<br>1）将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。<br>2）移除所有的类型参数。</p>
+<h2 id="12-Java中的集合类及关系图"><a href="#12-Java中的集合类及关系图" class="headerlink" title="12.Java中的集合类及关系图"></a><strong>12.Java中的集合类及关系图</strong></h2><ul>
+<li>List和Set继承自Collection接口。</li>
+<li>Set无序不允许元素重复。HashSet和TreeSet是两个主要的实现类。</li>
+<li>List有序且允许元素重复。ArrayList、LinkedList和Vector是三个主要的实现类。</li>
+<li>Map也属于集合系统，但和Collection接口没关系。Map是key对value的映射集合，其中key列就是一个集合。key不能重复，但是value可以重复。HashMap、TreeMap和Hashtable是三个主要的实现类。</li>
+<li>SortedSet和SortedMap接口对元素按指定规则排序，SortedMap是对key列进行排序。</li>
+</ul>
+<h2 id="13-HashMap实现原理"><a href="#13-HashMap实现原理" class="headerlink" title="13.HashMap实现原理"></a><strong>13.HashMap实现原理</strong></h2><p>具体原理参考文章：<br><a target="_blank" rel="noopener" href="http://zhangshixi.iteye.com/blog/672697">http://zhangshixi.iteye.com/blog/672697</a><br><a target="_blank" rel="noopener" href="http://www.admin10000.com/document/3322.html">http://www.admin10000.com/document/3322.html</a></p>
+<h2 id="14-HashTable实现原理"><a href="#14-HashTable实现原理" class="headerlink" title="14.HashTable实现原理"></a><strong>14.HashTable实现原理</strong></h2><p>具体原理参考文章：<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/skywang12345/p/3310887.html">http://www.cnblogs.com/skywang12345/p/3310887.html</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/chdjj/article/details/38581035">http://blog.csdn.net/chdjj/article/details/38581035</a></p>
+<h2 id="15-HashMap和HashTable区别"><a href="#15-HashMap和HashTable区别" class="headerlink" title="15.HashMap和HashTable区别"></a><strong>15.HashMap和HashTable区别</strong></h2><p>1）HashTable的方法前面都有synchronized来同步，是线程安全的；HashMap未经同步，是非线程安全的。<br>2）HashTable不允许null值(key和value都不可以) ；HashMap允许null值(key和value都可以)。<br>3）HashTable有一个contains(Object<br>value)功能和containsValue(Object<br>value)功能一样。<br>4）HashTable使用Enumeration进行遍历；HashMap使用Iterator进行遍历。<br>5）HashTable中hash数组默认大小是11，增加的方式是old*2+1；HashMap中hash数组的默认大小是16，而且一定是2的指数。<br>6）哈希值的使用不同，HashTable直接使用对象的hashCode； HashMap重新计算hash值，而且用与代替求模。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">小小强</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://codemaster520.github.io/2020/02/12/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E7%BB%BC%E5%90%88%E6%80%BB%E7%BB%93(%E4%B8%80)/">https://codemaster520.github.io/2020/02/12/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E7%BB%BC%E5%90%88%E6%80%BB%E7%BB%93(%E4%B8%80)/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://codemaster520.github.io" target="_blank">小小强の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9D%A2%E8%AF%95/">面试</a><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post11.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post7.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">我的第一个博客</div></div></a></div><div class="next-post pull-right"><a href="/2020/02/12/%E4%BD%A0%E5%A5%BD%EF%BC%8Chexo/"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post6.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">你好，hexo</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/11/28/Java面试题综合总结(二)/" title="Java面试题综合总结（二）"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post13.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-28</div><div class="title">Java面试题综合总结（二）</div></div></a></div><div><a href="/2020/04/10/Mybatis框架(新手)/" title="Mybatis框架(新手)"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-10</div><div class="title">Mybatis框架(新手)</div></div></a></div><div><a href="/2020/11/28/Mybatis面试整理(二)/" title="Mybatis面试整理(二)"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-28</div><div class="title">Mybatis面试整理(二)</div></div></a></div><div><a href="/2020/11/28/Mybatis面试整理(一)/" title="Mybatis面试整理(一)"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post8.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-28</div><div class="title">Mybatis面试整理(一)</div></div></a></div><div><a href="/2020/11/24/多线程并发模拟购票/" title="多线程并发模拟购票"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post13.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-24</div><div class="title">多线程并发模拟购票</div></div></a></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">小小强</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>github</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/codemaster520" target="_blank" title="Github"><i class="fa fa-github"></i></a><a class="social-icon" href="mailto:1787806000@qq.com" target="_blank" title="Email"><i class="fa fa-envelope"></i></a><a class="social-icon" href="https://qm.qq.com/cgi-bin/qm/qr?k=2luLqd-KdQJAliFpC04TlTX_R8RgjWeS&amp;noverify=0" target="_blank" title="qq"><i class="fa fa-qq"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到小小强的博客！</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">1.面向对象和面向过程的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Java%E7%9A%84%E5%9B%9B%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7%EF%BC%88%E6%8A%BD%E8%B1%A1%E3%80%81%E5%B0%81%E8%A3%85%E3%80%81%E7%BB%A7%E6%89%BF%EF%BC%8C%E5%A4%9A%E6%80%81%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">2.Java的四个基本特性（抽象、封装、继承，多态）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.</span> <span class="toc-text">3.重载和重写的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9E%84%E9%80%A0%E5%99%A8Constructor%E6%98%AF%E5%90%A6%E5%8F%AF%E8%A2%ABoverride"><span class="toc-number">4.</span> <span class="toc-text">4.构造器Constructor是否可被override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%E7%AC%A6public-protected-private-%E4%BB%A5%E5%8F%8A%E9%BB%98%E8%AE%A4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.</span> <span class="toc-text">5.访问控制符public,protected,private,以及默认的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BFString%E7%B1%BB"><span class="toc-number">6.</span> <span class="toc-text">6是否可以继承String类#</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-String%E5%92%8CStringBuffer%E3%80%81StringBuilder%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">7.</span> <span class="toc-text">7.String和StringBuffer、StringBuilder的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-hashCode%E5%92%8Cequals%E6%96%B9%E6%B3%95%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">8.</span> <span class="toc-text">8.hashCode和equals方法的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">9.</span> <span class="toc-text">9.抽象类和接口的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1%E4%B8%8E%E6%8B%86%E7%AE%B1"><span class="toc-number">10.</span> <span class="toc-text">10.自动装箱与拆箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%9B%E5%9E%8B%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E6%B3%9B%E5%9E%8B%E6%93%A6%E9%99%A4"><span class="toc-number">11.</span> <span class="toc-text">11.什么是泛型、为什么要使用以及泛型擦除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BB%E5%8F%8A%E5%85%B3%E7%B3%BB%E5%9B%BE"><span class="toc-number">12.</span> <span class="toc-text">12.Java中的集合类及关系图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-HashMap%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">13.</span> <span class="toc-text">13.HashMap实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-HashTable%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">14.</span> <span class="toc-text">14.HashTable实现原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-HashMap%E5%92%8CHashTable%E5%8C%BA%E5%88%AB"><span class="toc-number">15.</span> <span class="toc-text">15.HashMap和HashTable区别</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2020/11/28/Mybatis%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86(%E4%B8%80)/" title="Mybatis面试整理(一)"><img data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mybatis面试整理(一)"/></a><div class="content"><a class="title" href="/2020/11/28/Mybatis%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86(%E4%B8%80)/" title="Mybatis面试整理(一)">Mybatis面试整理(一)</a><time datetime="2020-11-28T03:30:59.504Z" title="发表于 2020-11-28 11:30:59">2020-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/28/Mybatis%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86(%E4%BA%8C)/" title="Mybatis面试整理(二)"><img data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mybatis面试整理(二)"/></a><div class="content"><a class="title" href="/2020/11/28/Mybatis%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86(%E4%BA%8C)/" title="Mybatis面试整理(二)">Mybatis面试整理(二)</a><time datetime="2020-11-28T03:30:59.492Z" title="发表于 2020-11-28 11:30:59">2020-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/28/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E7%BB%BC%E5%90%88%E6%80%BB%E7%BB%93(%E4%BA%8C)/" title="Java面试题综合总结（二）"><img data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java面试题综合总结（二）"/></a><div class="content"><a class="title" href="/2020/11/28/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E7%BB%BC%E5%90%88%E6%80%BB%E7%BB%93(%E4%BA%8C)/" title="Java面试题综合总结（二）">Java面试题综合总结（二）</a><time datetime="2020-11-28T03:30:59.146Z" title="发表于 2020-11-28 11:30:59">2020-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/28/hello-world/" title="Hello World"><img data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2020/11/28/hello-world/" title="Hello World">Hello World</a><time datetime="2020-11-27T18:01:40.488Z" title="发表于 2020-11-28 02:01:40">2020-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/24/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E6%A8%A1%E6%8B%9F%E8%B4%AD%E7%A5%A8/" title="多线程并发模拟购票"><img data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster520/CDN/post_img/post13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="多线程并发模拟购票"/></a><div class="content"><a class="title" href="/2020/11/24/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E6%A8%A1%E6%8B%9F%E8%B4%AD%E7%A5%A8/" title="多线程并发模拟购票">多线程并发模拟购票</a><time datetime="2020-11-24T13:27:51.000Z" title="发表于 2020-11-24 21:27:51">2020-11-24</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By 小小强</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></div></body></html>
