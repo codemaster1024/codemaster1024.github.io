@@ -1,3 +1,11 @@
+/**普通指针样式**/
+body {
+  cursor: url("https://cdn.jsdelivr.net/gh/codemaster1024/CDN/plug/mouse.cur"), default;
+}
+/**链接指针样式**/
+a:hover {
+  cursor: url("https://cdn.jsdelivr.net/gh/codemaster1024/CDN/plug/mouse.cur"), pointer;
+}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
   line-height: 1.15;
