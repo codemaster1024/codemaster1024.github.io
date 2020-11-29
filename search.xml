@@ -82,6 +82,33 @@
       </tags>
   </entry>
   <entry>
+    <title>Java面试题综合总结（二）</title>
+    <url>/posts/23859/</url>
+    <content><![CDATA[<h2 id="16-ArrayList和vector区别"><a href="#16-ArrayList和vector区别" class="headerlink" title="16.ArrayList和vector区别"></a><strong>16.ArrayList和vector区别</strong></h2><p>ArrayList和Vector都实现了List接口，都是通过数组实现的。</p>
+<p>Vector是线程安全的，而ArrayList是非线程安全的。<br>List第一次创建的时候，会有一个初始大小，随着不断向List中增加元素，当List 认为容量不够的时候就会进行扩容。Vector缺省情况下自动增长原来一倍的数组长度，ArrayList增长原来的50%。</p>
+<h2 id="17-ArrayList和LinkedList区别及使用场景"><a href="#17-ArrayList和LinkedList区别及使用场景" class="headerlink" title="17.ArrayList和LinkedList区别及使用场景"></a><strong>17.ArrayList和LinkedList区别及使用场景</strong></h2><p>区别<br>ArrayList底层是用数组实现的，可以认为ArrayList是一个可改变大小的数组。随着越来越多的元素被添加到ArrayList中，其规模是动态增加的。<br>LinkedList底层是通过双向链表实现的， LinkedList和ArrayList相比，增删的速度较快。但是查询和修改值的速度较慢。同时，LinkedList还实现了Queue接口，所以他还提供了offer(),<br>peek(), poll()等方法。<br>使用场景<br>LinkedList更适合从中间插入或者删除（链表的特性）。<br>ArrayList更适合检索和在末尾插入或删除（数组的特性）。</p>
+<h2 id="18-Collection和Collections的区别"><a href="#18-Collection和Collections的区别" class="headerlink" title="18.Collection和Collections的区别"></a><strong>18.Collection和Collections的区别</strong></h2><p>java.util.Collection 是一个集合接口。它提供了对集合对象进行基本操作的通用接口方法。Collection接口在Java 类库中有很多具体的实现。Collection接口的意义是为各种具体的集合提供了最大化的统一操作方式。<br>java.util.Collections 是一个包装类。它包含有各种有关集合操作的静态多态方法。此类不能实例化，就像一个工具类，服务于Java的Collection框架。</p>
+<h2 id="19-Concurrenthashmap实现原理"><a href="#19-Concurrenthashmap实现原理" class="headerlink" title="19.Concurrenthashmap实现原理"></a><strong>19.Concurrenthashmap实现原理</strong></h2><p>具体原理参考文章：<br><a href="http://www.cnblogs.com/ITtangtang/p/3948786.html">http://www.cnblogs.com/ITtangtang/p/3948786.html</a><br><a href="http://ifeve.com/concurrenthashmap/">http://ifeve.com/concurrenthashmap/</a></p>
+<h2 id="20-Error、Exception区别"><a href="#20-Error、Exception区别" class="headerlink" title="20.Error、Exception区别"></a><strong>20.Error、Exception区别</strong></h2><p>Error类和Exception类的父类都是throwable类，他们的区别是：<br>Error类一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和和预防，遇到这样的错误，建议让程序终止。<br>Exception类表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。</p>
+<h2 id="21-Unchecked"><a href="#21-Unchecked" class="headerlink" title="21.Unchecked"></a><strong>21.Unchecked</strong></h2><p>Exception和Checked Exception，各列举几个#<br>Unchecked Exception:<br>a. 指的是程序的瑕疵或逻辑错误，并且在运行时无法恢复。<br>b. 包括Error与RuntimeException及其子类，如：OutOfMemoryError,<br>UndeclaredThrowableException, IllegalArgumentException,<br>IllegalMonitorStateException, NullPointerException, IllegalStateException,<br>IndexOutOfBoundsException等。<br>c. 语法上不需要声明抛出异常。<br>Checked Exception:<br>a. 代表程序不能直接控制的无效外界情况（如用户输入，数据库问题，网络异常，文件丢失等）<br>b. 除了Error和RuntimeException及其子类之外，如：ClassNotFoundException,<br>NamingException, ServletException, SQLException, IOException等。<br>c. 需要try catch处理或throws声明抛出异常。</p>
+<h2 id="22-Java中如何实现代理机制-JDK、CGLIB"><a href="#22-Java中如何实现代理机制-JDK、CGLIB" class="headerlink" title="22.Java中如何实现代理机制(JDK、CGLIB)"></a><strong>22.Java中如何实现代理机制(JDK、CGLIB)</strong></h2><p>JDK动态代理：代理类和目标类实现了共同的接口，用到InvocationHandler接口。<br>CGLIB动态代理：代理类是目标类的子类，用到MethodInterceptor接口。</p>
+<h2 id="23-多线程的实现方式"><a href="#23-多线程的实现方式" class="headerlink" title="23.多线程的实现方式"></a><strong>23.多线程的实现方式</strong></h2><p>继承Thread类、实现Runnable接口、使用ExecutorService、Callable、Future实现有返回结果的多线程。</p>
+<h2 id="24-如何停止一个线程"><a href="#24-如何停止一个线程" class="headerlink" title="24.如何停止一个线程"></a><strong>24.如何停止一个线程</strong></h2><p>参考文章：<br><a href="http://www.cnblogs.com/greta/p/5624839.html">http://www.cnblogs.com/greta/p/5624839.html</a></p>
+<h2 id="25-什么是线程安全"><a href="#25-什么是线程安全" class="headerlink" title="25.什么是线程安全"></a><strong>25.什么是线程安全</strong></h2><p>线程安全就是多线程访问同一代码，不会产生不确定的结果。</p>
+<h2 id="26-如何保证线程安全"><a href="#26-如何保证线程安全" class="headerlink" title="26.如何保证线程安全"></a><strong>26.如何保证线程安全</strong></h2><p>对非安全的代码进行加锁控制；<br>使用线程安全的类；<br>多线程并发情况下，线程共享的变量改为方法级的局部变量。</p>
+<h2 id="27-synchronized如何使用"><a href="#27-synchronized如何使用" class="headerlink" title="27.synchronized如何使用"></a><strong>27.synchronized如何使用</strong></h2><p>synchronized是Java中的关键字，是一种同步锁。它修饰的对象有以下几种：<br>1). 修饰一个代码块，被修饰的代码块称为同步语句块，其作用的范围是大括号{}括起来的代码，作用的对象是调用这个代码块的对象；<br>2). 修饰一个方法，被修饰的方法称为同步方法，其作用的范围是整个方法，作用的对象是调用这个方法的对象；<br>3). 修改一个静态的方法，其作用的范围是整个静态方法，作用的对象是这个类的所有对象；<br>4). 修改一个类，其作用的范围是synchronized后面括号括起来的部分，作用主的对象是这个类的所有对象。</p>
+<h2 id="28-synchronized和Lock的区别"><a href="#28-synchronized和Lock的区别" class="headerlink" title="28.synchronized和Lock的区别"></a><strong>28.synchronized和Lock的区别</strong></h2><p>主要相同点：Lock能完成synchronized所实现的所有功能<br>主要不同点：Lock有比synchronized更精确的线程语义和更好的性能。Lock的锁定是通过代码实现的，而synchronized是在JVM层面上实现的，synchronized会自动释放锁，而Lock一定要求程序员手工释放，并且必须在finally从句中释放。Lock还有更强大的功能，例如，它的tryLock方法可以非阻塞方式去拿锁。Lock锁的范围有局限性，块范围，而synchronized可以锁住块、对象、类。</p>
+<h2 id="29-多线程如何进行信息交互"><a href="#29-多线程如何进行信息交互" class="headerlink" title="29.多线程如何进行信息交互"></a><strong>29.多线程如何进行信息交互</strong></h2><p>void notify() 唤醒在此对象监视器上等待的单个线程。<br>void notifyAll() 唤醒在此对象监视器上等待的所有线程。<br>void wait() 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法。<br>void wait(long timeout) 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法，或者超过指定的时间量。<br>void wait(long timeout, int nanos) 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法，或者其他某个线程中断当前线程，或者已超过某个实际时间量。</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mybatis框架(新手)</title>
     <url>/posts/5003/</url>
     <content><![CDATA[<h2 id="Mybatis框架入门-适合新手"><a href="#Mybatis框架入门-适合新手" class="headerlink" title="Mybatis框架入门(适合新手)"></a>Mybatis框架入门(适合新手)</h2><p>此文章适用新手简单认识一下mybatis框架。方便以后学习面试中提升；</p>
@@ -118,33 +145,6 @@
 <p>4）用xml配置文件引入映射器</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;file:///var/mappers+文件路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java面试题综合总结（二）</title>
-    <url>/posts/23859/</url>
-    <content><![CDATA[<h2 id="16-ArrayList和vector区别"><a href="#16-ArrayList和vector区别" class="headerlink" title="16.ArrayList和vector区别"></a><strong>16.ArrayList和vector区别</strong></h2><p>ArrayList和Vector都实现了List接口，都是通过数组实现的。</p>
-<p>Vector是线程安全的，而ArrayList是非线程安全的。<br>List第一次创建的时候，会有一个初始大小，随着不断向List中增加元素，当List 认为容量不够的时候就会进行扩容。Vector缺省情况下自动增长原来一倍的数组长度，ArrayList增长原来的50%。</p>
-<h2 id="17-ArrayList和LinkedList区别及使用场景"><a href="#17-ArrayList和LinkedList区别及使用场景" class="headerlink" title="17.ArrayList和LinkedList区别及使用场景"></a><strong>17.ArrayList和LinkedList区别及使用场景</strong></h2><p>区别<br>ArrayList底层是用数组实现的，可以认为ArrayList是一个可改变大小的数组。随着越来越多的元素被添加到ArrayList中，其规模是动态增加的。<br>LinkedList底层是通过双向链表实现的， LinkedList和ArrayList相比，增删的速度较快。但是查询和修改值的速度较慢。同时，LinkedList还实现了Queue接口，所以他还提供了offer(),<br>peek(), poll()等方法。<br>使用场景<br>LinkedList更适合从中间插入或者删除（链表的特性）。<br>ArrayList更适合检索和在末尾插入或删除（数组的特性）。</p>
-<h2 id="18-Collection和Collections的区别"><a href="#18-Collection和Collections的区别" class="headerlink" title="18.Collection和Collections的区别"></a><strong>18.Collection和Collections的区别</strong></h2><p>java.util.Collection 是一个集合接口。它提供了对集合对象进行基本操作的通用接口方法。Collection接口在Java 类库中有很多具体的实现。Collection接口的意义是为各种具体的集合提供了最大化的统一操作方式。<br>java.util.Collections 是一个包装类。它包含有各种有关集合操作的静态多态方法。此类不能实例化，就像一个工具类，服务于Java的Collection框架。</p>
-<h2 id="19-Concurrenthashmap实现原理"><a href="#19-Concurrenthashmap实现原理" class="headerlink" title="19.Concurrenthashmap实现原理"></a><strong>19.Concurrenthashmap实现原理</strong></h2><p>具体原理参考文章：<br><a href="http://www.cnblogs.com/ITtangtang/p/3948786.html">http://www.cnblogs.com/ITtangtang/p/3948786.html</a><br><a href="http://ifeve.com/concurrenthashmap/">http://ifeve.com/concurrenthashmap/</a></p>
-<h2 id="20-Error、Exception区别"><a href="#20-Error、Exception区别" class="headerlink" title="20.Error、Exception区别"></a><strong>20.Error、Exception区别</strong></h2><p>Error类和Exception类的父类都是throwable类，他们的区别是：<br>Error类一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和和预防，遇到这样的错误，建议让程序终止。<br>Exception类表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。</p>
-<h2 id="21-Unchecked"><a href="#21-Unchecked" class="headerlink" title="21.Unchecked"></a><strong>21.Unchecked</strong></h2><p>Exception和Checked Exception，各列举几个#<br>Unchecked Exception:<br>a. 指的是程序的瑕疵或逻辑错误，并且在运行时无法恢复。<br>b. 包括Error与RuntimeException及其子类，如：OutOfMemoryError,<br>UndeclaredThrowableException, IllegalArgumentException,<br>IllegalMonitorStateException, NullPointerException, IllegalStateException,<br>IndexOutOfBoundsException等。<br>c. 语法上不需要声明抛出异常。<br>Checked Exception:<br>a. 代表程序不能直接控制的无效外界情况（如用户输入，数据库问题，网络异常，文件丢失等）<br>b. 除了Error和RuntimeException及其子类之外，如：ClassNotFoundException,<br>NamingException, ServletException, SQLException, IOException等。<br>c. 需要try catch处理或throws声明抛出异常。</p>
-<h2 id="22-Java中如何实现代理机制-JDK、CGLIB"><a href="#22-Java中如何实现代理机制-JDK、CGLIB" class="headerlink" title="22.Java中如何实现代理机制(JDK、CGLIB)"></a><strong>22.Java中如何实现代理机制(JDK、CGLIB)</strong></h2><p>JDK动态代理：代理类和目标类实现了共同的接口，用到InvocationHandler接口。<br>CGLIB动态代理：代理类是目标类的子类，用到MethodInterceptor接口。</p>
-<h2 id="23-多线程的实现方式"><a href="#23-多线程的实现方式" class="headerlink" title="23.多线程的实现方式"></a><strong>23.多线程的实现方式</strong></h2><p>继承Thread类、实现Runnable接口、使用ExecutorService、Callable、Future实现有返回结果的多线程。</p>
-<h2 id="24-如何停止一个线程"><a href="#24-如何停止一个线程" class="headerlink" title="24.如何停止一个线程"></a><strong>24.如何停止一个线程</strong></h2><p>参考文章：<br><a href="http://www.cnblogs.com/greta/p/5624839.html">http://www.cnblogs.com/greta/p/5624839.html</a></p>
-<h2 id="25-什么是线程安全"><a href="#25-什么是线程安全" class="headerlink" title="25.什么是线程安全"></a><strong>25.什么是线程安全</strong></h2><p>线程安全就是多线程访问同一代码，不会产生不确定的结果。</p>
-<h2 id="26-如何保证线程安全"><a href="#26-如何保证线程安全" class="headerlink" title="26.如何保证线程安全"></a><strong>26.如何保证线程安全</strong></h2><p>对非安全的代码进行加锁控制；<br>使用线程安全的类；<br>多线程并发情况下，线程共享的变量改为方法级的局部变量。</p>
-<h2 id="27-synchronized如何使用"><a href="#27-synchronized如何使用" class="headerlink" title="27.synchronized如何使用"></a><strong>27.synchronized如何使用</strong></h2><p>synchronized是Java中的关键字，是一种同步锁。它修饰的对象有以下几种：<br>1). 修饰一个代码块，被修饰的代码块称为同步语句块，其作用的范围是大括号{}括起来的代码，作用的对象是调用这个代码块的对象；<br>2). 修饰一个方法，被修饰的方法称为同步方法，其作用的范围是整个方法，作用的对象是调用这个方法的对象；<br>3). 修改一个静态的方法，其作用的范围是整个静态方法，作用的对象是这个类的所有对象；<br>4). 修改一个类，其作用的范围是synchronized后面括号括起来的部分，作用主的对象是这个类的所有对象。</p>
-<h2 id="28-synchronized和Lock的区别"><a href="#28-synchronized和Lock的区别" class="headerlink" title="28.synchronized和Lock的区别"></a><strong>28.synchronized和Lock的区别</strong></h2><p>主要相同点：Lock能完成synchronized所实现的所有功能<br>主要不同点：Lock有比synchronized更精确的线程语义和更好的性能。Lock的锁定是通过代码实现的，而synchronized是在JVM层面上实现的，synchronized会自动释放锁，而Lock一定要求程序员手工释放，并且必须在finally从句中释放。Lock还有更强大的功能，例如，它的tryLock方法可以非阻塞方式去拿锁。Lock锁的范围有局限性，块范围，而synchronized可以锁住块、对象、类。</p>
-<h2 id="29-多线程如何进行信息交互"><a href="#29-多线程如何进行信息交互" class="headerlink" title="29.多线程如何进行信息交互"></a><strong>29.多线程如何进行信息交互</strong></h2><p>void notify() 唤醒在此对象监视器上等待的单个线程。<br>void notifyAll() 唤醒在此对象监视器上等待的所有线程。<br>void wait() 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法。<br>void wait(long timeout) 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法，或者超过指定的时间量。<br>void wait(long timeout, int nanos) 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法，或者其他某个线程中断当前线程，或者已超过某个实际时间量。</p>
 ]]></content>
       <categories>
         <category>面试</category>
@@ -293,6 +293,20 @@
       </tags>
   </entry>
   <entry>
+    <title>我的第一个博客</title>
+    <url>/posts/57728/</url>
+    <content><![CDATA[<h2 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h2><h1 id="About-This-Blog"><a href="#About-This-Blog" class="headerlink" title="About This  Blog"></a>About This  Blog</h1><p>上手体验了 hexo 、typecho、 catfish 以后</p>
+<p>typecho和hexo还可以满足我这个手残党的。</p>
+<p>以后会在这里不定期更新</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>多线程并发模拟购票</title>
     <url>/posts/120343/</url>
     <content><![CDATA[<h1 id="多线程并发模拟购票"><a href="#多线程并发模拟购票" class="headerlink" title="多线程并发模拟购票"></a>多线程并发模拟购票</h1><p>需求：用多线程模拟车站购票。100张票，200个人去购买。</p>
@@ -312,20 +326,6 @@
       <tags>
         <tag>Java</tag>
         <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的第一个博客</title>
-    <url>/posts/57728/</url>
-    <content><![CDATA[<h2 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h2><h1 id="About-This-Blog"><a href="#About-This-Blog" class="headerlink" title="About This  Blog"></a>About This  Blog</h1><p>上手体验了 hexo 、typecho、 catfish 以后</p>
-<p>typecho和hexo还可以满足我这个手残党的。</p>
-<p>以后会在这里不定期更新</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
