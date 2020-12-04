@@ -305,38 +305,38 @@
 <h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><ol>
 <li>直接运行下面这个exe</li>
 </ol>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/FileZilla1.png" alt="image-20201203150153779"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/FileZilla1.png" alt="image-20201203150153779"></p>
 <ol start="2">
 <li><p>启动服务</p>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Filezllia2.png" alt="image-20201203150246256"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezllia2.png" alt="image-20201203150246256"></p>
 <ol start="3">
 <li><p>运行服务端软件</p>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Fillezilla3.png" alt="image-20201203150440444"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla3.png" alt="image-20201203150440444"></p>
 </li>
 </ol>
 </li>
 <li><p>选择这个添加用户</p>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Filezilla4.png" alt="image-20201203151128124"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla4.png" alt="image-20201203151128124"></p>
 </li>
 <li><p>设置用户</p>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Filezilla5.png" alt="image-20201203150554956"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla5.png" alt="image-20201203150554956"></p>
 <ol start="5">
 <li>设置密码</li>
 </ol>
 </li>
 </ol>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Fillezilla6.png" alt="image-20201203151414970"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla6.png" alt="image-20201203151414970"></p>
 <p>3.设置共享文件夹</p>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Fillezilla7.png" alt="image-20201203151545703"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla7.png" alt="image-20201203151545703"></p>
 <p>这时候服务端就设置好啦</p>
 <h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>下面配置客户端软件</p>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Filezilla8.png" alt="image-20201203151712608"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla8.png" alt="image-20201203151712608"></p>
 <ol>
 <li>新建站点</li>
 </ol>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Filezilla9.png" alt="image-20201203151914710"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla9.png" alt="image-20201203151914710"></p>
 <p>3.传输设置</p>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Fillezilla10.png" alt="image-20201203152132810"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla10.png" alt="image-20201203152132810"></p>
 <ol start="4">
 <li>点击连接</li>
 <li>测试连接，打开浏览器进行访问<ul>
@@ -346,7 +346,7 @@
 </li>
 </ol>
 <p>6.访问成功</p>
-<p><img src= "/img/loading.gif" data-lazy-src="%E4%BD%BF%E7%94%A8FileZilla%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAFTP%E6%9C%8D%E5%8A%A1%E5%99%A8.assets/Fillezilla11.png" alt="image-20201203173304627"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla11.png" alt="image-20201203173304627"></p>
 ]]></content>
       <categories>
         <category>效率工具</category>
