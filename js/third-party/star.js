@@ -43,7 +43,7 @@ function startInit() {
             display: "block",
             pointerEvents: "none",
             "z-index": "10000000",
-            fontSize: "20px",
+            fontSize: "15px",
             "will-change": "transform"
         }, this.init = function (t, i, n) {
             this.velocity = {
@@ -74,4 +74,4 @@ function startInit() {
 }
 
 
-  setTimeout(startInit(),1600)
+  setTimeout(startInit(),1000)
