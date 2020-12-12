@@ -109,6 +109,52 @@
       </tags>
   </entry>
   <entry>
+    <title>Mybatis框架(新手)</title>
+    <url>/posts/5003/</url>
+    <content><![CDATA[<h2 id="Mybatis框架入门-适合新手"><a href="#Mybatis框架入门-适合新手" class="headerlink" title="Mybatis框架入门(适合新手)"></a>Mybatis框架入门(适合新手)</h2><p>此文章适用新手简单认识一下mybatis框架。方便以后学习面试中提升；</p>
+<p>想要深入的理解mybatis框架，首要前提是学习它的核心组件，mybatis的核心组件包括：SqlSessionFactoryBuilder（构造器）、SqlSessionFactory（工厂接口）、SqlSession（会话接口）、SQL Mapper（映射器）。</p>
+<h3 id="一-、SqlSessionFactoryBuilder（构造器）"><a href="#一-、SqlSessionFactoryBuilder（构造器）" class="headerlink" title="一 、SqlSessionFactoryBuilder（构造器）"></a>一 、SqlSessionFactoryBuilder（构造器）</h3><p>​    作用：根据配置信息或者代码来生成SqlSessionFactory</p>
+<p>​    实现原理：SqlSessionFactoryBuilder类负责构建SqlSessionFactory，该类下提供了多个build的重载方法。因为这些方法的参数不统一，为了方便调用，所以重载了多个方法。但是SqlSessionFactoryBuilder真正重载build方法只有三种，分别是InputStream（字节流）、Reader（字符流）、Configuration（类），字节流和字符流都是通过读取XML配置文件的形式创建SqlSessionFactory，而Configuration的是java代码方式创建SqlSessionFactory；</p>
+<h3 id="二-、SqlSessionFactory（工厂接口）"><a href="#二-、SqlSessionFactory（工厂接口）" class="headerlink" title="二 、SqlSessionFactory（工厂接口）"></a>二 、SqlSessionFactory（工厂接口）</h3><p>​    作用：生产SqlSession会话</p>
+<p>​    实现原理：sqlSession = sqlSessionFactory.openSession();</p>
+<h3 id="三、-SqlSession（会话）"><a href="#三、-SqlSession（会话）" class="headerlink" title="三、 SqlSession（会话）"></a>三、 SqlSession（会话）</h3><p>​    作用：1,获取映射器，让映射器通过命名空间和方法名称找到对应的SQL，发送给数据库执行并返回结果；2,通过update、insert、select、delete等方法，带上SQL的id来操作在XML中配置好的SQL，从而完成工作，同时它也支持事务，通过commit、rollback方法提交或者回滚事务。</p>
+<p>先认识一下SqlSession四大对象：</p>
+<p>执行器Executor：</p>
+<p>种类：SIMPLE：简易执行器，默认执行器</p>
+<p>​     REUSE：一种执行器重用预处理语句</p>
+<p>​     BATCH：执行器重用语句和批量更新，针对批量专用的执行器。</p>
+<p>数据库会话器StatementHandler：</p>
+<p>种类：SimpleStatementHandler：对应SIMPLE执行器</p>
+<p>​    PrepareStatementHandler：对应REUSE执行器</p>
+<p>​    CallableStatementHandler：对应BATCH执行器</p>
+<p>参数处理器ParameterHandler：</p>
+<p>​    用于SQL对参数的处理</p>
+<p>结果处理器ResultHandler：</p>
+<p>用于进行最后数据集ResultSet的封装返回处理。</p>
+<h3 id="三、Sql-Mapper（映射器）"><a href="#三、Sql-Mapper（映射器）" class="headerlink" title="三、Sql Mapper（映射器）"></a>三、Sql Mapper（映射器）</h3><p>作用：1、定义参数、2、描述缓存、3、描述SQL语句、4、定义查询结果和POJO的映射关系</p>
+<p>引入映射器的方法</p>
+<p>1）用文件路径引入映射器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口全路径的配置文件&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2)用包名引入映射器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口包的全路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3）用类注册引入映射器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口类的路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>4）用xml配置文件引入映射器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;file:///var/mappers+文件路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mybatis面试整理(二)</title>
     <url>/posts/38514/</url>
     <content><![CDATA[<h3 id="16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？"><a href="#16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？" class="headerlink" title="16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？"></a>16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？</h3><p>答：、、、、</p>
@@ -178,49 +224,67 @@
       </tags>
   </entry>
   <entry>
-    <title>Mybatis框架(新手)</title>
-    <url>/posts/5003/</url>
-    <content><![CDATA[<h2 id="Mybatis框架入门-适合新手"><a href="#Mybatis框架入门-适合新手" class="headerlink" title="Mybatis框架入门(适合新手)"></a>Mybatis框架入门(适合新手)</h2><p>此文章适用新手简单认识一下mybatis框架。方便以后学习面试中提升；</p>
-<p>想要深入的理解mybatis框架，首要前提是学习它的核心组件，mybatis的核心组件包括：SqlSessionFactoryBuilder（构造器）、SqlSessionFactory（工厂接口）、SqlSession（会话接口）、SQL Mapper（映射器）。</p>
-<h3 id="一-、SqlSessionFactoryBuilder（构造器）"><a href="#一-、SqlSessionFactoryBuilder（构造器）" class="headerlink" title="一 、SqlSessionFactoryBuilder（构造器）"></a>一 、SqlSessionFactoryBuilder（构造器）</h3><p>​    作用：根据配置信息或者代码来生成SqlSessionFactory</p>
-<p>​    实现原理：SqlSessionFactoryBuilder类负责构建SqlSessionFactory，该类下提供了多个build的重载方法。因为这些方法的参数不统一，为了方便调用，所以重载了多个方法。但是SqlSessionFactoryBuilder真正重载build方法只有三种，分别是InputStream（字节流）、Reader（字符流）、Configuration（类），字节流和字符流都是通过读取XML配置文件的形式创建SqlSessionFactory，而Configuration的是java代码方式创建SqlSessionFactory；</p>
-<h3 id="二-、SqlSessionFactory（工厂接口）"><a href="#二-、SqlSessionFactory（工厂接口）" class="headerlink" title="二 、SqlSessionFactory（工厂接口）"></a>二 、SqlSessionFactory（工厂接口）</h3><p>​    作用：生产SqlSession会话</p>
-<p>​    实现原理：sqlSession = sqlSessionFactory.openSession();</p>
-<h3 id="三、-SqlSession（会话）"><a href="#三、-SqlSession（会话）" class="headerlink" title="三、 SqlSession（会话）"></a>三、 SqlSession（会话）</h3><p>​    作用：1,获取映射器，让映射器通过命名空间和方法名称找到对应的SQL，发送给数据库执行并返回结果；2,通过update、insert、select、delete等方法，带上SQL的id来操作在XML中配置好的SQL，从而完成工作，同时它也支持事务，通过commit、rollback方法提交或者回滚事务。</p>
-<p>先认识一下SqlSession四大对象：</p>
-<p>执行器Executor：</p>
-<p>种类：SIMPLE：简易执行器，默认执行器</p>
-<p>​     REUSE：一种执行器重用预处理语句</p>
-<p>​     BATCH：执行器重用语句和批量更新，针对批量专用的执行器。</p>
-<p>数据库会话器StatementHandler：</p>
-<p>种类：SimpleStatementHandler：对应SIMPLE执行器</p>
-<p>​    PrepareStatementHandler：对应REUSE执行器</p>
-<p>​    CallableStatementHandler：对应BATCH执行器</p>
-<p>参数处理器ParameterHandler：</p>
-<p>​    用于SQL对参数的处理</p>
-<p>结果处理器ResultHandler：</p>
-<p>用于进行最后数据集ResultSet的封装返回处理。</p>
-<h3 id="三、Sql-Mapper（映射器）"><a href="#三、Sql-Mapper（映射器）" class="headerlink" title="三、Sql Mapper（映射器）"></a>三、Sql Mapper（映射器）</h3><p>作用：1、定义参数、2、描述缓存、3、描述SQL语句、4、定义查询结果和POJO的映射关系</p>
-<p>引入映射器的方法</p>
-<p>1）用文件路径引入映射器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口全路径的配置文件&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>2)用包名引入映射器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口包的全路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>3）用类注册引入映射器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口类的路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>4）用xml配置文件引入映射器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;file:///var/mappers+文件路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+    <title>使用FileZilla在本地搭建FTP服务器</title>
+    <url>/posts/18455/</url>
+    <content><![CDATA[<p>使用FileZilla在本地搭建FTP服务器</p>
+<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ol>
+<li>服务端：FileZilla_server</li>
+<li>客户端：filezilla</li>
+</ol>
+<p>这两个软件我这里都是免安装的，可以直接使用，无需安装</p>
+<p>需要注意的是  你要搭建FTP服务端的那台机器需要防火墙开启FTP的默认端:<strong>开启 21端口</strong></p>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><ol>
+<li>直接运行下面这个exe</li>
+</ol>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/FileZilla1.png" alt="image-20201203150153779"></p>
+<ol start="2">
+<li><p>启动服务</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezllia2.png" alt="image-20201203150246256"></p>
+<ol start="3">
+<li><p>运行服务端软件</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla3.png" alt="image-20201203150440444"></p>
+</li>
+</ol>
+</li>
+<li><p>选择这个添加用户</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla4.png" alt="image-20201203151128124"></p>
+</li>
+<li><p>设置用户</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla5.png" alt="image-20201203150554956"></p>
+<ol start="5">
+<li>设置密码</li>
+</ol>
+</li>
+</ol>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla6.png" alt="image-20201203151414970"></p>
+<p>3.设置共享文件夹</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla7.png" alt="image-20201203151545703"></p>
+<p>这时候服务端就设置好啦</p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>下面配置客户端软件</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla8.png" alt="image-20201203151712608"></p>
+<ol>
+<li>新建站点</li>
+</ol>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla9.png" alt="image-20201203151914710"></p>
+<p>3.传输设置</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla10.png" alt="image-20201203152132810"></p>
+<ol start="4">
+<li>点击连接</li>
+<li>测试连接，打开浏览器进行访问<ul>
+<li>在浏览器地址栏输入：FTP://127.0.0.1回车访问</li>
+<li>输入用户名和密码即可访问</li>
+</ul>
+</li>
+</ol>
+<p>6.访问成功</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla11.png" alt="image-20201203173304627"></p>
 ]]></content>
       <categories>
-        <category>面试</category>
+        <category>效率工具</category>
       </categories>
       <tags>
-        <tag>面试</tag>
-        <tag>Java</tag>
+        <tag>工具</tag>
+        <tag>FTP</tag>
       </tags>
   </entry>
   <entry>
@@ -293,67 +357,17 @@
       </tags>
   </entry>
   <entry>
-    <title>使用FileZilla在本地搭建FTP服务器</title>
-    <url>/posts/18455/</url>
-    <content><![CDATA[<p>使用FileZilla在本地搭建FTP服务器</p>
-<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ol>
-<li>服务端：FileZilla_server</li>
-<li>客户端：filezilla</li>
-</ol>
-<p>这两个软件我这里都是免安装的，可以直接使用，无需安装</p>
-<p>需要注意的是  你要搭建FTP服务端的那台机器需要防火墙开启FTP的默认端:<strong>开启 21端口</strong></p>
-<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><ol>
-<li>直接运行下面这个exe</li>
-</ol>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/FileZilla1.png" alt="image-20201203150153779"></p>
-<ol start="2">
-<li><p>启动服务</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezllia2.png" alt="image-20201203150246256"></p>
-<ol start="3">
-<li><p>运行服务端软件</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla3.png" alt="image-20201203150440444"></p>
-</li>
-</ol>
-</li>
-<li><p>选择这个添加用户</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla4.png" alt="image-20201203151128124"></p>
-</li>
-<li><p>设置用户</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla5.png" alt="image-20201203150554956"></p>
-<ol start="5">
-<li>设置密码</li>
-</ol>
-</li>
-</ol>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla6.png" alt="image-20201203151414970"></p>
-<p>3.设置共享文件夹</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla7.png" alt="image-20201203151545703"></p>
-<p>这时候服务端就设置好啦</p>
-<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>下面配置客户端软件</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla8.png" alt="image-20201203151712608"></p>
-<ol>
-<li>新建站点</li>
-</ol>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla9.png" alt="image-20201203151914710"></p>
-<p>3.传输设置</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla10.png" alt="image-20201203152132810"></p>
-<ol start="4">
-<li>点击连接</li>
-<li>测试连接，打开浏览器进行访问<ul>
-<li>在浏览器地址栏输入：FTP://127.0.0.1回车访问</li>
-<li>输入用户名和密码即可访问</li>
-</ul>
-</li>
-</ol>
-<p>6.访问成功</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla11.png" alt="image-20201203173304627"></p>
+    <title>我的第一个博客</title>
+    <url>/posts/57728/</url>
+    <content><![CDATA[<h2 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h2><h1 id="About-This-Blog"><a href="#About-This-Blog" class="headerlink" title="About This  Blog"></a>About This  Blog</h1><p>上手体验了 hexo 、typecho、 catfish 以后</p>
+<p>typecho和hexo还可以满足我这个手残党的。</p>
+<p>以后会在这里不定期更新</p>
 ]]></content>
       <categories>
-        <category>效率工具</category>
+        <category>生活</category>
       </categories>
       <tags>
-        <tag>工具</tag>
-        <tag>FTP</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -376,20 +390,6 @@
       <tags>
         <tag>Java</tag>
         <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的第一个博客</title>
-    <url>/posts/57728/</url>
-    <content><![CDATA[<h2 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h2><h1 id="About-This-Blog"><a href="#About-This-Blog" class="headerlink" title="About This  Blog"></a>About This  Blog</h1><p>上手体验了 hexo 、typecho、 catfish 以后</p>
-<p>typecho和hexo还可以满足我这个手残党的。</p>
-<p>以后会在这里不定期更新</p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
