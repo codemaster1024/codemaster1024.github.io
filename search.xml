@@ -517,4 +517,104 @@
         <tag>Java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>为什么有了基本数据类型还需要包装类型?</title>
+    <url>/posts/22234/</url>
+    <content><![CDATA[<h1 id="为什么有了基本数据类型还需要包装类型？"><a href="#为什么有了基本数据类型还需要包装类型？" class="headerlink" title="为什么有了基本数据类型还需要包装类型？"></a>为什么有了基本数据类型还需要包装类型？</h1><h2 id="为什么需要包装类型"><a href="#为什么需要包装类型" class="headerlink" title="为什么需要包装类型"></a>为什么需要包装类型</h2><p>Java 是一个面向对象的语言，而基本类型不具备面向对象的特性。例如：integer 有 null 值，,而int 只有 0。</p>
+<p>可见基本类型不能赋null值，但是某些场合我们需要给一个字段赋值为null。而且学习到集合时，你会发现，集合中是不可以直接存储基本数据类型的。所以我们要把基本数据类型转换一下，变成包装类。</p>
+<h2 id="那么他们如何转换呢？"><a href="#那么他们如何转换呢？" class="headerlink" title="那么他们如何转换呢？"></a>那么他们如何转换呢？</h2><p>基本数据类型，java中提供了8中基本的数据类型，包装类型：每一个基本的数据类型都会一一对应一个包装类型。如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>包装类型</th>
+<th>字节大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>Integer</td>
+<td>4</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+<td>2</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>Byte</td>
+<td>1</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+<td>8</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+<td>4</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+<td>8</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Char</td>
+<td>2</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>除了int比较特殊，包装类是Integer外，其他都是首字母大写。</p>
+<p>那么基本数据类型和封装类型之间的转换涉及到的概念就是：<code>自动装箱和拆箱</code></p>
+<ul>
+<li>自动装箱:    基本数据类型-&gt;包装类型</li>
+<li>自动拆箱： 包装类型-&gt;基本数据类型</li>
+</ul>
+<h2 id="自动装箱和自动拆箱是如何实现的呢？"><a href="#自动装箱和自动拆箱是如何实现的呢？" class="headerlink" title="自动装箱和自动拆箱是如何实现的呢？"></a>自动装箱和自动拆箱是如何实现的呢？</h2><ol>
+<li><p>自动装箱实际上在编译时会调用Integer.valueOf方法来装箱 </p>
+</li>
+<li><p>自动拆箱实际上会在编译时调用intValue</p>
+</li>
+</ol>
+<p>具体可以使用方式:</p>
+<ol>
+<li>基本数据类型向包装类转换（装箱）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line">Integer i = <span class="keyword">new</span> Integer (<span class="number">1</span>);</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line">Integer j = <span class="number">1</span>;<span class="comment">//jdk1.5 之后可以通过这种方式自动装箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Integer a=Integer.valueOf(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>包装类向基本数据类型转换（拆箱）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line"><span class="keyword">int</span> m = j.intValue();</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line"><span class="keyword">int</span> m = i;<span class="comment">//jdk1.5 之后可以通过这种方式自动拆箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Double a;</span><br><span class="line"><span class="keyword">double</span> b= <span class="keyword">double</span>(a);<span class="comment">//通过强制转换</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>还有一个知识点就是：</li>
+</ol>
+<ul>
+<li>包装类可以实现基本类型和字符串之间的转换：<ul>
+<li>字符串转基本类型：parseXXX(String s)；//XXX就是你想要转成的类型</li>
+<li>基本类型转字符串：String.valueOf(基本类型)，见第三种方式</li>
+</ul>
+</li>
+</ul>
+<p>具体使用方式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerToString</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 基本类型数据--&gt;字符串</span></span><br><span class="line">        String s1 = <span class="number">100</span>+<span class="string">&quot;&quot;</span>;  <span class="comment">// 第一种方式。常用</span></span><br><span class="line">        String s2 = Integer.toString(<span class="number">101</span>);<span class="comment">//第二种方式</span></span><br><span class="line">        String s3 = String.valueOf(<span class="number">102</span>);<span class="comment">//第三种方式</span></span><br><span class="line">        System.out.println(s1+<span class="number">200</span>); <span class="comment">// 100200</span></span><br><span class="line">        System.out.println(s2+<span class="number">200</span>); <span class="comment">// 101200</span></span><br><span class="line">        System.out.println(s3+<span class="number">200</span>); <span class="comment">// 102200</span></span><br><span class="line">        <span class="comment">// 字符串--&gt;基本类型数据</span></span><br><span class="line">        <span class="keyword">int</span> i1 = Integer.parseInt(<span class="string">&quot;100&quot;</span>);</span><br><span class="line">        System.out.println(i1+<span class="number">200</span>); <span class="comment">// 300</span></span><br><span class="line">        <span class="keyword">int</span> i2 = Integer.parseInt(<span class="string">&quot;a&quot;</span>); <span class="comment">// NumberFormatException: For input string: &quot;a&quot;数字格式化异常。因为前面是Integer，&quot;a&quot;不是数字。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其他数据类型也同理，具体不再演示了。</p>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>java基础知识</tag>
+      </tags>
+  </entry>
 </search>
