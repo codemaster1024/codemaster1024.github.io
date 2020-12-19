@@ -224,6 +224,139 @@
       </tags>
   </entry>
   <entry>
+    <title>java中截取字符串常用的方法</title>
+    <url>/posts/10520/</url>
+    <content><![CDATA[<h1 id="java中截取字符串常用的方法"><a href="#java中截取字符串常用的方法" class="headerlink" title="java中截取字符串常用的方法"></a>java中截取字符串常用的方法</h1><div class="tip warning"><p>第一种方式：使用StringUtils工具类</p>
+</div>
+<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String strs = <span class="string">&quot;1234567890&quot;</span>;</span><br><span class="line"><span class="comment">/*从开始位置一直截取到第一个“3”（不包括3）*/</span></span><br><span class="line">System.out.println(StringUtils.substringBefore(strs, <span class="string">&quot;3&quot;</span>)); </span><br><span class="line"><span class="comment">/*从开始位置一直截取到最后一个“3”（不包括3)*/</span></span><br><span class="line">System.out.println( StringUtils.substringBeforeLast(strs, <span class="string">&quot;3&quot;</span>)); </span><br><span class="line"><span class="comment">/*从第一个“3”出现的位置（不包括3）一直截取到末尾*/</span></span><br><span class="line">System.out.println(StringUtils.substringAfter(strs, <span class="string">&quot;3&quot;</span>));   </span><br><span class="line"><span class="comment">/*从最后一个“3”出现的位置（不包括3）一直截取到末尾*/</span></span><br><span class="line">System.out.println(StringUtils.substringAfterLast(strs, <span class="string">&quot;3&quot;</span>)); </span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<div class="tip cogs"><p>第二种方式：使用String类提供的substring方法</p>
+</div>
+<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String str = <span class="string">&quot;1234567890&quot;</span>;</span><br><span class="line">  <span class="comment">/*从字符串索引为0的位置开始截取，一直截取到末尾*/</span></span><br><span class="line">System.out.println( str.substring(<span class="number">0</span>));  </span><br><span class="line">  <span class="comment">/*截取索引为6的位置的字符*/</span></span><br><span class="line">System.out.println(str.substring(<span class="number">6</span>,<span class="number">7</span>)); </span><br><span class="line">  <span class="comment">/*截取字符串的倒数3,2位*/</span></span><br><span class="line">System.out.println(str.substring(str.length()-<span class="number">3</span>, str.length()-<span class="number">1</span>));        </span><br><span class="line">  <span class="comment">/*从字符串索引为0开始截取，一直截取到到第一个“4”（不包含4）*/</span></span><br><span class="line">System.out.println(str.substring(<span class="number">0</span>, str.indexOf(<span class="string">&quot;4&quot;</span>)));                   </span><br><span class="line">  <span class="comment">/*从第一个“4”出现的位置开始截取，一直截取到末尾*/</span></span><br><span class="line">System.out.println(str.substring(str.indexOf(<span class="string">&quot;4&quot;</span>) + <span class="number">1</span>, str.length()));    </span><br><span class="line">  <span class="comment">/*从第一个“4”截取，一直到第一个“8”出现的位置（不包含8）*/</span></span><br><span class="line">System.out.println(str.substring(str.indexOf(<span class="string">&quot;4&quot;</span>), str.indexOf(<span class="string">&quot;8&quot;</span>)));   </span><br><span class="line">  <span class="comment">/*从下标6的位置（包含6）开始截取到末尾*/</span></span><br><span class="line">System.out.println(trs.substring(<span class="number">6</span>, strs.length()));    </span><br><span class="line"> <span class="comment">/*截取字符串的前两位*/</span></span><br><span class="line">System.out.println(strs.substring(<span class="number">0</span>, <span class="number">2</span>));</span><br><span class="line"> <span class="comment">/*从最后一个“3”出现的位置（不包含3）一直截取到截取到末尾*/</span></span><br><span class="line">System.out.println(strs.substring(strs.lastIndexOf(<span class="string">&quot;3&quot;</span>) + <span class="number">1</span>, strs.length()));   </span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<div class="tip home"><p>第三种方式：使用split()配合特定的字符来进行截取。</p>
+</div>
+<ol>
+<li><p>将 <wavy>一般的分隔符</wavy> 传入split()。它会返回的是一个字符串数组类型。</p>
+<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*按分隔符截取字符串*/</span></span><br><span class="line">String str = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line">String[] strArray = String.split(<span class="string">&quot;,&quot;</span>);<span class="comment">//以逗号为分隔符来截取字符串，返回一个字符串数组。然后就可以对数组进行操作了</span></span><br><span class="line"><span class="comment">/*按分隔符截取3个*/</span></span><br><span class="line">String.split(<span class="string">&quot; &quot;</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+</li>
+<li><p>还有一些 <wavy>需要转义的分隔符</wavy> 需要特殊处理。<br>当使用<code>* ^ : | . \</code>等6个符号做分隔符时，这6个符号转义字符,必须得在前面加”\“。<br>例如<code>split(&quot;\\^&quot;)</code>等。第二个“\”是用来给这6种符号转义，第一个“\”是用来给第二个“\”转义。</p>
+<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String str=<span class="string">&quot;我*是*小*小强&quot;</span>;</span><br><span class="line">String[] splitStr=str.split(<span class="string">&quot;\\*&quot;</span>);</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+
+<p> 其中有个更特殊的，就是<code>\</code>。如果字符串中想要使用<code>\\</code>，就应该使用<code>\\</code>进行转义。也就是说，对于<code>a\b</code>，应该写成<code>a\\b</code>，而如果想要用split方法针对<code>\</code>进行拆分，应该使用<code>a\\b.split(&quot;\\\\&quot;)。</code></p>
+</li>
+<li><p>如果你想要 <wavy>多个符号作为分隔符</wavy><br>那么你 可以使用 <kbd>|</kbd>字符作为连字符，把多个分隔符分隔的内容都区分开：</p>
+<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String str=<span class="string">&quot;Java^后端@开发#加油&quot;</span>;</span><br><span class="line">String[] strArray=str.split(<span class="string">&quot;\\^|@|#&quot;</span>);</span><br><span class="line">System.out.println(strArray[<span class="number">0</span>]+strArray[<span class="number">1</span>]+strArray[<span class="number">2</span>]+strArray[<span class="number">3</span>]);  </span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div></li>
+</ol>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>java基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>为什么有了基本数据类型还需要包装类型?</title>
+    <url>/posts/22234/</url>
+    <content><![CDATA[<h1 id="为什么有了基本数据类型还需要包装类型？"><a href="#为什么有了基本数据类型还需要包装类型？" class="headerlink" title="为什么有了基本数据类型还需要包装类型？"></a>为什么有了基本数据类型还需要包装类型？</h1><h2 id="为什么需要包装类型"><a href="#为什么需要包装类型" class="headerlink" title="为什么需要包装类型"></a>为什么需要包装类型</h2><p>Java 是一个面向对象的语言，而基本类型不具备面向对象的特性。例如：integer 有 null 值，,而int 只有 0。</p>
+<p>可见基本类型不能赋null值，但是某些场合我们需要给一个字段赋值为null。而且学习到集合时，你会发现，集合中是不可以直接存储基本数据类型的。所以我们要把基本数据类型转换一下，变成包装类。</p>
+<h2 id="那么他们如何转换呢？"><a href="#那么他们如何转换呢？" class="headerlink" title="那么他们如何转换呢？"></a>那么他们如何转换呢？</h2><p>基本数据类型，java中提供了8中基本的数据类型，包装类型：每一个基本的数据类型都会一一对应一个包装类型。如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>包装类型</th>
+<th>字节大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>Integer</td>
+<td>4</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+<td>2</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>Byte</td>
+<td>1</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+<td>8</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+<td>4</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+<td>8</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Char</td>
+<td>2</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>除了int比较特殊，包装类是Integer外，其他都是首字母大写。</p>
+<p>那么基本数据类型和封装类型之间的转换涉及到的概念就是：<code>自动装箱和拆箱</code></p>
+<ul>
+<li>自动装箱:    基本数据类型-&gt;包装类型</li>
+<li>自动拆箱： 包装类型-&gt;基本数据类型</li>
+</ul>
+<h2 id="自动装箱和自动拆箱是如何实现的呢？"><a href="#自动装箱和自动拆箱是如何实现的呢？" class="headerlink" title="自动装箱和自动拆箱是如何实现的呢？"></a>自动装箱和自动拆箱是如何实现的呢？</h2><ol>
+<li><p>自动装箱实际上在编译时会调用Integer.valueOf方法来装箱 </p>
+</li>
+<li><p>自动拆箱实际上会在编译时调用intValue</p>
+</li>
+</ol>
+<p>具体可以使用方式:</p>
+<ol>
+<li>基本数据类型向包装类转换（装箱）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line">Integer i = <span class="keyword">new</span> Integer (<span class="number">1</span>);</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line">Integer j = <span class="number">1</span>;<span class="comment">//jdk1.5 之后可以通过这种方式自动装箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Integer a=Integer.valueOf(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>包装类向基本数据类型转换（拆箱）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line"><span class="keyword">int</span> m = j.intValue();</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line"><span class="keyword">int</span> m = i;<span class="comment">//jdk1.5 之后可以通过这种方式自动拆箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Double a;</span><br><span class="line"><span class="keyword">double</span> b= <span class="keyword">double</span>(a);<span class="comment">//通过强制转换</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>还有一个知识点就是：</li>
+</ol>
+<ul>
+<li>包装类可以实现基本类型和字符串之间的转换：<ul>
+<li>字符串转基本类型：parseXXX(String s)；//XXX就是你想要转成的类型</li>
+<li>基本类型转字符串：String.valueOf(基本类型)，见第三种方式</li>
+</ul>
+</li>
+</ul>
+<p>具体使用方式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerToString</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 基本类型数据--&gt;字符串</span></span><br><span class="line">        String s1 = <span class="number">100</span>+<span class="string">&quot;&quot;</span>;  <span class="comment">// 第一种方式。常用</span></span><br><span class="line">        String s2 = Integer.toString(<span class="number">101</span>);<span class="comment">//第二种方式</span></span><br><span class="line">        String s3 = String.valueOf(<span class="number">102</span>);<span class="comment">//第三种方式</span></span><br><span class="line">        System.out.println(s1+<span class="number">200</span>); <span class="comment">// 100200</span></span><br><span class="line">        System.out.println(s2+<span class="number">200</span>); <span class="comment">// 101200</span></span><br><span class="line">        System.out.println(s3+<span class="number">200</span>); <span class="comment">// 102200</span></span><br><span class="line">        <span class="comment">// 字符串--&gt;基本类型数据</span></span><br><span class="line">        <span class="keyword">int</span> i1 = Integer.parseInt(<span class="string">&quot;100&quot;</span>);</span><br><span class="line">        System.out.println(i1+<span class="number">200</span>); <span class="comment">// 300</span></span><br><span class="line">        <span class="keyword">int</span> i2 = Integer.parseInt(<span class="string">&quot;a&quot;</span>); <span class="comment">// NumberFormatException: For input string: &quot;a&quot;数字格式化异常。因为前面是Integer，&quot;a&quot;不是数字。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其他数据类型也同理，具体不再演示了。</p>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>java基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>你好，hexo</title>
     <url>/posts/18623/</url>
     <content><![CDATA[<h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><p>欢迎使用 Hexo，此文档将帮助您快速上手。如果您在使用过程中遇到问题，请查看 <a href="https://hexo.io/zh-cn/docs/troubleshooting">问题解答</a> 中的解答，或者在 <a href="https://github.com/hexojs/hexo/issues">GitHub</a>、<a href="https://groups.google.com/group/hexo">Google Group</a> 上提问</p>
@@ -381,9 +514,7 @@
   <entry>
     <title>我的第一个博客</title>
     <url>/posts/57728/</url>
-    <content><![CDATA[<h2 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h2><h1 id="About-This-Blog"><a href="#About-This-Blog" class="headerlink" title="About This  Blog"></a>About This  Blog</h1><p>上手体验了 hexo 、typecho、 catfish 以后</p>
-<p>typecho和hexo还可以满足我这个手残党的。</p>
-<p>以后会在这里不定期更新</p>
+    <content><![CDATA[<h2 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h2><h1 id="About-This-Blog"><a href="#About-This-Blog" class="headerlink" title="About This  Blog"></a>About This  Blog</h1><p>各位小伙伴们大家好,就叫我小小强好啦~<br>关于我:<code>2020届毕业</code>,<br>  专业:<code>交通工程+软件工程</code>。<br>  目前就职岗位:<code>Java后端开发</code>。<br>我的博客主要会记录自己的一些学习笔记,分享一些开发中常用的知识,可能还会有一些其他网络上的小tips..balabala..等等吧<br>我B站链接是:(待更新)<br>我会尝试着把教程录制成视频供学习记录。<br>也欢迎大家与我交流吖！</p>
 ]]></content>
       <categories>
         <category>生活</category>
@@ -515,106 +646,6 @@
       <tags>
         <tag>面试</tag>
         <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为什么有了基本数据类型还需要包装类型?</title>
-    <url>/posts/22234/</url>
-    <content><![CDATA[<h1 id="为什么有了基本数据类型还需要包装类型？"><a href="#为什么有了基本数据类型还需要包装类型？" class="headerlink" title="为什么有了基本数据类型还需要包装类型？"></a>为什么有了基本数据类型还需要包装类型？</h1><h2 id="为什么需要包装类型"><a href="#为什么需要包装类型" class="headerlink" title="为什么需要包装类型"></a>为什么需要包装类型</h2><p>Java 是一个面向对象的语言，而基本类型不具备面向对象的特性。例如：integer 有 null 值，,而int 只有 0。</p>
-<p>可见基本类型不能赋null值，但是某些场合我们需要给一个字段赋值为null。而且学习到集合时，你会发现，集合中是不可以直接存储基本数据类型的。所以我们要把基本数据类型转换一下，变成包装类。</p>
-<h2 id="那么他们如何转换呢？"><a href="#那么他们如何转换呢？" class="headerlink" title="那么他们如何转换呢？"></a>那么他们如何转换呢？</h2><p>基本数据类型，java中提供了8中基本的数据类型，包装类型：每一个基本的数据类型都会一一对应一个包装类型。如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th>基本数据类型</th>
-<th>包装类型</th>
-<th>字节大小</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>int</td>
-<td>Integer</td>
-<td>4</td>
-</tr>
-<tr>
-<td>short</td>
-<td>Short</td>
-<td>2</td>
-</tr>
-<tr>
-<td>byte</td>
-<td>Byte</td>
-<td>1</td>
-</tr>
-<tr>
-<td>long</td>
-<td>Long</td>
-<td>8</td>
-</tr>
-<tr>
-<td>float</td>
-<td>Float</td>
-<td>4</td>
-</tr>
-<tr>
-<td>double</td>
-<td>Double</td>
-<td>8</td>
-</tr>
-<tr>
-<td>char</td>
-<td>Char</td>
-<td>2</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td>Boolean</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<p>除了int比较特殊，包装类是Integer外，其他都是首字母大写。</p>
-<p>那么基本数据类型和封装类型之间的转换涉及到的概念就是：<code>自动装箱和拆箱</code></p>
-<ul>
-<li>自动装箱:    基本数据类型-&gt;包装类型</li>
-<li>自动拆箱： 包装类型-&gt;基本数据类型</li>
-</ul>
-<h2 id="自动装箱和自动拆箱是如何实现的呢？"><a href="#自动装箱和自动拆箱是如何实现的呢？" class="headerlink" title="自动装箱和自动拆箱是如何实现的呢？"></a>自动装箱和自动拆箱是如何实现的呢？</h2><ol>
-<li><p>自动装箱实际上在编译时会调用Integer.valueOf方法来装箱 </p>
-</li>
-<li><p>自动拆箱实际上会在编译时调用intValue</p>
-</li>
-</ol>
-<p>具体可以使用方式:</p>
-<ol>
-<li>基本数据类型向包装类转换（装箱）</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line">Integer i = <span class="keyword">new</span> Integer (<span class="number">1</span>);</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line">Integer j = <span class="number">1</span>;<span class="comment">//jdk1.5 之后可以通过这种方式自动装箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Integer a=Integer.valueOf(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>包装类向基本数据类型转换（拆箱）</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line"><span class="keyword">int</span> m = j.intValue();</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line"><span class="keyword">int</span> m = i;<span class="comment">//jdk1.5 之后可以通过这种方式自动拆箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Double a;</span><br><span class="line"><span class="keyword">double</span> b= <span class="keyword">double</span>(a);<span class="comment">//通过强制转换</span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>还有一个知识点就是：</li>
-</ol>
-<ul>
-<li>包装类可以实现基本类型和字符串之间的转换：<ul>
-<li>字符串转基本类型：parseXXX(String s)；//XXX就是你想要转成的类型</li>
-<li>基本类型转字符串：String.valueOf(基本类型)，见第三种方式</li>
-</ul>
-</li>
-</ul>
-<p>具体使用方式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerToString</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 基本类型数据--&gt;字符串</span></span><br><span class="line">        String s1 = <span class="number">100</span>+<span class="string">&quot;&quot;</span>;  <span class="comment">// 第一种方式。常用</span></span><br><span class="line">        String s2 = Integer.toString(<span class="number">101</span>);<span class="comment">//第二种方式</span></span><br><span class="line">        String s3 = String.valueOf(<span class="number">102</span>);<span class="comment">//第三种方式</span></span><br><span class="line">        System.out.println(s1+<span class="number">200</span>); <span class="comment">// 100200</span></span><br><span class="line">        System.out.println(s2+<span class="number">200</span>); <span class="comment">// 101200</span></span><br><span class="line">        System.out.println(s3+<span class="number">200</span>); <span class="comment">// 102200</span></span><br><span class="line">        <span class="comment">// 字符串--&gt;基本类型数据</span></span><br><span class="line">        <span class="keyword">int</span> i1 = Integer.parseInt(<span class="string">&quot;100&quot;</span>);</span><br><span class="line">        System.out.println(i1+<span class="number">200</span>); <span class="comment">// 300</span></span><br><span class="line">        <span class="keyword">int</span> i2 = Integer.parseInt(<span class="string">&quot;a&quot;</span>); <span class="comment">// NumberFormatException: For input string: &quot;a&quot;数字格式化异常。因为前面是Integer，&quot;a&quot;不是数字。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>其他数据类型也同理，具体不再演示了。</p>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>java基础知识</tag>
       </tags>
   </entry>
 </search>
