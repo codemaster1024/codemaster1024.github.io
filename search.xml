@@ -648,4 +648,117 @@
         <tag>Java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>字符串聚合函数</title>
+    <url>/posts/23432/</url>
+    <content><![CDATA[<h1 id="字符串聚合函数"><a href="#字符串聚合函数" class="headerlink" title="字符串聚合函数"></a>字符串聚合函数</h1><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>到年末了，甲方要一大堆的数据，项目经理让我给帮忙查完整理一下，来来回回也改了好几稿。最后给了我需要的数据的样式，经过尝试之后，最终那列就需要字符串拼接函数。大概的需求就是，通过查询之后，同一个人的最后一列是联合查询出来的，不一样的话都要显示出来，但是最后整理的数据需要将这一个人的那列合并在一起，就是一个人就一行数据。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>以前只是学过数字类型的聚合函数，像sum,count,max..而且竟然从来没有想过字符串去聚合的问题，虽然在开发中这种需求很少，但是如果是查询数据的话，我觉得还是有它的用武之地的,如果你不知道的话，就一起来看下吧~</p>
+<p>以Mysql示例：</p>
+<p>假设下面这张表是通过一个联合查询出来的表</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>userId</th>
+<th>userName</th>
+<th>ability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>校长</td>
+<td>学校</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>老师</td>
+<td>班级</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>学生</td>
+<td>环境</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>校长</td>
+<td>班级</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>老师</td>
+<td>环境</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1</td>
+<td>校长</td>
+<td>环境</td>
+</tr>
+</tbody></table>
+<p>现在需要将userId相同的行，把ability列合并显示，以逗号隔开。例如：</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>userId</th>
+<th>userName</th>
+<th>ability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>校长</td>
+<td>学校，班级，环境</td>
+</tr>
+</tbody></table>
+<p>在Mysql中，<code>group_concat</code>函数是典型的字符串连接函数。</p>
+<p><code>group_concat</code>函数完整的语法如下:</p>
+<p><code>group_concat([DISTINCT] 要连接的字段 [Order BY ASC/DESC 排序字段] [Separator &#39;分隔符&#39;])</code></p>
+<p>查询示例：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> userId,username,<span class="keyword">GROUP_CONCAT</span>(<span class="keyword">DISTINCT</span>(ability)) <span class="keyword">as</span> <span class="string">&#x27;ability&#x27;</span> <span class="keyword">from</span> <span class="string">`manager`</span> <span class="keyword">group</span> <span class="keyword">by</span> userId,username</span><br></pre></td></tr></table></figure>
+
+<p>查询结果是：</p>
+<table>
+<thead>
+<tr>
+<th>userId</th>
+<th>username</th>
+<th>ability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>校长</td>
+<td>学生，班级，环境</td>
+</tr>
+<tr>
+<td>2</td>
+<td>老师</td>
+<td>班级，环境</td>
+</tr>
+<tr>
+<td>3</td>
+<td>学生</td>
+<td>环境</td>
+</tr>
+</tbody></table>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>如果你使用的oracle数据库，可以尝试使用<code>WM_CONCAT</code>这个函数,用法类似。</p>
+<blockquote>
+<p>任何傻瓜都能写出计算机可以理解的代码。好的程序员能写出人能读懂的代码 —— Martin Fowler</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySql基础知识</tag>
+      </tags>
+  </entry>
 </search>
