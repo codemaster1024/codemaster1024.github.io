@@ -1,764 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>Java面试题综合总结（一）</title>
-    <url>/posts/18623/</url>
-    <content><![CDATA[<p>  走在应届毕业生的路上，特此总结了一些面试题，还望一起学习交流。</p>
-<h2 id="1-面向对象和面向过程的区别"><a href="#1-面向对象和面向过程的区别" class="headerlink" title="1.面向对象和面向过程的区别"></a><strong>1.面向对象和面向过程的区别</strong></h2><ul>
-<li><p>面向过程<br>优点：性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。<br>缺点：没有面向对象易维护、易复用、易扩展</p>
-</li>
-<li><p>面向对象<br>优点：易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护<br>缺点：性能比面向过程低</p>
-</li>
-</ul>
-<h2 id="2-Java的四个基本特性（抽象、封装、继承，多态）"><a href="#2-Java的四个基本特性（抽象、封装、继承，多态）" class="headerlink" title="2.Java的四个基本特性（抽象、封装、继承，多态）"></a><strong>2.Java的四个基本特性（抽象、封装、继承，多态）</strong></h2><ul>
-<li><p>抽象：就是把现实生活中的某一类东西提取出来，用程序代码表示，我们通常叫做类或者接口。抽象包括两个方面：一个是数据抽象，一个是过程抽象。数据抽象也就是对象的属性。过程抽象是对象的行为特征。</p>
-</li>
-<li><p>封装：把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行封装隐藏。封装分为属性的封装和方法的封装。</p>
-</li>
-<li><p>继承：是对有着共同特性的多类事物，进行再抽象成一个类。这个类就是多类事物的父类。父类的意义在于抽取多类事物的共性。</p>
-</li>
-<li><p>多态：允许不同类的对象对同一消息做出响应。方法的重载、类的覆盖正体现了多态。</p>
-</li>
-</ul>
-<h2 id="3-重载和重写的区别"><a href="#3-重载和重写的区别" class="headerlink" title="3.重载和重写的区别"></a><strong>3.重载和重写的区别</strong></h2><ul>
-<li><p>重载：发生在同一个类中，方法名必须相同，参数类型不同、个数不同、顺序不同，方法返回值和访问修饰符可以不同，发生在编译时。</p>
-</li>
-<li><p>重写：发生在父子类中，方法名、参数列表必须相同，返回值类型小于等于父类，抛出的异常小于等于父类，访问修饰符大于等于父类；如果父类方法访问修饰符为private则子类中就不是重写。</p>
-</li>
-</ul>
-<h2 id="4-构造器Constructor是否可被override"><a href="#4-构造器Constructor是否可被override" class="headerlink" title="4.构造器Constructor是否可被override"></a><strong>4.构造器Constructor是否可被override</strong></h2><p>构造器不能被重写，不能用static修饰构造器，只能用public<br>private protected这三个权限修饰符，且不能有返回语句。</p>
-<h2 id="5-访问控制符public-protected-private-以及默认的区别"><a href="#5-访问控制符public-protected-private-以及默认的区别" class="headerlink" title="5.访问控制符public,protected,private,以及默认的区别"></a><strong>5.访问控制符public,protected,private,以及默认的区别</strong></h2><ul>
-<li><p>private只有在本类中才能访问；</p>
-</li>
-<li><p>public在任何地方都能访问；</p>
-</li>
-<li><p>protected在同包内的类及包外的子类能访问；<br>默认不写在同包内能访问。</p>
-</li>
-</ul>
-<h2 id="6是否可以继承String类"><a href="#6是否可以继承String类" class="headerlink" title="6是否可以继承String类#"></a><strong>6是否可以继承String类#</strong></h2><ul>
-<li>String类是final类故不可以继承，一切由final修饰过的都不能继承。</li>
-</ul>
-<h2 id="7-String和StringBuffer、StringBuilder的区别"><a href="#7-String和StringBuffer、StringBuilder的区别" class="headerlink" title="7.String和StringBuffer、StringBuilder的区别"></a><strong>7.String和StringBuffer、StringBuilder的区别</strong></h2><ul>
-<li><p>可变性<br>String类中使用字符数组保存字符串，private<br>final char value[]，所以string对象是不可变的。StringBuilder与StringBuffer都继承自AbstractStringBuilder类，在AbstractStringBuilder中也是使用字符数组保存字符串，char[]<br>value，这两种对象都是可变的。</p>
-</li>
-<li><p>线程安全性<br>String中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder是StringBuilder与StringBuffer的公共父类，定义了一些字符串的基本操作，如expandCapacity、append、insert、indexOf等公共方法。StringBuffer对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder并没有对方法进行加同步锁，所以是非线程安全的。</p>
-</li>
-<li><p>性能<br>每次对String 类型进行改变的时候，都会生成一个新的String 对象，然后将指针指向新的String 对象。StringBuffer每次都会对<br>StringBuffer 对象本身进行操作，而不是生成新的对象并改变对象引用。相同情况下使用<br>StirngBuilder 相比使用<br>StringBuffer 仅能获得10%~15% 左右的性能提升，但却要冒多线程不安全的风险。</p>
-</li>
-</ul>
-<h2 id="8-hashCode和equals方法的关系"><a href="#8-hashCode和equals方法的关系" class="headerlink" title="8.hashCode和equals方法的关系"></a><strong>8.hashCode和equals方法的关系</strong></h2><p>equals相等，hashcode必相等；hashcode相等，equals可能不相等。</p>
-<h2 id="9-抽象类和接口的区别"><a href="#9-抽象类和接口的区别" class="headerlink" title="9.抽象类和接口的区别"></a><strong>9.抽象类和接口的区别</strong></h2><ul>
-<li><p>语法层次<br>抽象类和接口分别给出了不同的语法定义。</p>
-</li>
-<li><p>设计层次<br>抽象层次不同，抽象类是对类抽象，而接口是对行为的抽象。抽象类是对整个类整体进行抽象，包括属性、行为，但是接口却是对类局部（行为）进行抽象。抽象类是自底向上抽象而来的，接口是自顶向下设计出来的。</p>
-</li>
-<li><p>跨域不同<br>抽象类所体现的是一种继承关系，要想使得继承关系合理，父类和派生类之间必须存在”is-a”<br>关系，即父类和派生类在概念本质上应该是相同的。对于接口则不然，并不要求接口的实现者和接口定义在概念本质上是一致的，仅仅是实现了接口定义的契约而已，”like-a”的关系。</p>
-</li>
-</ul>
-<h2 id="10-自动装箱与拆箱"><a href="#10-自动装箱与拆箱" class="headerlink" title="10.自动装箱与拆箱"></a><strong>10.自动装箱与拆箱</strong></h2><ul>
-<li><p>装箱：将基本类型用它们对应的引用类型包装起来；</p>
-</li>
-<li><p>拆箱：将包装类型转换为基本数据类型；<br>Java使用自动装箱和拆箱机制，节省了常用数值的内存开销和创建对象的开销，提高了效率，由编译器来完成，编译器会在编译期根据语法决定是否进行装箱和拆箱动作。</p>
-</li>
-</ul>
-<h2 id="11-什么是泛型、为什么要使用以及泛型擦除"><a href="#11-什么是泛型、为什么要使用以及泛型擦除" class="headerlink" title="11.什么是泛型、为什么要使用以及泛型擦除"></a><strong>11.什么是泛型、为什么要使用以及泛型擦除</strong></h2><p>泛型，即“参数化类型”。<br>    创建集合时就指定集合元素的类型，该集合只能保存其指定类型的元素，避免使用强制类型转换。<br>Java编译器生成的字节码是不包涵泛型信息的，泛型类型信息将在编译处理是被擦除，这个过程即类型擦除。泛型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。<br>类型擦除的主要过程如下：<br>1）将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。<br>2）移除所有的类型参数。</p>
-<h2 id="12-Java中的集合类及关系图"><a href="#12-Java中的集合类及关系图" class="headerlink" title="12.Java中的集合类及关系图"></a><strong>12.Java中的集合类及关系图</strong></h2><ul>
-<li>List和Set继承自Collection接口。</li>
-<li>Set无序不允许元素重复。HashSet和TreeSet是两个主要的实现类。</li>
-<li>List有序且允许元素重复。ArrayList、LinkedList和Vector是三个主要的实现类。</li>
-<li>Map也属于集合系统，但和Collection接口没关系。Map是key对value的映射集合，其中key列就是一个集合。key不能重复，但是value可以重复。HashMap、TreeMap和Hashtable是三个主要的实现类。</li>
-<li>SortedSet和SortedMap接口对元素按指定规则排序，SortedMap是对key列进行排序。</li>
-</ul>
-<h2 id="13-HashMap实现原理"><a href="#13-HashMap实现原理" class="headerlink" title="13.HashMap实现原理"></a><strong>13.HashMap实现原理</strong></h2><p>具体原理参考文章：<br><a href="http://zhangshixi.iteye.com/blog/672697">http://zhangshixi.iteye.com/blog/672697</a><br><a href="http://www.admin10000.com/document/3322.html">http://www.admin10000.com/document/3322.html</a></p>
-<h2 id="14-HashTable实现原理"><a href="#14-HashTable实现原理" class="headerlink" title="14.HashTable实现原理"></a><strong>14.HashTable实现原理</strong></h2><p>具体原理参考文章：<br><a href="http://www.cnblogs.com/skywang12345/p/3310887.html">http://www.cnblogs.com/skywang12345/p/3310887.html</a><br><a href="http://blog.csdn.net/chdjj/article/details/38581035">http://blog.csdn.net/chdjj/article/details/38581035</a></p>
-<h2 id="15-HashMap和HashTable区别"><a href="#15-HashMap和HashTable区别" class="headerlink" title="15.HashMap和HashTable区别"></a><strong>15.HashMap和HashTable区别</strong></h2><p>1）HashTable的方法前面都有synchronized来同步，是线程安全的；HashMap未经同步，是非线程安全的。<br>2）HashTable不允许null值(key和value都不可以) ；HashMap允许null值(key和value都可以)。<br>3）HashTable有一个contains(Object<br>value)功能和containsValue(Object<br>value)功能一样。<br>4）HashTable使用Enumeration进行遍历；HashMap使用Iterator进行遍历。<br>5）HashTable中hash数组默认大小是11，增加的方式是old*2+1；HashMap中hash数组的默认大小是16，而且一定是2的指数。<br>6）哈希值的使用不同，HashTable直接使用对象的hashCode； HashMap重新计算hash值，而且用与代替求模。</p>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>字符串聚合函数</title>
+      <link href="posts/23432/"/>
+      <url>posts/23432/</url>
+      
+        <content type="html"><![CDATA[<h1 id="字符串聚合函数"><a href="#字符串聚合函数" class="headerlink" title="字符串聚合函数"></a>字符串聚合函数</h1><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>到年末了，甲方要一大堆的数据，项目经理让我给帮忙查完整理一下，来来回回也改了好几稿。最后给了我需要的数据的样式，经过尝试之后，最终那列就需要字符串拼接函数。大概的需求就是，通过查询之后，同一个人的最后一列是联合查询出来的，不一样的话都要显示出来，但是最后整理的数据需要将这一个人的那列合并在一起，就是一个人就一行数据。</p><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>以前只是学过数字类型的聚合函数，像sum,count,max..而且竟然从来没有想过字符串去聚合的问题，虽然在开发中这种需求很少，但是如果是查询数据的话，我觉得还是有它的用武之地的,如果你不知道的话，就一起来看下吧~</p><p>以Mysql示例：</p><p>假设下面这张表是通过一个联合查询出来的表</p><table><thead><tr><th>id</th><th>userId</th><th>userName</th><th>ability</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>校长</td><td>学校</td></tr><tr><td>2</td><td>2</td><td>老师</td><td>班级</td></tr><tr><td>3</td><td>3</td><td>学生</td><td>环境</td></tr><tr><td>4</td><td>1</td><td>校长</td><td>班级</td></tr><tr><td>5</td><td>2</td><td>老师</td><td>环境</td></tr><tr><td>6</td><td>1</td><td>校长</td><td>环境</td></tr></tbody></table><p>现在需要将userId相同的行，把ability列合并显示，以逗号隔开。例如：</p><table><thead><tr><th>id</th><th>userId</th><th>userName</th><th>ability</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>校长</td><td>学校，班级，环境</td></tr></tbody></table><p>在Mysql中，<code>group_concat</code>函数是典型的字符串连接函数。</p><p><code>group_concat</code>函数完整的语法如下:</p><p><code>group_concat([DISTINCT] 要连接的字段 [Order BY ASC/DESC 排序字段] [Separator &#39;分隔符&#39;])</code></p><p>查询示例：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> userId,username,<span class="keyword">GROUP_CONCAT</span>(<span class="keyword">DISTINCT</span>(ability)) <span class="keyword">as</span> <span class="string">&#x27;ability&#x27;</span> <span class="keyword">from</span> <span class="string">`manager`</span> <span class="keyword">group</span> <span class="keyword">by</span> userId,username</span><br></pre></td></tr></table></figure><p>查询结果是：</p><table><thead><tr><th>userId</th><th>username</th><th>ability</th></tr></thead><tbody><tr><td>1</td><td>校长</td><td>学生，班级，环境</td></tr><tr><td>2</td><td>老师</td><td>班级，环境</td></tr><tr><td>3</td><td>学生</td><td>环境</td></tr></tbody></table><h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>如果你使用的oracle数据库，可以尝试使用<code>WM_CONCAT</code>这个函数,用法类似。</p><blockquote><p>任何傻瓜都能写出计算机可以理解的代码。好的程序员能写出人能读懂的代码 —— Martin Fowler</p></blockquote>]]></content>
+      
+      
       <categories>
-        <category>面试</category>
+          
+          <category> MySQL </category>
+          
       </categories>
-      <tags>
-        <tag>面试</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java面试题综合总结（二）</title>
-    <url>/posts/23859/</url>
-    <content><![CDATA[<h2 id="16-ArrayList和vector区别"><a href="#16-ArrayList和vector区别" class="headerlink" title="16.ArrayList和vector区别"></a><strong>16.ArrayList和vector区别</strong></h2><p>ArrayList和Vector都实现了List接口，都是通过数组实现的。</p>
-<p>Vector是线程安全的，而ArrayList是非线程安全的。<br>List第一次创建的时候，会有一个初始大小，随着不断向List中增加元素，当List 认为容量不够的时候就会进行扩容。Vector缺省情况下自动增长原来一倍的数组长度，ArrayList增长原来的50%。</p>
-<h2 id="17-ArrayList和LinkedList区别及使用场景"><a href="#17-ArrayList和LinkedList区别及使用场景" class="headerlink" title="17.ArrayList和LinkedList区别及使用场景"></a><strong>17.ArrayList和LinkedList区别及使用场景</strong></h2><p>区别<br>ArrayList底层是用数组实现的，可以认为ArrayList是一个可改变大小的数组。随着越来越多的元素被添加到ArrayList中，其规模是动态增加的。<br>LinkedList底层是通过双向链表实现的， LinkedList和ArrayList相比，增删的速度较快。但是查询和修改值的速度较慢。同时，LinkedList还实现了Queue接口，所以他还提供了offer(),<br>peek(), poll()等方法。<br>使用场景<br>LinkedList更适合从中间插入或者删除（链表的特性）。<br>ArrayList更适合检索和在末尾插入或删除（数组的特性）。</p>
-<h2 id="18-Collection和Collections的区别"><a href="#18-Collection和Collections的区别" class="headerlink" title="18.Collection和Collections的区别"></a><strong>18.Collection和Collections的区别</strong></h2><p>java.util.Collection 是一个集合接口。它提供了对集合对象进行基本操作的通用接口方法。Collection接口在Java 类库中有很多具体的实现。Collection接口的意义是为各种具体的集合提供了最大化的统一操作方式。<br>java.util.Collections 是一个包装类。它包含有各种有关集合操作的静态多态方法。此类不能实例化，就像一个工具类，服务于Java的Collection框架。</p>
-<h2 id="19-Concurrenthashmap实现原理"><a href="#19-Concurrenthashmap实现原理" class="headerlink" title="19.Concurrenthashmap实现原理"></a><strong>19.Concurrenthashmap实现原理</strong></h2><p>具体原理参考文章：<br><a href="http://www.cnblogs.com/ITtangtang/p/3948786.html">http://www.cnblogs.com/ITtangtang/p/3948786.html</a><br><a href="http://ifeve.com/concurrenthashmap/">http://ifeve.com/concurrenthashmap/</a></p>
-<h2 id="20-Error、Exception区别"><a href="#20-Error、Exception区别" class="headerlink" title="20.Error、Exception区别"></a><strong>20.Error、Exception区别</strong></h2><p>Error类和Exception类的父类都是throwable类，他们的区别是：<br>Error类一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和和预防，遇到这样的错误，建议让程序终止。<br>Exception类表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。</p>
-<h2 id="21-Unchecked"><a href="#21-Unchecked" class="headerlink" title="21.Unchecked"></a><strong>21.Unchecked</strong></h2><p>Exception和Checked Exception，各列举几个#<br>Unchecked Exception:<br>a. 指的是程序的瑕疵或逻辑错误，并且在运行时无法恢复。<br>b. 包括Error与RuntimeException及其子类，如：OutOfMemoryError,<br>UndeclaredThrowableException, IllegalArgumentException,<br>IllegalMonitorStateException, NullPointerException, IllegalStateException,<br>IndexOutOfBoundsException等。<br>c. 语法上不需要声明抛出异常。<br>Checked Exception:<br>a. 代表程序不能直接控制的无效外界情况（如用户输入，数据库问题，网络异常，文件丢失等）<br>b. 除了Error和RuntimeException及其子类之外，如：ClassNotFoundException,<br>NamingException, ServletException, SQLException, IOException等。<br>c. 需要try catch处理或throws声明抛出异常。</p>
-<h2 id="22-Java中如何实现代理机制-JDK、CGLIB"><a href="#22-Java中如何实现代理机制-JDK、CGLIB" class="headerlink" title="22.Java中如何实现代理机制(JDK、CGLIB)"></a><strong>22.Java中如何实现代理机制(JDK、CGLIB)</strong></h2><p>JDK动态代理：代理类和目标类实现了共同的接口，用到InvocationHandler接口。<br>CGLIB动态代理：代理类是目标类的子类，用到MethodInterceptor接口。</p>
-<h2 id="23-多线程的实现方式"><a href="#23-多线程的实现方式" class="headerlink" title="23.多线程的实现方式"></a><strong>23.多线程的实现方式</strong></h2><p>继承Thread类、实现Runnable接口、使用ExecutorService、Callable、Future实现有返回结果的多线程。</p>
-<h2 id="24-如何停止一个线程"><a href="#24-如何停止一个线程" class="headerlink" title="24.如何停止一个线程"></a><strong>24.如何停止一个线程</strong></h2><p>参考文章：<br><a href="http://www.cnblogs.com/greta/p/5624839.html">http://www.cnblogs.com/greta/p/5624839.html</a></p>
-<h2 id="25-什么是线程安全"><a href="#25-什么是线程安全" class="headerlink" title="25.什么是线程安全"></a><strong>25.什么是线程安全</strong></h2><p>线程安全就是多线程访问同一代码，不会产生不确定的结果。</p>
-<h2 id="26-如何保证线程安全"><a href="#26-如何保证线程安全" class="headerlink" title="26.如何保证线程安全"></a><strong>26.如何保证线程安全</strong></h2><p>对非安全的代码进行加锁控制；<br>使用线程安全的类；<br>多线程并发情况下，线程共享的变量改为方法级的局部变量。</p>
-<h2 id="27-synchronized如何使用"><a href="#27-synchronized如何使用" class="headerlink" title="27.synchronized如何使用"></a><strong>27.synchronized如何使用</strong></h2><p>synchronized是Java中的关键字，是一种同步锁。它修饰的对象有以下几种：<br>1). 修饰一个代码块，被修饰的代码块称为同步语句块，其作用的范围是大括号{}括起来的代码，作用的对象是调用这个代码块的对象；<br>2). 修饰一个方法，被修饰的方法称为同步方法，其作用的范围是整个方法，作用的对象是调用这个方法的对象；<br>3). 修改一个静态的方法，其作用的范围是整个静态方法，作用的对象是这个类的所有对象；<br>4). 修改一个类，其作用的范围是synchronized后面括号括起来的部分，作用主的对象是这个类的所有对象。</p>
-<h2 id="28-synchronized和Lock的区别"><a href="#28-synchronized和Lock的区别" class="headerlink" title="28.synchronized和Lock的区别"></a><strong>28.synchronized和Lock的区别</strong></h2><p>主要相同点：Lock能完成synchronized所实现的所有功能<br>主要不同点：Lock有比synchronized更精确的线程语义和更好的性能。Lock的锁定是通过代码实现的，而synchronized是在JVM层面上实现的，synchronized会自动释放锁，而Lock一定要求程序员手工释放，并且必须在finally从句中释放。Lock还有更强大的功能，例如，它的tryLock方法可以非阻塞方式去拿锁。Lock锁的范围有局限性，块范围，而synchronized可以锁住块、对象、类。</p>
-<h2 id="29-多线程如何进行信息交互"><a href="#29-多线程如何进行信息交互" class="headerlink" title="29.多线程如何进行信息交互"></a><strong>29.多线程如何进行信息交互</strong></h2><p>void notify() 唤醒在此对象监视器上等待的单个线程。<br>void notifyAll() 唤醒在此对象监视器上等待的所有线程。<br>void wait() 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法。<br>void wait(long timeout) 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法，或者超过指定的时间量。<br>void wait(long timeout, int nanos) 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法，或者其他某个线程中断当前线程，或者已超过某个实际时间量。</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> MySql基础知识 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>java中截取字符串常用的方法</title>
+      <link href="posts/10520/"/>
+      <url>posts/10520/</url>
+      
+        <content type="html"><![CDATA[<h1 id="java中截取字符串常用的方法"><a href="#java中截取字符串常用的方法" class="headerlink" title="java中截取字符串常用的方法"></a>java中截取字符串常用的方法</h1><div class="tip warning"><p>第一种方式：使用StringUtils工具类</p></div><div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String strs = <span class="string">&quot;1234567890&quot;</span>;</span><br><span class="line"><span class="comment">/*从开始位置一直截取到第一个“3”（不包括3）*/</span></span><br><span class="line">System.out.println(StringUtils.substringBefore(strs, <span class="string">&quot;3&quot;</span>)); </span><br><span class="line"><span class="comment">/*从开始位置一直截取到最后一个“3”（不包括3)*/</span></span><br><span class="line">System.out.println( StringUtils.substringBeforeLast(strs, <span class="string">&quot;3&quot;</span>)); </span><br><span class="line"><span class="comment">/*从第一个“3”出现的位置（不包括3）一直截取到末尾*/</span></span><br><span class="line">System.out.println(StringUtils.substringAfter(strs, <span class="string">&quot;3&quot;</span>));   </span><br><span class="line"><span class="comment">/*从最后一个“3”出现的位置（不包括3）一直截取到末尾*/</span></span><br><span class="line">System.out.println(StringUtils.substringAfterLast(strs, <span class="string">&quot;3&quot;</span>)); </span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div><div class="tip cogs"><p>第二种方式：使用String类提供的substring方法</p></div><div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">&quot;1234567890&quot;</span>;</span><br><span class="line">  <span class="comment">/*从字符串索引为0的位置开始截取，一直截取到末尾*/</span></span><br><span class="line">System.out.println( str.substring(<span class="number">0</span>));  </span><br><span class="line">  <span class="comment">/*截取索引为6的位置的字符*/</span></span><br><span class="line">System.out.println(str.substring(<span class="number">6</span>,<span class="number">7</span>)); </span><br><span class="line">  <span class="comment">/*截取字符串的倒数3,2位*/</span></span><br><span class="line">System.out.println(str.substring(str.length()-<span class="number">3</span>, str.length()-<span class="number">1</span>));        </span><br><span class="line">  <span class="comment">/*从字符串索引为0开始截取，一直截取到到第一个“4”（不包含4）*/</span></span><br><span class="line">System.out.println(str.substring(<span class="number">0</span>, str.indexOf(<span class="string">&quot;4&quot;</span>)));                   </span><br><span class="line">  <span class="comment">/*从第一个“4”出现的位置开始截取，一直截取到末尾*/</span></span><br><span class="line">System.out.println(str.substring(str.indexOf(<span class="string">&quot;4&quot;</span>) + <span class="number">1</span>, str.length()));    </span><br><span class="line">  <span class="comment">/*从第一个“4”截取，一直到第一个“8”出现的位置（不包含8）*/</span></span><br><span class="line">System.out.println(str.substring(str.indexOf(<span class="string">&quot;4&quot;</span>), str.indexOf(<span class="string">&quot;8&quot;</span>)));   </span><br><span class="line">  <span class="comment">/*从下标6的位置（包含6）开始截取到末尾*/</span></span><br><span class="line">System.out.println(trs.substring(<span class="number">6</span>, strs.length()));    </span><br><span class="line"> <span class="comment">/*截取字符串的前两位*/</span></span><br><span class="line">System.out.println(strs.substring(<span class="number">0</span>, <span class="number">2</span>));</span><br><span class="line"> <span class="comment">/*从最后一个“3”出现的位置（不包含3）一直截取到截取到末尾*/</span></span><br><span class="line">System.out.println(strs.substring(strs.lastIndexOf(<span class="string">&quot;3&quot;</span>) + <span class="number">1</span>, strs.length()));   </span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div><div class="tip home"><p>第三种方式：使用split()配合特定的字符来进行截取。</p></div><ol><li><p>将 <wavy>一般的分隔符</wavy> 传入split()。它会返回的是一个字符串数组类型。</p><div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*按分隔符截取字符串*/</span></span><br><span class="line">String str = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line">String[] strArray = String.split(<span class="string">&quot;,&quot;</span>);<span class="comment">//以逗号为分隔符来截取字符串，返回一个字符串数组。然后就可以对数组进行操作了</span></span><br><span class="line"><span class="comment">/*按分隔符截取3个*/</span></span><br><span class="line">String.split(<span class="string">&quot; &quot;</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div></li><li><p>还有一些 <wavy>需要转义的分隔符</wavy> 需要特殊处理。<br>当使用<code>* ^ : | . \</code>等6个符号做分隔符时，这6个符号转义字符,必须得在前面加”\“。<br>例如<code>split(&quot;\\^&quot;)</code>等。第二个“\”是用来给这6种符号转义，第一个“\”是用来给第二个“\”转义。</p><div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str=<span class="string">&quot;我*是*小*小强&quot;</span>;</span><br><span class="line">String[] splitStr=str.split(<span class="string">&quot;\\*&quot;</span>);</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div><p> 其中有个更特殊的，就是<code>\</code>。如果字符串中想要使用<code>\\</code>，就应该使用<code>\\</code>进行转义。也就是说，对于<code>a\b</code>，应该写成<code>a\\b</code>，而如果想要用split方法针对<code>\</code>进行拆分，应该使用<code>a\\b.split(&quot;\\\\&quot;)。</code></p></li><li><p>如果你想要 <wavy>多个符号作为分隔符</wavy><br>那么你 可以使用 <kbd>|</kbd>字符作为连字符，把多个分隔符分隔的内容都区分开：</p><div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str=<span class="string">&quot;Java^后端@开发#加油&quot;</span>;</span><br><span class="line">String[] strArray=str.split(<span class="string">&quot;\\^|@|#&quot;</span>);</span><br><span class="line">System.out.println(strArray[<span class="number">0</span>]+strArray[<span class="number">1</span>]+strArray[<span class="number">2</span>]+strArray[<span class="number">3</span>]);  </span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div></li></ol>]]></content>
+      
+      
       <categories>
-        <category>面试</category>
+          
+          <category> JavaSE </category>
+          
       </categories>
-      <tags>
-        <tag>面试</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mybatis框架(新手)</title>
-    <url>/posts/5003/</url>
-    <content><![CDATA[<h2 id="Mybatis框架入门-适合新手"><a href="#Mybatis框架入门-适合新手" class="headerlink" title="Mybatis框架入门(适合新手)"></a>Mybatis框架入门(适合新手)</h2><p>此文章适用新手简单认识一下mybatis框架。方便以后学习面试中提升；</p>
-<p>想要深入的理解mybatis框架，首要前提是学习它的核心组件，mybatis的核心组件包括：SqlSessionFactoryBuilder（构造器）、SqlSessionFactory（工厂接口）、SqlSession（会话接口）、SQL Mapper（映射器）。</p>
-<h3 id="一-、SqlSessionFactoryBuilder（构造器）"><a href="#一-、SqlSessionFactoryBuilder（构造器）" class="headerlink" title="一 、SqlSessionFactoryBuilder（构造器）"></a>一 、SqlSessionFactoryBuilder（构造器）</h3><p>​    作用：根据配置信息或者代码来生成SqlSessionFactory</p>
-<p>​    实现原理：SqlSessionFactoryBuilder类负责构建SqlSessionFactory，该类下提供了多个build的重载方法。因为这些方法的参数不统一，为了方便调用，所以重载了多个方法。但是SqlSessionFactoryBuilder真正重载build方法只有三种，分别是InputStream（字节流）、Reader（字符流）、Configuration（类），字节流和字符流都是通过读取XML配置文件的形式创建SqlSessionFactory，而Configuration的是java代码方式创建SqlSessionFactory；</p>
-<h3 id="二-、SqlSessionFactory（工厂接口）"><a href="#二-、SqlSessionFactory（工厂接口）" class="headerlink" title="二 、SqlSessionFactory（工厂接口）"></a>二 、SqlSessionFactory（工厂接口）</h3><p>​    作用：生产SqlSession会话</p>
-<p>​    实现原理：sqlSession = sqlSessionFactory.openSession();</p>
-<h3 id="三、-SqlSession（会话）"><a href="#三、-SqlSession（会话）" class="headerlink" title="三、 SqlSession（会话）"></a>三、 SqlSession（会话）</h3><p>​    作用：1,获取映射器，让映射器通过命名空间和方法名称找到对应的SQL，发送给数据库执行并返回结果；2,通过update、insert、select、delete等方法，带上SQL的id来操作在XML中配置好的SQL，从而完成工作，同时它也支持事务，通过commit、rollback方法提交或者回滚事务。</p>
-<p>先认识一下SqlSession四大对象：</p>
-<p>执行器Executor：</p>
-<p>种类：SIMPLE：简易执行器，默认执行器</p>
-<p>​     REUSE：一种执行器重用预处理语句</p>
-<p>​     BATCH：执行器重用语句和批量更新，针对批量专用的执行器。</p>
-<p>数据库会话器StatementHandler：</p>
-<p>种类：SimpleStatementHandler：对应SIMPLE执行器</p>
-<p>​    PrepareStatementHandler：对应REUSE执行器</p>
-<p>​    CallableStatementHandler：对应BATCH执行器</p>
-<p>参数处理器ParameterHandler：</p>
-<p>​    用于SQL对参数的处理</p>
-<p>结果处理器ResultHandler：</p>
-<p>用于进行最后数据集ResultSet的封装返回处理。</p>
-<h3 id="三、Sql-Mapper（映射器）"><a href="#三、Sql-Mapper（映射器）" class="headerlink" title="三、Sql Mapper（映射器）"></a>三、Sql Mapper（映射器）</h3><p>作用：1、定义参数、2、描述缓存、3、描述SQL语句、4、定义查询结果和POJO的映射关系</p>
-<p>引入映射器的方法</p>
-<p>1）用文件路径引入映射器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口全路径的配置文件&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>2)用包名引入映射器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口包的全路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>3）用类注册引入映射器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口类的路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>4）用xml配置文件引入映射器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;file:///var/mappers+文件路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> java基础知识 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>为什么有了基本数据类型还需要包装类型?</title>
+      <link href="posts/22234/"/>
+      <url>posts/22234/</url>
+      
+        <content type="html"><![CDATA[<h1 id="为什么有了基本数据类型还需要包装类型？"><a href="#为什么有了基本数据类型还需要包装类型？" class="headerlink" title="为什么有了基本数据类型还需要包装类型？"></a>为什么有了基本数据类型还需要包装类型？</h1><h2 id="为什么需要包装类型"><a href="#为什么需要包装类型" class="headerlink" title="为什么需要包装类型"></a>为什么需要包装类型</h2><p>Java 是一个面向对象的语言，而基本类型不具备面向对象的特性。例如：integer 有 null 值，,而int 只有 0。</p><p>可见基本类型不能赋null值，但是某些场合我们需要给一个字段赋值为null。而且学习到集合时，你会发现，集合中是不可以直接存储基本数据类型的。所以我们要把基本数据类型转换一下，变成包装类。</p><h2 id="那么他们如何转换呢？"><a href="#那么他们如何转换呢？" class="headerlink" title="那么他们如何转换呢？"></a>那么他们如何转换呢？</h2><p>基本数据类型，java中提供了8中基本的数据类型，包装类型：每一个基本的数据类型都会一一对应一个包装类型。如下表所示：</p><table><thead><tr><th>基本数据类型</th><th>包装类型</th><th>字节大小</th></tr></thead><tbody><tr><td>int</td><td>Integer</td><td>4</td></tr><tr><td>short</td><td>Short</td><td>2</td></tr><tr><td>byte</td><td>Byte</td><td>1</td></tr><tr><td>long</td><td>Long</td><td>8</td></tr><tr><td>float</td><td>Float</td><td>4</td></tr><tr><td>double</td><td>Double</td><td>8</td></tr><tr><td>char</td><td>Char</td><td>2</td></tr><tr><td>boolean</td><td>Boolean</td><td>1</td></tr></tbody></table><p>除了int比较特殊，包装类是Integer外，其他都是首字母大写。</p><p>那么基本数据类型和封装类型之间的转换涉及到的概念就是：<code>自动装箱和拆箱</code></p><ul><li>自动装箱:    基本数据类型-&gt;包装类型</li><li>自动拆箱： 包装类型-&gt;基本数据类型</li></ul><h2 id="自动装箱和自动拆箱是如何实现的呢？"><a href="#自动装箱和自动拆箱是如何实现的呢？" class="headerlink" title="自动装箱和自动拆箱是如何实现的呢？"></a>自动装箱和自动拆箱是如何实现的呢？</h2><ol><li><p>自动装箱实际上在编译时会调用Integer.valueOf方法来装箱 </p></li><li><p>自动拆箱实际上会在编译时调用intValue</p></li></ol><p>具体可以使用方式:</p><ol><li>基本数据类型向包装类转换（装箱）</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line">Integer i = <span class="keyword">new</span> Integer (<span class="number">1</span>);</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line">Integer j = <span class="number">1</span>;<span class="comment">//jdk1.5 之后可以通过这种方式自动装箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Integer a=Integer.valueOf(<span class="number">1</span>);</span><br></pre></td></tr></table></figure><ol start="2"><li>包装类向基本数据类型转换（拆箱）</li></ol><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line"><span class="keyword">int</span> m = j.intValue();</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line"><span class="keyword">int</span> m = i;<span class="comment">//jdk1.5 之后可以通过这种方式自动拆箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Double a;</span><br><span class="line"><span class="keyword">double</span> b= <span class="keyword">double</span>(a);<span class="comment">//通过强制转换</span></span><br></pre></td></tr></table></figure><ol start="3"><li>还有一个知识点就是：</li></ol><ul><li>包装类可以实现基本类型和字符串之间的转换：<ul><li>字符串转基本类型：parseXXX(String s)；//XXX就是你想要转成的类型</li><li>基本类型转字符串：String.valueOf(基本类型)，见第三种方式</li></ul></li></ul><p>具体使用方式：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerToString</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 基本类型数据--&gt;字符串</span></span><br><span class="line">        String s1 = <span class="number">100</span>+<span class="string">&quot;&quot;</span>;  <span class="comment">// 第一种方式。常用</span></span><br><span class="line">        String s2 = Integer.toString(<span class="number">101</span>);<span class="comment">//第二种方式</span></span><br><span class="line">        String s3 = String.valueOf(<span class="number">102</span>);<span class="comment">//第三种方式</span></span><br><span class="line">        System.out.println(s1+<span class="number">200</span>); <span class="comment">// 100200</span></span><br><span class="line">        System.out.println(s2+<span class="number">200</span>); <span class="comment">// 101200</span></span><br><span class="line">        System.out.println(s3+<span class="number">200</span>); <span class="comment">// 102200</span></span><br><span class="line">        <span class="comment">// 字符串--&gt;基本类型数据</span></span><br><span class="line">        <span class="keyword">int</span> i1 = Integer.parseInt(<span class="string">&quot;100&quot;</span>);</span><br><span class="line">        System.out.println(i1+<span class="number">200</span>); <span class="comment">// 300</span></span><br><span class="line">        <span class="keyword">int</span> i2 = Integer.parseInt(<span class="string">&quot;a&quot;</span>); <span class="comment">// NumberFormatException: For input string: &quot;a&quot;数字格式化异常。因为前面是Integer，&quot;a&quot;不是数字。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>其他数据类型也同理，具体不再演示了。</p>]]></content>
+      
+      
       <categories>
-        <category>面试</category>
+          
+          <category> JavaSE </category>
+          
       </categories>
-      <tags>
-        <tag>面试</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mybatis面试整理(二)</title>
-    <url>/posts/38514/</url>
-    <content><![CDATA[<h3 id="16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？"><a href="#16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？" class="headerlink" title="16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？"></a>16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？</h3><p>答：、、、、</p>
-<p>， 加上动态 sql 的 9 个标签， 其中为 sql 片段标签， 通过</p>
-<p>标签引入  sql  片段，为不支持自增的主键生成策略标签。</p>
-<h3 id="17、Mybatis-的-Xml-映射文件中，-不同的-Xml-映射文件，-id-是否可以重复？"><a href="#17、Mybatis-的-Xml-映射文件中，-不同的-Xml-映射文件，-id-是否可以重复？" class="headerlink" title="17、Mybatis 的 Xml 映射文件中， 不同的 Xml 映射文件， id 是否可以重复？"></a>17、Mybatis 的 Xml 映射文件中， 不同的 Xml 映射文件， id 是否可以重复？</h3><p>不同的 Xml 映射文件， 如果配置了 namespace， 那么 id 可以重复；如果没有配置 namespace， 那么 id 不能重复；</p>
-<p>原因就是 namespace+id 是作为 Map的 key 使用的， 如果没有 namespace， 就剩下 id， 那么， id 重复会导致数据互相覆盖。有了 namespace，自然 id 就可以重复，namespace 不同，namespace+id 自然也就不同。</p>
-<h3 id="18、为什么说-Mybatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？"><a href="#18、为什么说-Mybatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？" class="headerlink" title="18、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？"></a>18、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？</h3><p>Hibernate 属于全自动 ORM 映射工具， 使用 Hibernate 查询关联对象或者关联集合对象时， 可以根据对象关系模型直接获取， 所以它是全自动的。而 Mybatis 在查询关联对象或关联集合对象时，需要手动编写 sql 来完成，所以，称之为半自动 ORM 映射工具。</p>
-<h3 id="20、MyBatis-实现一对一有几种方式-具体怎么操作的？"><a href="#20、MyBatis-实现一对一有几种方式-具体怎么操作的？" class="headerlink" title="20、MyBatis 实现一对一有几种方式?具体怎么操作的？"></a>20、MyBatis 实现一对一有几种方式?具体怎么操作的？</h3><p>有联合查询和嵌套查询,联合查询是几个表联合查询,只查询一次, 通过在resultMap 里面配置 association 节点配置一对一的类就可以完成；</p>
-<p>嵌套查询是先查一个表，根据这个表里面的结果的 外键 id，去再另外一个表里面查询数据,也是通过 association 配置，但另外一个表的查询通过 select 属性配置。</p>
-<h3 id="21、MyBatis-实现一对多有几种方式-怎么操作的？"><a href="#21、MyBatis-实现一对多有几种方式-怎么操作的？" class="headerlink" title="21、MyBatis 实现一对多有几种方式,怎么操作的？"></a>21、MyBatis 实现一对多有几种方式,怎么操作的？</h3><p>有联合查询和嵌套查询。联合查询是几个表联合查询,只查询一次,通过在</p>
-<p>resultMap 里面的 collection 节点配置一对多的类就可以完成；嵌套查询是先查一个表,根据这个表里面的 结果的外键 id,去再另外一个表里面查询数据,也是通过配置 collection,但另外一个表的查询通过 select 节点配置。</p>
-<h3 id="22、Mybatis-是否支持延迟加载？如果支持，它的实现原理是什么？"><a href="#22、Mybatis-是否支持延迟加载？如果支持，它的实现原理是什么？" class="headerlink" title="22、Mybatis 是否支持延迟加载？如果支持，它的实现原理是什么？"></a>22、Mybatis 是否支持延迟加载？如果支持，它的实现原理是什么？</h3><p>答：Mybatis 仅支持 association 关联对象和 collection 关联集合对象的延迟加载， association 指的就是一对一， collection 指的就是一对多查询。在 Mybatis 配置文件中， 可以配置是否启用延迟加载  lazyLoadingEnabled=true|false。</p>
-<p>它的原理是， 使用 CGLIB 创建目标对象的代理对象， 当调用目标方法时， 进入拦截器方法， 比如调用 a.getB().getName()， 拦截器 invoke()方法发现 a.getB()是null 值， 那么就会单独发送事先保存好的查询关联 B 对象的 sql， 把 B 查询上来， 然后调用 a.setB(b)，于是 a 的对象 b 属性就有值了，接着完成 a.getB().getName()方法的调用。这就是延迟加载的基本原理。</p>
-<p>当然了， 不光是 Mybatis， 几乎所有的包括 Hibernate， 支持延迟加载的原理都是一样的。</p>
-<h3 id="23、Mybatis-的一级、二级缓存"><a href="#23、Mybatis-的一级、二级缓存" class="headerlink" title="23、Mybatis 的一级、二级缓存:"></a>23、Mybatis 的一级、二级缓存:</h3><p>1）  一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存， 其存储作用域为Session， 当 Session flush  或  close  之后， 该  Session  中的所有  Cache  就将清空， 默认打开一级缓存。</p>
-<p>2） 二级缓存与一级缓存其机制相同，默认也是采用 PerpetualCache，HashMap 存储， 不同在于其存储作用域为 Mapper(Namespace)， 并且可自定义存储源， 如 Ehcache。默认不打开二级缓存， 要开启二级缓存， 使用二级缓存属性类需要实现 Serializable 序列化接口(可用来保存对象的状态),可在它的映射文件中配置</p>
-<p>3）  对于缓存数据更新机制， 当某一个作用域(一级缓存 Session/二级缓存</p>
-<p>Namespaces)的进行了 C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear 。</p>
-<h3 id="24、什么是-MyBatis-的接口绑定？有哪些实现方式？"><a href="#24、什么是-MyBatis-的接口绑定？有哪些实现方式？" class="headerlink" title="24、什么是 MyBatis 的接口绑定？有哪些实现方式？"></a>24、什么是 MyBatis 的接口绑定？有哪些实现方式？</h3><p>接口绑定，就是在 MyBatis 中任意定义接口,然后把接口里面的方法和 SQL 语句绑定, 我们直接调用接口方法就可以,这样比起原来了 SqlSession 提供的方法我们可以有更加灵活的选择和设置。</p>
-<p>接口绑定有两种实现方式,一种是通过注解绑定， 就是在接口的方法上面加上@Select、@Update 等注解， 里面包含 Sql 语句来绑定；另外一种就是通过 xml 里面写 SQL 来绑定, 在这种情况下,要指定 xml 映射文件里面的 namespace 必须为接口的全路径名。当 Sql 语句比较简单时候,用注解绑定, 当 SQL 语句比较复杂时候,用 xml 绑定,一般用 xml 绑定的比较多。</p>
-<h3 id="25、使用-MyBatis-的mapper-接口调用时有哪些要求？"><a href="#25、使用-MyBatis-的mapper-接口调用时有哪些要求？" class="headerlink" title="25、使用 MyBatis 的mapper 接口调用时有哪些要求？"></a>25、使用 MyBatis 的mapper 接口调用时有哪些要求？</h3><p>1、Mapper 接口方法名和 mapper.xml 中定义的每个 sql 的 id 相同；</p>
-<p>2、Mapper 接口方法的输入参数类型和 mapper.xml 中定义的每个 sql 的parameterType 的类型相同；</p>
-<p>3、Mapper 接口方法的输出参数类型和 mapper.xml 中定义的每个 sql 的resultType 的类型相同；</p>
-<p>4、Mapper.xml 文件中的 namespace 即是 mapper 接口的类路径。</p>
-<h3 id="26、Mapper-编写有哪几种方式？"><a href="#26、Mapper-编写有哪几种方式？" class="headerlink" title="26、Mapper 编写有哪几种方式？"></a>26、Mapper 编写有哪几种方式？</h3><p>第一种：接口实现类继承 SqlSessionDaoSupport：使用此种方法需要编写mapper 接口， mapper 接口实现类、mapper.xml 文件。</p>
-<p>1、在 sqlMapConfig.xml 中配置 mapper.xml 的位置</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>1、定义 mapper 接口</p>
-<p>3、实现类集成 SqlSessionDaoSupport</p>
-<p>mapper 方法中可以  this.getSqlSession()进行数据增删改查。</p>
-<p>4、spring 配置</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot; &quot;</span> <span class="attr">class</span>=<span class="string">&quot;mapper 接口的实现&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>第二种：使用 org.mybatis.spring.mapper.MapperFactoryBean：</p>
-<p>1、在 sqlMapConfig.xml 中配置 mapper.xml 的位置， 如果 mapper.xml 和mappre 接口的名称相同且在同一个目录， 这里可以不用配置</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>2、定义 mapper 接口：</p>
-<p>1、mapper.xml 中的 namespace 为 mapper 接口的地址</p>
-<p>2、mapper 接口中的方法名和 mapper.xml 中的定义的 statement 的 id 保持一致</p>
-<p>3、Spring 中定义</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperInterface&quot;</span>              <span class="attr">value</span>=<span class="string">&quot;mapper 接口地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>第三种：使用 mapper 扫描器：</p>
-<p>1、mapper.xml 文件编写：</p>
-<p>mapper.xml 中的 namespace 为 mapper 接口的地址；</p>
-<p>mapper 接口中的方法名和 mapper.xml 中的定义的 statement 的 id 保持一致；</p>
-<p>如果将 mapper.xml 和 mapper 接口的名称保持一致则不用在 sqlMapConfig.xml 中进行配置。</p>
-<p>2、定义 mapper 接口：</p>
-<p>注意 mapper.xml 的文件名和 mapper 的接口名称保持一致， 且放在同一个目录</p>
-<p>3、配置 mapper 扫描器：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;mapper 接口包地址&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactoryBeanName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>4、使用扫描器后从 spring 容器中获取 mapper 的实现对象。</p>
-<h3 id="27、简述-Mybatis-的插件运行原理，以及如何编写一个插件。"><a href="#27、简述-Mybatis-的插件运行原理，以及如何编写一个插件。" class="headerlink" title="27、简述 Mybatis 的插件运行原理，以及如何编写一个插件。"></a>27、简述 Mybatis 的插件运行原理，以及如何编写一个插件。</h3><p>答：Mybatis 仅可以编写针对 ParameterHandler、ResultSetHandler、</p>
-<p>StatementHandler、Executor 这 4 种接口的插件， Mybatis 使用 JDK 的动态代理， 为需要拦截的接口生成代理对象以实现接口方法拦截功能， 每当执行这 4 种接口对象的方法时，就会进入拦截方法，具体就是 InvocationHandler 的 invoke() 方法， 当然， 只会拦截那些你指定需要拦截的方法。</p>
-<p>编写插件：实现 Mybatis 的 Interceptor 接口并复写 intercept()方法， 然后在给插件编写注解， 指定要拦截哪一个接口的哪些方法即可， 记住， 别忘了在配置文件中配置你编写的插件。</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> java基础知识 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用FileZilla在本地搭建FTP服务器</title>
+      <link href="posts/18455/"/>
+      <url>posts/18455/</url>
+      
+        <content type="html"><![CDATA[<p>使用FileZilla在本地搭建FTP服务器</p><h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ol><li>服务端：FileZilla_server</li><li>客户端：filezilla</li></ol><p>这两个软件我这里都是免安装的，可以直接使用，无需安装</p><p>需要注意的是  你要搭建FTP服务端的那台机器需要防火墙开启FTP的默认端:<strong>开启 21端口</strong></p><h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><ol><li>直接运行下面这个exe</li></ol><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/FileZilla1.png" alt="image-20201203150153779"></p><ol start="2"><li><p>启动服务</p><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezllia2.png" alt="image-20201203150246256"></p><ol start="3"><li><p>运行服务端软件</p><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla3.png" alt="image-20201203150440444"></p></li></ol></li><li><p>选择这个添加用户</p><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla4.png" alt="image-20201203151128124"></p></li><li><p>设置用户</p><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla5.png" alt="image-20201203150554956"></p><ol start="5"><li>设置密码</li></ol></li></ol><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla6.png" alt="image-20201203151414970"></p><p>3.设置共享文件夹</p><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla7.png" alt="image-20201203151545703"></p><p>这时候服务端就设置好啦</p><h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>下面配置客户端软件</p><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla8.png" alt="image-20201203151712608"></p><ol><li>新建站点</li></ol><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla9.png" alt="image-20201203151914710"></p><p>3.传输设置</p><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla10.png" alt="image-20201203152132810"></p><ol start="4"><li>点击连接</li><li>测试连接，打开浏览器进行访问<ul><li>在浏览器地址栏输入：FTP://127.0.0.1回车访问</li><li>输入用户名和密码即可访问</li></ul></li></ol><p>6.访问成功</p><p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla11.png" alt="image-20201203173304627"></p>]]></content>
+      
+      
       <categories>
-        <category>面试</category>
+          
+          <category> 效率工具 </category>
+          
       </categories>
-      <tags>
-        <tag>面试</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java中截取字符串常用的方法</title>
-    <url>/posts/10520/</url>
-    <content><![CDATA[<h1 id="java中截取字符串常用的方法"><a href="#java中截取字符串常用的方法" class="headerlink" title="java中截取字符串常用的方法"></a>java中截取字符串常用的方法</h1><div class="tip warning"><p>第一种方式：使用StringUtils工具类</p>
-</div>
-<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String strs = <span class="string">&quot;1234567890&quot;</span>;</span><br><span class="line"><span class="comment">/*从开始位置一直截取到第一个“3”（不包括3）*/</span></span><br><span class="line">System.out.println(StringUtils.substringBefore(strs, <span class="string">&quot;3&quot;</span>)); </span><br><span class="line"><span class="comment">/*从开始位置一直截取到最后一个“3”（不包括3)*/</span></span><br><span class="line">System.out.println( StringUtils.substringBeforeLast(strs, <span class="string">&quot;3&quot;</span>)); </span><br><span class="line"><span class="comment">/*从第一个“3”出现的位置（不包括3）一直截取到末尾*/</span></span><br><span class="line">System.out.println(StringUtils.substringAfter(strs, <span class="string">&quot;3&quot;</span>));   </span><br><span class="line"><span class="comment">/*从最后一个“3”出现的位置（不包括3）一直截取到末尾*/</span></span><br><span class="line">System.out.println(StringUtils.substringAfterLast(strs, <span class="string">&quot;3&quot;</span>)); </span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-
-<div class="tip cogs"><p>第二种方式：使用String类提供的substring方法</p>
-</div>
-<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String str = <span class="string">&quot;1234567890&quot;</span>;</span><br><span class="line">  <span class="comment">/*从字符串索引为0的位置开始截取，一直截取到末尾*/</span></span><br><span class="line">System.out.println( str.substring(<span class="number">0</span>));  </span><br><span class="line">  <span class="comment">/*截取索引为6的位置的字符*/</span></span><br><span class="line">System.out.println(str.substring(<span class="number">6</span>,<span class="number">7</span>)); </span><br><span class="line">  <span class="comment">/*截取字符串的倒数3,2位*/</span></span><br><span class="line">System.out.println(str.substring(str.length()-<span class="number">3</span>, str.length()-<span class="number">1</span>));        </span><br><span class="line">  <span class="comment">/*从字符串索引为0开始截取，一直截取到到第一个“4”（不包含4）*/</span></span><br><span class="line">System.out.println(str.substring(<span class="number">0</span>, str.indexOf(<span class="string">&quot;4&quot;</span>)));                   </span><br><span class="line">  <span class="comment">/*从第一个“4”出现的位置开始截取，一直截取到末尾*/</span></span><br><span class="line">System.out.println(str.substring(str.indexOf(<span class="string">&quot;4&quot;</span>) + <span class="number">1</span>, str.length()));    </span><br><span class="line">  <span class="comment">/*从第一个“4”截取，一直到第一个“8”出现的位置（不包含8）*/</span></span><br><span class="line">System.out.println(str.substring(str.indexOf(<span class="string">&quot;4&quot;</span>), str.indexOf(<span class="string">&quot;8&quot;</span>)));   </span><br><span class="line">  <span class="comment">/*从下标6的位置（包含6）开始截取到末尾*/</span></span><br><span class="line">System.out.println(trs.substring(<span class="number">6</span>, strs.length()));    </span><br><span class="line"> <span class="comment">/*截取字符串的前两位*/</span></span><br><span class="line">System.out.println(strs.substring(<span class="number">0</span>, <span class="number">2</span>));</span><br><span class="line"> <span class="comment">/*从最后一个“3”出现的位置（不包含3）一直截取到截取到末尾*/</span></span><br><span class="line">System.out.println(strs.substring(strs.lastIndexOf(<span class="string">&quot;3&quot;</span>) + <span class="number">1</span>, strs.length()));   </span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-
-<div class="tip home"><p>第三种方式：使用split()配合特定的字符来进行截取。</p>
-</div>
-<ol>
-<li><p>将 <wavy>一般的分隔符</wavy> 传入split()。它会返回的是一个字符串数组类型。</p>
-<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*按分隔符截取字符串*/</span></span><br><span class="line">String str = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line">String[] strArray = String.split(<span class="string">&quot;,&quot;</span>);<span class="comment">//以逗号为分隔符来截取字符串，返回一个字符串数组。然后就可以对数组进行操作了</span></span><br><span class="line"><span class="comment">/*按分隔符截取3个*/</span></span><br><span class="line">String.split(<span class="string">&quot; &quot;</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-</li>
-<li><p>还有一些 <wavy>需要转义的分隔符</wavy> 需要特殊处理。<br>当使用<code>* ^ : | . \</code>等6个符号做分隔符时，这6个符号转义字符,必须得在前面加”\“。<br>例如<code>split(&quot;\\^&quot;)</code>等。第二个“\”是用来给这6种符号转义，第一个“\”是用来给第二个“\”转义。</p>
-<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String str=<span class="string">&quot;我*是*小*小强&quot;</span>;</span><br><span class="line">String[] splitStr=str.split(<span class="string">&quot;\\*&quot;</span>);</span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div>
-
-<p> 其中有个更特殊的，就是<code>\</code>。如果字符串中想要使用<code>\\</code>，就应该使用<code>\\</code>进行转义。也就是说，对于<code>a\b</code>，应该写成<code>a\\b</code>，而如果想要用split方法针对<code>\</code>进行拆分，应该使用<code>a\\b.split(&quot;\\\\&quot;)。</code></p>
-</li>
-<li><p>如果你想要 <wavy>多个符号作为分隔符</wavy><br>那么你 可以使用 <kbd>|</kbd>字符作为连字符，把多个分隔符分隔的内容都区分开：</p>
-<div class="tabs" id="test1"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test1-1">代码示例</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test1-1"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String str=<span class="string">&quot;Java^后端@开发#加油&quot;</span>;</span><br><span class="line">String[] strArray=str.split(<span class="string">&quot;\\^|@|#&quot;</span>);</span><br><span class="line">System.out.println(strArray[<span class="number">0</span>]+strArray[<span class="number">1</span>]+strArray[<span class="number">2</span>]+strArray[<span class="number">3</span>]);  </span><br></pre></td></tr></table></figure><button type="button" class="tab-to-top"><i class="fas fa-arrow-up"></i></button></div></div></div></li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+            <tag> FTP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>多线程并发模拟购票</title>
+      <link href="posts/120343/"/>
+      <url>posts/120343/</url>
+      
+        <content type="html"><![CDATA[<h1 id="多线程并发模拟购票"><a href="#多线程并发模拟购票" class="headerlink" title="多线程并发模拟购票"></a>多线程并发模拟购票</h1><p>需求：用多线程模拟车站购票。100张票，200个人去购买。</p><p>买不到的就购票失败，100张票不可以多卖，不可以少卖。</p><h2 id="车票类"><a href="#车票类" class="headerlink" title="车票类"></a>车票类</h2><p>含有一个购票的方法，所有线程的共享对象是车票类，所以直接用车票类对象锁住购票方法</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.qiyiyu.javase.thread.buyticket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: 车票类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> 小小强</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/11/21</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> </span>&#123;</span><br><span class="line">    <span class="comment">//剩余票数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> allowance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tickets</span><span class="params">(<span class="keyword">int</span> allowance)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.allowance = allowance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAllowance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> allowance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAllowance</span><span class="params">(<span class="keyword">int</span> allowance)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.allowance = allowance;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 购票</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">buyTickets</span><span class="params">(<span class="keyword">int</span> amount)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.getAllowance() &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;剩余&quot;</span> + <span class="keyword">this</span>.getAllowance() + <span class="string">&quot;票已经售空&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//购票前余量</span></span><br><span class="line">            <span class="keyword">int</span> before = <span class="keyword">this</span>.allowance;</span><br><span class="line">            <span class="keyword">int</span> after = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.allowance &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">//买完后剩余票数</span></span><br><span class="line">                after = before - amount;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                after = before;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.setAllowance(after);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="顾客类"><a href="#顾客类" class="headerlink" title="顾客类"></a>顾客类</h2><p>将共享对象作为参数传进去</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.qiyiyu.javase.thread.buyticket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> 小小强</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/11/21</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomerRunnable</span>  <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span>  Tickets tickets;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CustomerRunnable</span><span class="params">(Tickets tickets)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.tickets = tickets;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                  <span class="keyword">boolean</span> flag =  tickets.buyTickets(<span class="number">1</span>);</span><br><span class="line">                  <span class="keyword">if</span> (flag)&#123;</span><br><span class="line"></span><br><span class="line">                      System.out.println(Thread.currentThread().getName() + <span class="string">&quot;购买成功，当前剩余票数&quot;</span> + tickets.getAllowance());</span><br><span class="line">                  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                      System.out.println(Thread.currentThread().getName() + <span class="string">&quot;购买失败，当前剩余票数&quot;</span> + tickets.getAllowance());</span><br><span class="line"></span><br><span class="line">                  &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.qiyiyu.javase.thread.buyticket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:测试</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> 小小强</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/11/21</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuyTicketTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//100张票 所有线程都共享这个票对象，通过把这个对象传到线程里</span></span><br><span class="line">        Tickets tickets = <span class="keyword">new</span> Tickets(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建数组</span></span><br><span class="line">        CustomerRunnable[] customerRunnables = <span class="keyword">new</span> CustomerRunnable[<span class="number">200</span>];</span><br><span class="line"></span><br><span class="line">        Thread[] threads = <span class="keyword">new</span> Thread[<span class="number">200</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; customerRunnables.length; i++) &#123;</span><br><span class="line">            <span class="comment">//创建对象</span></span><br><span class="line">            customerRunnables[i] = <span class="keyword">new</span> CustomerRunnable(tickets);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//给每个对象创建线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; threads.length; i++) &#123;</span><br><span class="line">            threads[i] = <span class="keyword">new</span> Thread(customerRunnables[i]);</span><br><span class="line">            threads[i].setName(<span class="string">&quot;票友&quot;</span> + i);</span><br><span class="line">            <span class="comment">//启动线程</span></span><br><span class="line">            threads[i].start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>JavaSE</category>
+          
+          <category> 小模块 </category>
+          
       </categories>
-      <tags>
-        <tag>java基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>为什么有了基本数据类型还需要包装类型?</title>
-    <url>/posts/22234/</url>
-    <content><![CDATA[<h1 id="为什么有了基本数据类型还需要包装类型？"><a href="#为什么有了基本数据类型还需要包装类型？" class="headerlink" title="为什么有了基本数据类型还需要包装类型？"></a>为什么有了基本数据类型还需要包装类型？</h1><h2 id="为什么需要包装类型"><a href="#为什么需要包装类型" class="headerlink" title="为什么需要包装类型"></a>为什么需要包装类型</h2><p>Java 是一个面向对象的语言，而基本类型不具备面向对象的特性。例如：integer 有 null 值，,而int 只有 0。</p>
-<p>可见基本类型不能赋null值，但是某些场合我们需要给一个字段赋值为null。而且学习到集合时，你会发现，集合中是不可以直接存储基本数据类型的。所以我们要把基本数据类型转换一下，变成包装类。</p>
-<h2 id="那么他们如何转换呢？"><a href="#那么他们如何转换呢？" class="headerlink" title="那么他们如何转换呢？"></a>那么他们如何转换呢？</h2><p>基本数据类型，java中提供了8中基本的数据类型，包装类型：每一个基本的数据类型都会一一对应一个包装类型。如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th>基本数据类型</th>
-<th>包装类型</th>
-<th>字节大小</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>int</td>
-<td>Integer</td>
-<td>4</td>
-</tr>
-<tr>
-<td>short</td>
-<td>Short</td>
-<td>2</td>
-</tr>
-<tr>
-<td>byte</td>
-<td>Byte</td>
-<td>1</td>
-</tr>
-<tr>
-<td>long</td>
-<td>Long</td>
-<td>8</td>
-</tr>
-<tr>
-<td>float</td>
-<td>Float</td>
-<td>4</td>
-</tr>
-<tr>
-<td>double</td>
-<td>Double</td>
-<td>8</td>
-</tr>
-<tr>
-<td>char</td>
-<td>Char</td>
-<td>2</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td>Boolean</td>
-<td>1</td>
-</tr>
-</tbody></table>
-<p>除了int比较特殊，包装类是Integer外，其他都是首字母大写。</p>
-<p>那么基本数据类型和封装类型之间的转换涉及到的概念就是：<code>自动装箱和拆箱</code></p>
-<ul>
-<li>自动装箱:    基本数据类型-&gt;包装类型</li>
-<li>自动拆箱： 包装类型-&gt;基本数据类型</li>
-</ul>
-<h2 id="自动装箱和自动拆箱是如何实现的呢？"><a href="#自动装箱和自动拆箱是如何实现的呢？" class="headerlink" title="自动装箱和自动拆箱是如何实现的呢？"></a>自动装箱和自动拆箱是如何实现的呢？</h2><ol>
-<li><p>自动装箱实际上在编译时会调用Integer.valueOf方法来装箱 </p>
-</li>
-<li><p>自动拆箱实际上会在编译时调用intValue</p>
-</li>
-</ol>
-<p>具体可以使用方式:</p>
-<ol>
-<li>基本数据类型向包装类转换（装箱）</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line">Integer i = <span class="keyword">new</span> Integer (<span class="number">1</span>);</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line">Integer j = <span class="number">1</span>;<span class="comment">//jdk1.5 之后可以通过这种方式自动装箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Integer a=Integer.valueOf(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>包装类向基本数据类型转换（拆箱）</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line"><span class="keyword">int</span> m = j.intValue();</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line"><span class="keyword">int</span> m = i;<span class="comment">//jdk1.5 之后可以通过这种方式自动拆箱</span></span><br><span class="line"><span class="comment">//第三种</span></span><br><span class="line">Double a;</span><br><span class="line"><span class="keyword">double</span> b= <span class="keyword">double</span>(a);<span class="comment">//通过强制转换</span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>还有一个知识点就是：</li>
-</ol>
-<ul>
-<li>包装类可以实现基本类型和字符串之间的转换：<ul>
-<li>字符串转基本类型：parseXXX(String s)；//XXX就是你想要转成的类型</li>
-<li>基本类型转字符串：String.valueOf(基本类型)，见第三种方式</li>
-</ul>
-</li>
-</ul>
-<p>具体使用方式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerToString</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 基本类型数据--&gt;字符串</span></span><br><span class="line">        String s1 = <span class="number">100</span>+<span class="string">&quot;&quot;</span>;  <span class="comment">// 第一种方式。常用</span></span><br><span class="line">        String s2 = Integer.toString(<span class="number">101</span>);<span class="comment">//第二种方式</span></span><br><span class="line">        String s3 = String.valueOf(<span class="number">102</span>);<span class="comment">//第三种方式</span></span><br><span class="line">        System.out.println(s1+<span class="number">200</span>); <span class="comment">// 100200</span></span><br><span class="line">        System.out.println(s2+<span class="number">200</span>); <span class="comment">// 101200</span></span><br><span class="line">        System.out.println(s3+<span class="number">200</span>); <span class="comment">// 102200</span></span><br><span class="line">        <span class="comment">// 字符串--&gt;基本类型数据</span></span><br><span class="line">        <span class="keyword">int</span> i1 = Integer.parseInt(<span class="string">&quot;100&quot;</span>);</span><br><span class="line">        System.out.println(i1+<span class="number">200</span>); <span class="comment">// 300</span></span><br><span class="line">        <span class="keyword">int</span> i2 = Integer.parseInt(<span class="string">&quot;a&quot;</span>); <span class="comment">// NumberFormatException: For input string: &quot;a&quot;数字格式化异常。因为前面是Integer，&quot;a&quot;不是数字。</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>其他数据类型也同理，具体不再演示了。</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 多线程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java面试题综合总结（二）</title>
+      <link href="posts/23859/"/>
+      <url>posts/23859/</url>
+      
+        <content type="html"><![CDATA[<h2 id="16-ArrayList和vector区别"><a href="#16-ArrayList和vector区别" class="headerlink" title="16.ArrayList和vector区别"></a><strong>16.ArrayList和vector区别</strong></h2><p>ArrayList和Vector都实现了List接口，都是通过数组实现的。</p><p>Vector是线程安全的，而ArrayList是非线程安全的。<br>List第一次创建的时候，会有一个初始大小，随着不断向List中增加元素，当List 认为容量不够的时候就会进行扩容。Vector缺省情况下自动增长原来一倍的数组长度，ArrayList增长原来的50%。</p><h2 id="17-ArrayList和LinkedList区别及使用场景"><a href="#17-ArrayList和LinkedList区别及使用场景" class="headerlink" title="17.ArrayList和LinkedList区别及使用场景"></a><strong>17.ArrayList和LinkedList区别及使用场景</strong></h2><p>区别<br>ArrayList底层是用数组实现的，可以认为ArrayList是一个可改变大小的数组。随着越来越多的元素被添加到ArrayList中，其规模是动态增加的。<br>LinkedList底层是通过双向链表实现的， LinkedList和ArrayList相比，增删的速度较快。但是查询和修改值的速度较慢。同时，LinkedList还实现了Queue接口，所以他还提供了offer(),<br>peek(), poll()等方法。<br>使用场景<br>LinkedList更适合从中间插入或者删除（链表的特性）。<br>ArrayList更适合检索和在末尾插入或删除（数组的特性）。</p><h2 id="18-Collection和Collections的区别"><a href="#18-Collection和Collections的区别" class="headerlink" title="18.Collection和Collections的区别"></a><strong>18.Collection和Collections的区别</strong></h2><p>java.util.Collection 是一个集合接口。它提供了对集合对象进行基本操作的通用接口方法。Collection接口在Java 类库中有很多具体的实现。Collection接口的意义是为各种具体的集合提供了最大化的统一操作方式。<br>java.util.Collections 是一个包装类。它包含有各种有关集合操作的静态多态方法。此类不能实例化，就像一个工具类，服务于Java的Collection框架。</p><h2 id="19-Concurrenthashmap实现原理"><a href="#19-Concurrenthashmap实现原理" class="headerlink" title="19.Concurrenthashmap实现原理"></a><strong>19.Concurrenthashmap实现原理</strong></h2><p>具体原理参考文章：<br><a href="http://www.cnblogs.com/ITtangtang/p/3948786.html">http://www.cnblogs.com/ITtangtang/p/3948786.html</a><br><a href="http://ifeve.com/concurrenthashmap/">http://ifeve.com/concurrenthashmap/</a></p><h2 id="20-Error、Exception区别"><a href="#20-Error、Exception区别" class="headerlink" title="20.Error、Exception区别"></a><strong>20.Error、Exception区别</strong></h2><p>Error类和Exception类的父类都是throwable类，他们的区别是：<br>Error类一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和和预防，遇到这样的错误，建议让程序终止。<br>Exception类表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。</p><h2 id="21-Unchecked"><a href="#21-Unchecked" class="headerlink" title="21.Unchecked"></a><strong>21.Unchecked</strong></h2><p>Exception和Checked Exception，各列举几个#<br>Unchecked Exception:<br>a. 指的是程序的瑕疵或逻辑错误，并且在运行时无法恢复。<br>b. 包括Error与RuntimeException及其子类，如：OutOfMemoryError,<br>UndeclaredThrowableException, IllegalArgumentException,<br>IllegalMonitorStateException, NullPointerException, IllegalStateException,<br>IndexOutOfBoundsException等。<br>c. 语法上不需要声明抛出异常。<br>Checked Exception:<br>a. 代表程序不能直接控制的无效外界情况（如用户输入，数据库问题，网络异常，文件丢失等）<br>b. 除了Error和RuntimeException及其子类之外，如：ClassNotFoundException,<br>NamingException, ServletException, SQLException, IOException等。<br>c. 需要try catch处理或throws声明抛出异常。</p><h2 id="22-Java中如何实现代理机制-JDK、CGLIB"><a href="#22-Java中如何实现代理机制-JDK、CGLIB" class="headerlink" title="22.Java中如何实现代理机制(JDK、CGLIB)"></a><strong>22.Java中如何实现代理机制(JDK、CGLIB)</strong></h2><p>JDK动态代理：代理类和目标类实现了共同的接口，用到InvocationHandler接口。<br>CGLIB动态代理：代理类是目标类的子类，用到MethodInterceptor接口。</p><h2 id="23-多线程的实现方式"><a href="#23-多线程的实现方式" class="headerlink" title="23.多线程的实现方式"></a><strong>23.多线程的实现方式</strong></h2><p>继承Thread类、实现Runnable接口、使用ExecutorService、Callable、Future实现有返回结果的多线程。</p><h2 id="24-如何停止一个线程"><a href="#24-如何停止一个线程" class="headerlink" title="24.如何停止一个线程"></a><strong>24.如何停止一个线程</strong></h2><p>参考文章：<br><a href="http://www.cnblogs.com/greta/p/5624839.html">http://www.cnblogs.com/greta/p/5624839.html</a></p><h2 id="25-什么是线程安全"><a href="#25-什么是线程安全" class="headerlink" title="25.什么是线程安全"></a><strong>25.什么是线程安全</strong></h2><p>线程安全就是多线程访问同一代码，不会产生不确定的结果。</p><h2 id="26-如何保证线程安全"><a href="#26-如何保证线程安全" class="headerlink" title="26.如何保证线程安全"></a><strong>26.如何保证线程安全</strong></h2><p>对非安全的代码进行加锁控制；<br>使用线程安全的类；<br>多线程并发情况下，线程共享的变量改为方法级的局部变量。</p><h2 id="27-synchronized如何使用"><a href="#27-synchronized如何使用" class="headerlink" title="27.synchronized如何使用"></a><strong>27.synchronized如何使用</strong></h2><p>synchronized是Java中的关键字，是一种同步锁。它修饰的对象有以下几种：<br>1). 修饰一个代码块，被修饰的代码块称为同步语句块，其作用的范围是大括号{}括起来的代码，作用的对象是调用这个代码块的对象；<br>2). 修饰一个方法，被修饰的方法称为同步方法，其作用的范围是整个方法，作用的对象是调用这个方法的对象；<br>3). 修改一个静态的方法，其作用的范围是整个静态方法，作用的对象是这个类的所有对象；<br>4). 修改一个类，其作用的范围是synchronized后面括号括起来的部分，作用主的对象是这个类的所有对象。</p><h2 id="28-synchronized和Lock的区别"><a href="#28-synchronized和Lock的区别" class="headerlink" title="28.synchronized和Lock的区别"></a><strong>28.synchronized和Lock的区别</strong></h2><p>主要相同点：Lock能完成synchronized所实现的所有功能<br>主要不同点：Lock有比synchronized更精确的线程语义和更好的性能。Lock的锁定是通过代码实现的，而synchronized是在JVM层面上实现的，synchronized会自动释放锁，而Lock一定要求程序员手工释放，并且必须在finally从句中释放。Lock还有更强大的功能，例如，它的tryLock方法可以非阻塞方式去拿锁。Lock锁的范围有局限性，块范围，而synchronized可以锁住块、对象、类。</p><h2 id="29-多线程如何进行信息交互"><a href="#29-多线程如何进行信息交互" class="headerlink" title="29.多线程如何进行信息交互"></a><strong>29.多线程如何进行信息交互</strong></h2><p>void notify() 唤醒在此对象监视器上等待的单个线程。<br>void notifyAll() 唤醒在此对象监视器上等待的所有线程。<br>void wait() 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法。<br>void wait(long timeout) 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法，或者超过指定的时间量。<br>void wait(long timeout, int nanos) 导致当前的线程等待，直到其他线程调用此对象的notify()方法或notifyAll()方法，或者其他某个线程中断当前线程，或者已超过某个实际时间量。</p>]]></content>
+      
+      
       <categories>
-        <category>JavaSE</category>
+          
+          <category> 面试 </category>
+          
       </categories>
-      <tags>
-        <tag>java基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>你好，hexo</title>
-    <url>/posts/18623/</url>
-    <content><![CDATA[<h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><p>欢迎使用 Hexo，此文档将帮助您快速上手。如果您在使用过程中遇到问题，请查看 <a href="https://hexo.io/zh-cn/docs/troubleshooting">问题解答</a> 中的解答，或者在 <a href="https://github.com/hexojs/hexo/issues">GitHub</a>、<a href="https://groups.google.com/group/hexo">Google Group</a> 上提问</p>
-<h2 id="什么是-Hexo？"><a href="#什么是-Hexo？" class="headerlink" title="什么是 Hexo？"></a>什么是 Hexo？</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<iframe src="https://www.youtube.com/embed/PsXWbI2Mqu0" loading="lazy" allowfullscreen="" frameborder="0"></iframe>
-
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 Hexo 只需几分钟时间，若您在安装过程中遇到问题或无法找到解决方式，请<a href="https://github.com/hexojs/hexo/issues">提交问题</a>，我们会尽力解决您的问题。</p>
-<h3 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h3><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p>
-<ul>
-<li><a href="http://nodejs.org/">Node.js</a> (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)</li>
-<li><a href="http://git-scm.com/">Git</a></li>
-</ul>
-<p>如果您的电脑中已经安装上述必备程序，那么恭喜您！你可以直接前往 <a href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo">安装 Hexo</a> 步骤。</p>
-<p>如果您的电脑中尚未安装所需要的程序，请根据以下安装指示完成安装。</p>
-<h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><ul>
-<li>Windows：下载并安装 <a href="https://git-scm.com/download/win">git</a>.</li>
-<li>Mac：使用 <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, <a href="http://www.macports.org/">MacPorts</a> 或者下载 <a href="http://sourceforge.net/projects/git-osx-installer/">安装程序</a>。</li>
-<li>Linux (Ubuntu, Debian)：<code>sudo apt-get install git-core</code></li>
-<li>Linux (Fedora, Red Hat, CentOS)：<code>sudo yum install git-core</code></li>
-</ul>
-<blockquote>
-<p>Mac 用户</p>
-<p>如果在编译时可能会遇到问题，请先到 App Store 安装 Xcode，Xcode 完成后，启动并进入 <strong>Preferences -&gt; Download -&gt; Command Line Tools -&gt; Install</strong> 安装命令行工具。</p>
-</blockquote>
-<blockquote>
-<p>Windows 用户</p>
-<p>对于中国大陆地区用户，可以前往 <a href="https://npm.taobao.org/mirrors/git-for-windows/">淘宝 Git for Windows 镜像</a> 下载 git 安装包。</p>
-</blockquote>
-<h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>Node.js 为大多数平台提供了官方的 <a href="https://nodejs.org/en/download/">安装程序</a>。对于中国大陆地区用户，可以前往 <a href="https://npm.taobao.org/mirrors/node">淘宝 Node.js 镜像</a> 下载。</p>
-<p>其它的安装方法：</p>
-<ul>
-<li>Windows：通过 <a href="https://github.com/jasongin/nvs/">nvs</a>（推荐）或者<a href="https://github.com/nvm-sh/nvm">nvm</a> 安装。</li>
-<li>Mac：使用 <a href="https://brew.sh/">Homebrew</a> 或 <a href="http://www.macports.org/">MacPorts</a> 安装。</li>
-<li>Linux（DEB/RPM-based）：从 <a href="https://github.com/nodesource/distributions">NodeSource</a> 安装。</li>
-<li>其它：使用相应的软件包管理器进行安装，可以参考由 Node.js 提供的 <a href="https://nodejs.org/en/download/package-manager/">指导</a></li>
-</ul>
-<p>对于 Mac 和 Linux 同样建议使用 nvs 或者 nvm，以避免可能会出现的权限问题。</p>
-<blockquote>
-<p>Windows 用户</p>
-<p>使用 Node.js 官方安装程序时，请确保勾选 <strong>Add to PATH</strong> 选项（默认已勾选）</p>
-</blockquote>
-<blockquote>
-<p>For Mac / Linux 用户</p>
-<p>如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code> 权限错误，请遵循 <a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally">由 npmjs 发布的指导</a> 修复该问题。强烈建议 <strong>不要</strong> 使用 root、sudo 等方法覆盖权限</p>
-</blockquote>
-<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h3 id="进阶安装和使用"><a href="#进阶安装和使用" class="headerlink" title="进阶安装和使用"></a>进阶安装和使用</h3><p>对于熟悉 npm 的进阶用户，可以仅局部安装 <code>hexo</code> 包。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install hexo</span><br></pre></td></tr></table></figure>
-
-<p>安装以后，可以使用以下两种方式执行 Hexo：</p>
-<ol>
-<li><p><code>npx hexo </code></p>
-</li>
-<li><p>将 Hexo 所在的目录下的 <code>node_modules</code> 添加到环境变量之中即可直接使用 <code>hexo </code>：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">echo &#39;PATH&#x3D;&quot;$PATH:.&#x2F;node_modules&#x2F;.bin&quot;&#39; &gt;&gt; ~&#x2F;.profile</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 面试 </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mybatis框架(新手)</title>
+      <link href="posts/5003/"/>
+      <url>posts/5003/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Mybatis框架入门-适合新手"><a href="#Mybatis框架入门-适合新手" class="headerlink" title="Mybatis框架入门(适合新手)"></a>Mybatis框架入门(适合新手)</h2><p>此文章适用新手简单认识一下mybatis框架。方便以后学习面试中提升；</p><p>想要深入的理解mybatis框架，首要前提是学习它的核心组件，mybatis的核心组件包括：SqlSessionFactoryBuilder（构造器）、SqlSessionFactory（工厂接口）、SqlSession（会话接口）、SQL Mapper（映射器）。</p><h3 id="一-、SqlSessionFactoryBuilder（构造器）"><a href="#一-、SqlSessionFactoryBuilder（构造器）" class="headerlink" title="一 、SqlSessionFactoryBuilder（构造器）"></a>一 、SqlSessionFactoryBuilder（构造器）</h3><p>​    作用：根据配置信息或者代码来生成SqlSessionFactory</p><p>​    实现原理：SqlSessionFactoryBuilder类负责构建SqlSessionFactory，该类下提供了多个build的重载方法。因为这些方法的参数不统一，为了方便调用，所以重载了多个方法。但是SqlSessionFactoryBuilder真正重载build方法只有三种，分别是InputStream（字节流）、Reader（字符流）、Configuration（类），字节流和字符流都是通过读取XML配置文件的形式创建SqlSessionFactory，而Configuration的是java代码方式创建SqlSessionFactory；</p><h3 id="二-、SqlSessionFactory（工厂接口）"><a href="#二-、SqlSessionFactory（工厂接口）" class="headerlink" title="二 、SqlSessionFactory（工厂接口）"></a>二 、SqlSessionFactory（工厂接口）</h3><p>​    作用：生产SqlSession会话</p><p>​    实现原理：sqlSession = sqlSessionFactory.openSession();</p><h3 id="三、-SqlSession（会话）"><a href="#三、-SqlSession（会话）" class="headerlink" title="三、 SqlSession（会话）"></a>三、 SqlSession（会话）</h3><p>​    作用：1,获取映射器，让映射器通过命名空间和方法名称找到对应的SQL，发送给数据库执行并返回结果；2,通过update、insert、select、delete等方法，带上SQL的id来操作在XML中配置好的SQL，从而完成工作，同时它也支持事务，通过commit、rollback方法提交或者回滚事务。</p><p>先认识一下SqlSession四大对象：</p><p>执行器Executor：</p><p>种类：SIMPLE：简易执行器，默认执行器</p><p>​     REUSE：一种执行器重用预处理语句</p><p>​     BATCH：执行器重用语句和批量更新，针对批量专用的执行器。</p><p>数据库会话器StatementHandler：</p><p>种类：SimpleStatementHandler：对应SIMPLE执行器</p><p>​    PrepareStatementHandler：对应REUSE执行器</p><p>​    CallableStatementHandler：对应BATCH执行器</p><p>参数处理器ParameterHandler：</p><p>​    用于SQL对参数的处理</p><p>结果处理器ResultHandler：</p><p>用于进行最后数据集ResultSet的封装返回处理。</p><h3 id="三、Sql-Mapper（映射器）"><a href="#三、Sql-Mapper（映射器）" class="headerlink" title="三、Sql Mapper（映射器）"></a>三、Sql Mapper（映射器）</h3><p>作用：1、定义参数、2、描述缓存、3、描述SQL语句、4、定义查询结果和POJO的映射关系</p><p>引入映射器的方法</p><p>1）用文件路径引入映射器</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口全路径的配置文件&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure><p>2)用包名引入映射器</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口包的全路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure><p>3）用类注册引入映射器</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;对应mapper接口类的路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure><p>4）用xml配置文件引入映射器</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">url</span>=<span class="string">&quot;file:///var/mappers+文件路径&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>hexo</category>
+          
+          <category> 面试 </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用FileZilla在本地搭建FTP服务器</title>
-    <url>/posts/18455/</url>
-    <content><![CDATA[<p>使用FileZilla在本地搭建FTP服务器</p>
-<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ol>
-<li>服务端：FileZilla_server</li>
-<li>客户端：filezilla</li>
-</ol>
-<p>这两个软件我这里都是免安装的，可以直接使用，无需安装</p>
-<p>需要注意的是  你要搭建FTP服务端的那台机器需要防火墙开启FTP的默认端:<strong>开启 21端口</strong></p>
-<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><ol>
-<li>直接运行下面这个exe</li>
-</ol>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/FileZilla1.png" alt="image-20201203150153779"></p>
-<ol start="2">
-<li><p>启动服务</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezllia2.png" alt="image-20201203150246256"></p>
-<ol start="3">
-<li><p>运行服务端软件</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla3.png" alt="image-20201203150440444"></p>
-</li>
-</ol>
-</li>
-<li><p>选择这个添加用户</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla4.png" alt="image-20201203151128124"></p>
-</li>
-<li><p>设置用户</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla5.png" alt="image-20201203150554956"></p>
-<ol start="5">
-<li>设置密码</li>
-</ol>
-</li>
-</ol>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla6.png" alt="image-20201203151414970"></p>
-<p>3.设置共享文件夹</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla7.png" alt="image-20201203151545703"></p>
-<p>这时候服务端就设置好啦</p>
-<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>下面配置客户端软件</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla8.png" alt="image-20201203151712608"></p>
-<ol>
-<li>新建站点</li>
-</ol>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Filezilla9.png" alt="image-20201203151914710"></p>
-<p>3.传输设置</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla10.png" alt="image-20201203152132810"></p>
-<ol start="4">
-<li>点击连接</li>
-<li>测试连接，打开浏览器进行访问<ul>
-<li>在浏览器地址栏输入：FTP://127.0.0.1回车访问</li>
-<li>输入用户名和密码即可访问</li>
-</ul>
-</li>
-</ol>
-<p>6.访问成功</p>
-<p><img src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/codemaster1024/Image/blog/Fillezilla11.png" alt="image-20201203173304627"></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 面试 </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java面试题综合总结（一）</title>
+      <link href="posts/18623/"/>
+      <url>posts/18623/</url>
+      
+        <content type="html"><![CDATA[<p>  走在应届毕业生的路上，特此总结了一些面试题，还望一起学习交流。</p><h2 id="1-面向对象和面向过程的区别"><a href="#1-面向对象和面向过程的区别" class="headerlink" title="1.面向对象和面向过程的区别"></a><strong>1.面向对象和面向过程的区别</strong></h2><ul><li><p>面向过程<br>优点：性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、Linux/Unix等一般采用面向过程开发，性能是最重要的因素。<br>缺点：没有面向对象易维护、易复用、易扩展</p></li><li><p>面向对象<br>优点：易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统更加灵活、更加易于维护<br>缺点：性能比面向过程低</p></li></ul><h2 id="2-Java的四个基本特性（抽象、封装、继承，多态）"><a href="#2-Java的四个基本特性（抽象、封装、继承，多态）" class="headerlink" title="2.Java的四个基本特性（抽象、封装、继承，多态）"></a><strong>2.Java的四个基本特性（抽象、封装、继承，多态）</strong></h2><ul><li><p>抽象：就是把现实生活中的某一类东西提取出来，用程序代码表示，我们通常叫做类或者接口。抽象包括两个方面：一个是数据抽象，一个是过程抽象。数据抽象也就是对象的属性。过程抽象是对象的行为特征。</p></li><li><p>封装：把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行封装隐藏。封装分为属性的封装和方法的封装。</p></li><li><p>继承：是对有着共同特性的多类事物，进行再抽象成一个类。这个类就是多类事物的父类。父类的意义在于抽取多类事物的共性。</p></li><li><p>多态：允许不同类的对象对同一消息做出响应。方法的重载、类的覆盖正体现了多态。</p></li></ul><h2 id="3-重载和重写的区别"><a href="#3-重载和重写的区别" class="headerlink" title="3.重载和重写的区别"></a><strong>3.重载和重写的区别</strong></h2><ul><li><p>重载：发生在同一个类中，方法名必须相同，参数类型不同、个数不同、顺序不同，方法返回值和访问修饰符可以不同，发生在编译时。</p></li><li><p>重写：发生在父子类中，方法名、参数列表必须相同，返回值类型小于等于父类，抛出的异常小于等于父类，访问修饰符大于等于父类；如果父类方法访问修饰符为private则子类中就不是重写。</p></li></ul><h2 id="4-构造器Constructor是否可被override"><a href="#4-构造器Constructor是否可被override" class="headerlink" title="4.构造器Constructor是否可被override"></a><strong>4.构造器Constructor是否可被override</strong></h2><p>构造器不能被重写，不能用static修饰构造器，只能用public<br>private protected这三个权限修饰符，且不能有返回语句。</p><h2 id="5-访问控制符public-protected-private-以及默认的区别"><a href="#5-访问控制符public-protected-private-以及默认的区别" class="headerlink" title="5.访问控制符public,protected,private,以及默认的区别"></a><strong>5.访问控制符public,protected,private,以及默认的区别</strong></h2><ul><li><p>private只有在本类中才能访问；</p></li><li><p>public在任何地方都能访问；</p></li><li><p>protected在同包内的类及包外的子类能访问；<br>默认不写在同包内能访问。</p></li></ul><h2 id="6是否可以继承String类"><a href="#6是否可以继承String类" class="headerlink" title="6是否可以继承String类#"></a><strong>6是否可以继承String类#</strong></h2><ul><li>String类是final类故不可以继承，一切由final修饰过的都不能继承。</li></ul><h2 id="7-String和StringBuffer、StringBuilder的区别"><a href="#7-String和StringBuffer、StringBuilder的区别" class="headerlink" title="7.String和StringBuffer、StringBuilder的区别"></a><strong>7.String和StringBuffer、StringBuilder的区别</strong></h2><ul><li><p>可变性<br>String类中使用字符数组保存字符串，private<br>final char value[]，所以string对象是不可变的。StringBuilder与StringBuffer都继承自AbstractStringBuilder类，在AbstractStringBuilder中也是使用字符数组保存字符串，char[]<br>value，这两种对象都是可变的。</p></li><li><p>线程安全性<br>String中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder是StringBuilder与StringBuffer的公共父类，定义了一些字符串的基本操作，如expandCapacity、append、insert、indexOf等公共方法。StringBuffer对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder并没有对方法进行加同步锁，所以是非线程安全的。</p></li><li><p>性能<br>每次对String 类型进行改变的时候，都会生成一个新的String 对象，然后将指针指向新的String 对象。StringBuffer每次都会对<br>StringBuffer 对象本身进行操作，而不是生成新的对象并改变对象引用。相同情况下使用<br>StirngBuilder 相比使用<br>StringBuffer 仅能获得10%~15% 左右的性能提升，但却要冒多线程不安全的风险。</p></li></ul><h2 id="8-hashCode和equals方法的关系"><a href="#8-hashCode和equals方法的关系" class="headerlink" title="8.hashCode和equals方法的关系"></a><strong>8.hashCode和equals方法的关系</strong></h2><p>equals相等，hashcode必相等；hashcode相等，equals可能不相等。</p><h2 id="9-抽象类和接口的区别"><a href="#9-抽象类和接口的区别" class="headerlink" title="9.抽象类和接口的区别"></a><strong>9.抽象类和接口的区别</strong></h2><ul><li><p>语法层次<br>抽象类和接口分别给出了不同的语法定义。</p></li><li><p>设计层次<br>抽象层次不同，抽象类是对类抽象，而接口是对行为的抽象。抽象类是对整个类整体进行抽象，包括属性、行为，但是接口却是对类局部（行为）进行抽象。抽象类是自底向上抽象而来的，接口是自顶向下设计出来的。</p></li><li><p>跨域不同<br>抽象类所体现的是一种继承关系，要想使得继承关系合理，父类和派生类之间必须存在”is-a”<br>关系，即父类和派生类在概念本质上应该是相同的。对于接口则不然，并不要求接口的实现者和接口定义在概念本质上是一致的，仅仅是实现了接口定义的契约而已，”like-a”的关系。</p></li></ul><h2 id="10-自动装箱与拆箱"><a href="#10-自动装箱与拆箱" class="headerlink" title="10.自动装箱与拆箱"></a><strong>10.自动装箱与拆箱</strong></h2><ul><li><p>装箱：将基本类型用它们对应的引用类型包装起来；</p></li><li><p>拆箱：将包装类型转换为基本数据类型；<br>Java使用自动装箱和拆箱机制，节省了常用数值的内存开销和创建对象的开销，提高了效率，由编译器来完成，编译器会在编译期根据语法决定是否进行装箱和拆箱动作。</p></li></ul><h2 id="11-什么是泛型、为什么要使用以及泛型擦除"><a href="#11-什么是泛型、为什么要使用以及泛型擦除" class="headerlink" title="11.什么是泛型、为什么要使用以及泛型擦除"></a><strong>11.什么是泛型、为什么要使用以及泛型擦除</strong></h2><p>泛型，即“参数化类型”。<br>    创建集合时就指定集合元素的类型，该集合只能保存其指定类型的元素，避免使用强制类型转换。<br>Java编译器生成的字节码是不包涵泛型信息的，泛型类型信息将在编译处理是被擦除，这个过程即类型擦除。泛型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。<br>类型擦除的主要过程如下：<br>1）将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。<br>2）移除所有的类型参数。</p><h2 id="12-Java中的集合类及关系图"><a href="#12-Java中的集合类及关系图" class="headerlink" title="12.Java中的集合类及关系图"></a><strong>12.Java中的集合类及关系图</strong></h2><ul><li>List和Set继承自Collection接口。</li><li>Set无序不允许元素重复。HashSet和TreeSet是两个主要的实现类。</li><li>List有序且允许元素重复。ArrayList、LinkedList和Vector是三个主要的实现类。</li><li>Map也属于集合系统，但和Collection接口没关系。Map是key对value的映射集合，其中key列就是一个集合。key不能重复，但是value可以重复。HashMap、TreeMap和Hashtable是三个主要的实现类。</li><li>SortedSet和SortedMap接口对元素按指定规则排序，SortedMap是对key列进行排序。</li></ul><h2 id="13-HashMap实现原理"><a href="#13-HashMap实现原理" class="headerlink" title="13.HashMap实现原理"></a><strong>13.HashMap实现原理</strong></h2><p>具体原理参考文章：<br><a href="http://zhangshixi.iteye.com/blog/672697">http://zhangshixi.iteye.com/blog/672697</a><br><a href="http://www.admin10000.com/document/3322.html">http://www.admin10000.com/document/3322.html</a></p><h2 id="14-HashTable实现原理"><a href="#14-HashTable实现原理" class="headerlink" title="14.HashTable实现原理"></a><strong>14.HashTable实现原理</strong></h2><p>具体原理参考文章：<br><a href="http://www.cnblogs.com/skywang12345/p/3310887.html">http://www.cnblogs.com/skywang12345/p/3310887.html</a><br><a href="http://blog.csdn.net/chdjj/article/details/38581035">http://blog.csdn.net/chdjj/article/details/38581035</a></p><h2 id="15-HashMap和HashTable区别"><a href="#15-HashMap和HashTable区别" class="headerlink" title="15.HashMap和HashTable区别"></a><strong>15.HashMap和HashTable区别</strong></h2><p>1）HashTable的方法前面都有synchronized来同步，是线程安全的；HashMap未经同步，是非线程安全的。<br>2）HashTable不允许null值(key和value都不可以) ；HashMap允许null值(key和value都可以)。<br>3）HashTable有一个contains(Object<br>value)功能和containsValue(Object<br>value)功能一样。<br>4）HashTable使用Enumeration进行遍历；HashMap使用Iterator进行遍历。<br>5）HashTable中hash数组默认大小是11，增加的方式是old*2+1；HashMap中hash数组的默认大小是16，而且一定是2的指数。<br>6）哈希值的使用不同，HashTable直接使用对象的hashCode； HashMap重新计算hash值，而且用与代替求模。</p>]]></content>
+      
+      
       <categories>
-        <category>效率工具</category>
+          
+          <category> 面试 </category>
+          
       </categories>
-      <tags>
-        <tag>工具</tag>
-        <tag>FTP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>多线程并发模拟购票</title>
-    <url>/posts/120343/</url>
-    <content><![CDATA[<h1 id="多线程并发模拟购票"><a href="#多线程并发模拟购票" class="headerlink" title="多线程并发模拟购票"></a>多线程并发模拟购票</h1><p>需求：用多线程模拟车站购票。100张票，200个人去购买。</p>
-<p>买不到的就购票失败，100张票不可以多卖，不可以少卖。</p>
-<h2 id="车票类"><a href="#车票类" class="headerlink" title="车票类"></a>车票类</h2><p>含有一个购票的方法，所有线程的共享对象是车票类，所以直接用车票类对象锁住购票方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.qiyiyu.javase.thread.buyticket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>: 车票类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> 小小强</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/11/21</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tickets</span> </span>&#123;</span><br><span class="line">    <span class="comment">//剩余票数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> allowance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tickets</span><span class="params">(<span class="keyword">int</span> allowance)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.allowance = allowance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAllowance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> allowance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAllowance</span><span class="params">(<span class="keyword">int</span> allowance)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.allowance = allowance;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 购票</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">buyTickets</span><span class="params">(<span class="keyword">int</span> amount)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.getAllowance() &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;剩余&quot;</span> + <span class="keyword">this</span>.getAllowance() + <span class="string">&quot;票已经售空&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//购票前余量</span></span><br><span class="line">            <span class="keyword">int</span> before = <span class="keyword">this</span>.allowance;</span><br><span class="line">            <span class="keyword">int</span> after = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.allowance &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">//买完后剩余票数</span></span><br><span class="line">                after = before - amount;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                after = before;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.setAllowance(after);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="顾客类"><a href="#顾客类" class="headerlink" title="顾客类"></a>顾客类</h2><p>将共享对象作为参数传进去</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.qiyiyu.javase.thread.buyticket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> 小小强</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/11/21</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomerRunnable</span>  <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span>  Tickets tickets;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CustomerRunnable</span><span class="params">(Tickets tickets)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.tickets = tickets;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                  <span class="keyword">boolean</span> flag =  tickets.buyTickets(<span class="number">1</span>);</span><br><span class="line">                  <span class="keyword">if</span> (flag)&#123;</span><br><span class="line"></span><br><span class="line">                      System.out.println(Thread.currentThread().getName() + <span class="string">&quot;购买成功，当前剩余票数&quot;</span> + tickets.getAllowance());</span><br><span class="line">                  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                      System.out.println(Thread.currentThread().getName() + <span class="string">&quot;购买失败，当前剩余票数&quot;</span> + tickets.getAllowance());</span><br><span class="line"></span><br><span class="line">                  &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.qiyiyu.javase.thread.buyticket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:测试</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span> 小小强</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2020/11/21</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BuyTicketTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//100张票 所有线程都共享这个票对象，通过把这个对象传到线程里</span></span><br><span class="line">        Tickets tickets = <span class="keyword">new</span> Tickets(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建数组</span></span><br><span class="line">        CustomerRunnable[] customerRunnables = <span class="keyword">new</span> CustomerRunnable[<span class="number">200</span>];</span><br><span class="line"></span><br><span class="line">        Thread[] threads = <span class="keyword">new</span> Thread[<span class="number">200</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; customerRunnables.length; i++) &#123;</span><br><span class="line">            <span class="comment">//创建对象</span></span><br><span class="line">            customerRunnables[i] = <span class="keyword">new</span> CustomerRunnable(tickets);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//给每个对象创建线程</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; threads.length; i++) &#123;</span><br><span class="line">            threads[i] = <span class="keyword">new</span> Thread(customerRunnables[i]);</span><br><span class="line">            threads[i].setName(<span class="string">&quot;票友&quot;</span> + i);</span><br><span class="line">            <span class="comment">//启动线程</span></span><br><span class="line">            threads[i].start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 面试 </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mybatis面试整理(二)</title>
+      <link href="posts/38514/"/>
+      <url>posts/38514/</url>
+      
+        <content type="html"><![CDATA[<h3 id="16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？"><a href="#16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？" class="headerlink" title="16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？"></a>16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？</h3><p>答：、、、、</p><p>， 加上动态 sql 的 9 个标签， 其中为 sql 片段标签， 通过</p><p>标签引入  sql  片段，为不支持自增的主键生成策略标签。</p><h3 id="17、Mybatis-的-Xml-映射文件中，-不同的-Xml-映射文件，-id-是否可以重复？"><a href="#17、Mybatis-的-Xml-映射文件中，-不同的-Xml-映射文件，-id-是否可以重复？" class="headerlink" title="17、Mybatis 的 Xml 映射文件中， 不同的 Xml 映射文件， id 是否可以重复？"></a>17、Mybatis 的 Xml 映射文件中， 不同的 Xml 映射文件， id 是否可以重复？</h3><p>不同的 Xml 映射文件， 如果配置了 namespace， 那么 id 可以重复；如果没有配置 namespace， 那么 id 不能重复；</p><p>原因就是 namespace+id 是作为 Map的 key 使用的， 如果没有 namespace， 就剩下 id， 那么， id 重复会导致数据互相覆盖。有了 namespace，自然 id 就可以重复，namespace 不同，namespace+id 自然也就不同。</p><h3 id="18、为什么说-Mybatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？"><a href="#18、为什么说-Mybatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？" class="headerlink" title="18、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？"></a>18、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？</h3><p>Hibernate 属于全自动 ORM 映射工具， 使用 Hibernate 查询关联对象或者关联集合对象时， 可以根据对象关系模型直接获取， 所以它是全自动的。而 Mybatis 在查询关联对象或关联集合对象时，需要手动编写 sql 来完成，所以，称之为半自动 ORM 映射工具。</p><h3 id="20、MyBatis-实现一对一有几种方式-具体怎么操作的？"><a href="#20、MyBatis-实现一对一有几种方式-具体怎么操作的？" class="headerlink" title="20、MyBatis 实现一对一有几种方式?具体怎么操作的？"></a>20、MyBatis 实现一对一有几种方式?具体怎么操作的？</h3><p>有联合查询和嵌套查询,联合查询是几个表联合查询,只查询一次, 通过在resultMap 里面配置 association 节点配置一对一的类就可以完成；</p><p>嵌套查询是先查一个表，根据这个表里面的结果的 外键 id，去再另外一个表里面查询数据,也是通过 association 配置，但另外一个表的查询通过 select 属性配置。</p><h3 id="21、MyBatis-实现一对多有几种方式-怎么操作的？"><a href="#21、MyBatis-实现一对多有几种方式-怎么操作的？" class="headerlink" title="21、MyBatis 实现一对多有几种方式,怎么操作的？"></a>21、MyBatis 实现一对多有几种方式,怎么操作的？</h3><p>有联合查询和嵌套查询。联合查询是几个表联合查询,只查询一次,通过在</p><p>resultMap 里面的 collection 节点配置一对多的类就可以完成；嵌套查询是先查一个表,根据这个表里面的 结果的外键 id,去再另外一个表里面查询数据,也是通过配置 collection,但另外一个表的查询通过 select 节点配置。</p><h3 id="22、Mybatis-是否支持延迟加载？如果支持，它的实现原理是什么？"><a href="#22、Mybatis-是否支持延迟加载？如果支持，它的实现原理是什么？" class="headerlink" title="22、Mybatis 是否支持延迟加载？如果支持，它的实现原理是什么？"></a>22、Mybatis 是否支持延迟加载？如果支持，它的实现原理是什么？</h3><p>答：Mybatis 仅支持 association 关联对象和 collection 关联集合对象的延迟加载， association 指的就是一对一， collection 指的就是一对多查询。在 Mybatis 配置文件中， 可以配置是否启用延迟加载  lazyLoadingEnabled=true|false。</p><p>它的原理是， 使用 CGLIB 创建目标对象的代理对象， 当调用目标方法时， 进入拦截器方法， 比如调用 a.getB().getName()， 拦截器 invoke()方法发现 a.getB()是null 值， 那么就会单独发送事先保存好的查询关联 B 对象的 sql， 把 B 查询上来， 然后调用 a.setB(b)，于是 a 的对象 b 属性就有值了，接着完成 a.getB().getName()方法的调用。这就是延迟加载的基本原理。</p><p>当然了， 不光是 Mybatis， 几乎所有的包括 Hibernate， 支持延迟加载的原理都是一样的。</p><h3 id="23、Mybatis-的一级、二级缓存"><a href="#23、Mybatis-的一级、二级缓存" class="headerlink" title="23、Mybatis 的一级、二级缓存:"></a>23、Mybatis 的一级、二级缓存:</h3><p>1）  一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存， 其存储作用域为Session， 当 Session flush  或  close  之后， 该  Session  中的所有  Cache  就将清空， 默认打开一级缓存。</p><p>2） 二级缓存与一级缓存其机制相同，默认也是采用 PerpetualCache，HashMap 存储， 不同在于其存储作用域为 Mapper(Namespace)， 并且可自定义存储源， 如 Ehcache。默认不打开二级缓存， 要开启二级缓存， 使用二级缓存属性类需要实现 Serializable 序列化接口(可用来保存对象的状态),可在它的映射文件中配置</p><p>3）  对于缓存数据更新机制， 当某一个作用域(一级缓存 Session/二级缓存</p><p>Namespaces)的进行了 C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear 。</p><h3 id="24、什么是-MyBatis-的接口绑定？有哪些实现方式？"><a href="#24、什么是-MyBatis-的接口绑定？有哪些实现方式？" class="headerlink" title="24、什么是 MyBatis 的接口绑定？有哪些实现方式？"></a>24、什么是 MyBatis 的接口绑定？有哪些实现方式？</h3><p>接口绑定，就是在 MyBatis 中任意定义接口,然后把接口里面的方法和 SQL 语句绑定, 我们直接调用接口方法就可以,这样比起原来了 SqlSession 提供的方法我们可以有更加灵活的选择和设置。</p><p>接口绑定有两种实现方式,一种是通过注解绑定， 就是在接口的方法上面加上@Select、@Update 等注解， 里面包含 Sql 语句来绑定；另外一种就是通过 xml 里面写 SQL 来绑定, 在这种情况下,要指定 xml 映射文件里面的 namespace 必须为接口的全路径名。当 Sql 语句比较简单时候,用注解绑定, 当 SQL 语句比较复杂时候,用 xml 绑定,一般用 xml 绑定的比较多。</p><h3 id="25、使用-MyBatis-的mapper-接口调用时有哪些要求？"><a href="#25、使用-MyBatis-的mapper-接口调用时有哪些要求？" class="headerlink" title="25、使用 MyBatis 的mapper 接口调用时有哪些要求？"></a>25、使用 MyBatis 的mapper 接口调用时有哪些要求？</h3><p>1、Mapper 接口方法名和 mapper.xml 中定义的每个 sql 的 id 相同；</p><p>2、Mapper 接口方法的输入参数类型和 mapper.xml 中定义的每个 sql 的parameterType 的类型相同；</p><p>3、Mapper 接口方法的输出参数类型和 mapper.xml 中定义的每个 sql 的resultType 的类型相同；</p><p>4、Mapper.xml 文件中的 namespace 即是 mapper 接口的类路径。</p><h3 id="26、Mapper-编写有哪几种方式？"><a href="#26、Mapper-编写有哪几种方式？" class="headerlink" title="26、Mapper 编写有哪几种方式？"></a>26、Mapper 编写有哪几种方式？</h3><p>第一种：接口实现类继承 SqlSessionDaoSupport：使用此种方法需要编写mapper 接口， mapper 接口实现类、mapper.xml 文件。</p><p>1、在 sqlMapConfig.xml 中配置 mapper.xml 的位置</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure><p>1、定义 mapper 接口</p><p>3、实现类集成 SqlSessionDaoSupport</p><p>mapper 方法中可以  this.getSqlSession()进行数据增删改查。</p><p>4、spring 配置</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot; &quot;</span> <span class="attr">class</span>=<span class="string">&quot;mapper 接口的实现&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure><p>第二种：使用 org.mybatis.spring.mapper.MapperFactoryBean：</p><p>1、在 sqlMapConfig.xml 中配置 mapper.xml 的位置， 如果 mapper.xml 和mappre 接口的名称相同且在同一个目录， 这里可以不用配置</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure><p>2、定义 mapper 接口：</p><p>1、mapper.xml 中的 namespace 为 mapper 接口的地址</p><p>2、mapper 接口中的方法名和 mapper.xml 中的定义的 statement 的 id 保持一致</p><p>3、Spring 中定义</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperInterface&quot;</span>              <span class="attr">value</span>=<span class="string">&quot;mapper 接口地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure><p>第三种：使用 mapper 扫描器：</p><p>1、mapper.xml 文件编写：</p><p>mapper.xml 中的 namespace 为 mapper 接口的地址；</p><p>mapper 接口中的方法名和 mapper.xml 中的定义的 statement 的 id 保持一致；</p><p>如果将 mapper.xml 和 mapper 接口的名称保持一致则不用在 sqlMapConfig.xml 中进行配置。</p><p>2、定义 mapper 接口：</p><p>注意 mapper.xml 的文件名和 mapper 的接口名称保持一致， 且放在同一个目录</p><p>3、配置 mapper 扫描器：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;mapper 接口包地址&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactoryBeanName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure><p>4、使用扫描器后从 spring 容器中获取 mapper 的实现对象。</p><h3 id="27、简述-Mybatis-的插件运行原理，以及如何编写一个插件。"><a href="#27、简述-Mybatis-的插件运行原理，以及如何编写一个插件。" class="headerlink" title="27、简述 Mybatis 的插件运行原理，以及如何编写一个插件。"></a>27、简述 Mybatis 的插件运行原理，以及如何编写一个插件。</h3><p>答：Mybatis 仅可以编写针对 ParameterHandler、ResultSetHandler、</p><p>StatementHandler、Executor 这 4 种接口的插件， Mybatis 使用 JDK 的动态代理， 为需要拦截的接口生成代理对象以实现接口方法拦截功能， 每当执行这 4 种接口对象的方法时，就会进入拦截方法，具体就是 InvocationHandler 的 invoke() 方法， 当然， 只会拦截那些你指定需要拦截的方法。</p><p>编写插件：实现 Mybatis 的 Interceptor 接口并复写 intercept()方法， 然后在给插件编写注解， 指定要拦截哪一个接口的哪些方法即可， 记住， 别忘了在配置文件中配置你编写的插件。</p>]]></content>
+      
+      
       <categories>
-        <category>小模块</category>
+          
+          <category> 面试 </category>
+          
       </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的第一个博客</title>
-    <url>/posts/57728/</url>
-    <content><![CDATA[<h2 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h2><h1 id="About-This-Blog"><a href="#About-This-Blog" class="headerlink" title="About This  Blog"></a>About This  Blog</h1><p>各位小伙伴们大家好,就叫我小小强好啦~<br>关于我:<code>2020届毕业</code>,<br>  专业:<code>交通工程+软件工程</code>。<br>  目前就职岗位:<code>Java后端开发</code>。<br>我的博客主要会记录自己的一些学习笔记,分享一些开发中常用的知识,可能还会有一些其他网络上的小tips..balabala..等等吧<br>我B站链接是:(待更新)<br>我会尝试着把教程录制成视频供学习记录。<br>也欢迎大家与我交流吖！</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 面试 </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Mybatis面试整理(一)</title>
+      <link href="posts/22230/"/>
+      <url>posts/22230/</url>
+      
+        <content type="html"><![CDATA[<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><h3 id="1、什么是Mybatis？"><a href="#1、什么是Mybatis？" class="headerlink" title="1、什么是Mybatis？"></a>1、什么是Mybatis？</h3><p>1、Mybatis 是一个半 ORM（ 对象关系映射）框架，它内部封装了 JDBC，开发时只需要关注 SQL 语句本身， 不需要花费精力去处理加载驱动、创建连接、创建</p><p>statement 等繁杂的过程。程序员直接编写原生态 sql，可以严格控制 sql 执行性能， 灵活度高。</p><p>2、MyBatis 可以使用 XML 或注解来配置和映射原生信息， 将 POJO 映射成数据库中的记录， 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。</p><p>3、通过 xml 文件或注解的方式将要执行的各种 statement 配置起来， 并通过java 对象和 statement 中 sql 的动态参数进行映射生成最终执行的 sql 语句，最后由 mybatis 框架执行 sql 并将结果映射为 java 对象并返回。（ 从执行 sql 到返回 result 的过程）。</p><h3 id="2、Mybaits-的优点："><a href="#2、Mybaits-的优点：" class="headerlink" title="2、Mybaits 的优点："></a>2、Mybaits 的优点：</h3><p>1、基于 SQL 语句编程，相当灵活，不会对应用程序或者数据库的现有设计造成任何影响，SQL 写在 XML 里，解除 sql 与程序代码的耦合，便于统一管理；提供 XML 标签， 支持编写动态 SQL 语句， 并可重用。</p><p>2、与 JDBC 相比，减少了 50%以上的代码量，消除了 JDBC 大量冗余的代码，不需要手动开关连接；</p><p>3、很好的与各种数据库兼容（ 因为 MyBatis 使用 JDBC 来连接数据库，所以只要JDBC 支持的数据库 MyBatis 都支持）。</p><p>4、能够与 Spring 很好的集成；</p><p>5、提供映射标签， 支持对象与数据库的 ORM 字段关系映射；提供对象关系映射标签， 支持对象关系组件维护。</p><h3 id="3、MyBatis-框架的缺点："><a href="#3、MyBatis-框架的缺点：" class="headerlink" title="3、MyBatis 框架的缺点："></a>3、MyBatis 框架的缺点：</h3><p>1、SQL 语句的编写工作量较大， 尤其当字段多、关联表多时， 对开发人员编写SQL 语句的功底有一定要求。</p><p>2、SQL 语句依赖于数据库， 导致数据库移植性差， 不能随意更换数据库。</p><h3 id="4、MyBatis-框架适用场合："><a href="#4、MyBatis-框架适用场合：" class="headerlink" title="4、MyBatis 框架适用场合："></a>4、MyBatis 框架适用场合：</h3><p>1、MyBatis 专注于 SQL 本身， 是一个足够灵活的 DAO 层解决方案。</p><p>2、对性能的要求很高，或者需求变化较多的项目，如互联网项目， MyBatis 将是不错的选择。</p><h3 id="5、MyBatis-与Hibernate-有哪些不同？"><a href="#5、MyBatis-与Hibernate-有哪些不同？" class="headerlink" title="5、MyBatis 与Hibernate 有哪些不同？"></a>5、MyBatis 与Hibernate 有哪些不同？</h3><p>1、Mybatis 和 hibernate 不同，它不完全是一个 ORM 框架，因为 MyBatis 需要程序员自己编写 Sql 语句。</p><p>2、Mybatis 直接编写原生态 sql， 可以严格控制 sql 执行性能， 灵活度高， 非常适合对关系数据模型要求不高的软件开发， 因为这类软件需求变化频繁， 一但需求变化要求迅速输出成果。但是灵活的前提是 mybatis 无法做到数据库无关性， 如果需要实现支持多种数据库的软件，则需要自定义多套 sql 映射文件，工作量大。</p><p>3、Hibernate 对象/关系映射能力强， 数据库无关性好， 对于关系模型要求高的软件， 如果用 hibernate 开发可以节省很多代码， 提高效率。</p><h3 id="6、-和-的区别是什么？"><a href="#6、-和-的区别是什么？" class="headerlink" title="6、#{}和${}的区别是什么？"></a>6、#{}和${}的区别是什么？</h3><h1 id="是预编译处理，-是字符串替换。"><a href="#是预编译处理，-是字符串替换。" class="headerlink" title="#{}是预编译处理， ${}是字符串替换。"></a>#{}是预编译处理， ${}是字符串替换。</h1><p>1）#{}是预编译处理，$ {}是字符串替换。</p><p>2）mybatis在处理#{}时，会将sql中的#{}替换为?号，调用PreparedStatement的set方法来赋值；mybatis在处理 $ { } 时，就是把 ${ } 替换成变量的值。</p><p>3）使用 #{} 可以有效的防止SQL注入，提高系统安全性。</p><h3 id="7、当实体类中的属性名和表中的字段名不一样-，怎么办-？"><a href="#7、当实体类中的属性名和表中的字段名不一样-，怎么办-？" class="headerlink" title="7、当实体类中的属性名和表中的字段名不一样 ，怎么办 ？"></a>7、当实体类中的属性名和表中的字段名不一样 ，怎么办 ？</h3><p>第 1 种：通过在查询的 sql 语句中定义字段名的别名， 让字段名的别名和实体类的属性名一致。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">”selectorder”</span>  <span class="attr">parametertype</span>=<span class="string">”int”</span>  <span class="attr">resultetype</span>=<span class="string">”</span> <span class="attr">me.gacl.domain.order</span>”&gt;</span></span><br><span class="line">select order_id id, order_no orderno ,order_price price form orders where order_id=#&#123;id&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure><p>第 2 种：通过来映射字段名和实体类属性名的一一对应的关系。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getOrder&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;int&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;orderresultmap&quot;</span>&gt;</span></span><br><span class="line"> select * from orders where order_id=#&#123;id&#125;</span><br><span class="line"> <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">”me.gacl.domain.order”</span>  <span class="attr">id</span>=<span class="string">”orderresultmap”</span>&gt;</span></span><br><span class="line"> &lt;!–用 id 属性来映射主键字段–&gt;</span><br><span class="line"> <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">”id”</span>  <span class="attr">column</span>=<span class="string">”order_id”</span>&gt;</span></span><br><span class="line"> &lt;!–用 result 属性来映射非主键字段，property 为实体类属性名，column 为数据表中的属性–&gt;</span><br><span class="line"> <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> =  <span class="string">“orderno”</span>  <span class="attr">column</span> =<span class="string">”order_no”/</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">”price”</span>  <span class="attr">column</span>=<span class="string">”order_price”</span>  /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">reslutMap</span>&gt;</span></span><br></pre></td></tr></table></figure><h3 id="9、通常一个Xml-映射文件，都会写一个Dao-接口与之对应，"><a href="#9、通常一个Xml-映射文件，都会写一个Dao-接口与之对应，" class="headerlink" title="9、通常一个Xml 映射文件，都会写一个Dao 接口与之对应，"></a>9、通常一个Xml 映射文件，都会写一个Dao 接口与之对应，</h3><p>请问，这个Dao 接口的工作原理是什么？Dao 接口里的方法， 参数不同时，方法能重载吗？</p><p>Dao 接口即 Mapper 接口。接口的全限名，就是映射文件中的 namespace 的值；接口的方法名， 就是映射文件中 Mapper 的 Statement 的 id 值；接口方法内的参数， 就是传递给 sql 的参数.</p><p>Mapper 接口是没有实现类的，当调用接口方法时，接口全限名+方法名拼接字符串作为 key 值， 可唯一定位一个 MapperStatement。在 Mybatis 中， 每一个<br>select、insert 、update、delete标签，  都会被解析为一个MapperStatement 对象.<br>举例：com.mybatis3.mappers.StudentDao.findStudentById， 可以唯一 找 到 namespace 为 com.mybatis3.mappers.StudentDao 下 面 id 为findStudentById 的 MapperStatement 。<br>Mapper 接口里的方法，是不能重载的，因为是使用 全限名+方法名<br>的保存和寻找策略。Mapper 接口的工作原理是 JDK 动态代理， Mybatis 运行时会使用 JDK 动态代理为 Mapper 接口生成代理对象 proxy， 代理对象会拦截接口方法， 转而执行 MapperStatement 所代表的 sql， 然后将 sql 执行结果返回。</p><h3 id="10、Mybatis-是如何进行分页的？分页插件的原理是什么？"><a href="#10、Mybatis-是如何进行分页的？分页插件的原理是什么？" class="headerlink" title="10、Mybatis 是如何进行分页的？分页插件的原理是什么？"></a>10、Mybatis 是如何进行分页的？分页插件的原理是什么？</h3><p>Mybatis 使用 RowBounds 对象进行分页， 它是针对 ResultSet 结果集执行的内存分页，而非物理分页。可以在 sql 内直接书写带有物理分页的参数来完成物理分页功能， 也可以使用分页插件来完成物理分页。</p><p>分页插件的基本原理是使用 Mybatis 提供的插件接口， 实现自定义插件， 在插件的拦截方法内拦截待执行的 sql，然后重写 sql，根据 dialect 方言，添加对应的物理分页语句和物理分页参数。</p><h3 id="11、Mybatis-是如何将sql-执行结果封装为目标对象并返回的？都有哪些映射形式？"><a href="#11、Mybatis-是如何将sql-执行结果封装为目标对象并返回的？都有哪些映射形式？" class="headerlink" title="11、Mybatis 是如何将sql 执行结果封装为目标对象并返回的？都有哪些映射形式？"></a>11、Mybatis 是如何将sql 执行结果封装为目标对象并返回的？都有哪些映射形式？</h3><p>第一种是使用标签， 逐一定义数据库列名和对象属性名之间的映射关系。</p><p>第二种是使用 sql 列的别名功能， 将列的别名书写为对象属性名。</p><p>有了列名与属性名的映射关系后， Mybatis 通过反射创建对象， 同时使用反射给对象的属性逐一赋值并返回， 那些找不到映射关系的属性， 是无法完成赋值的。</p><h3 id="13、如何获取自动生成的-主-键值"><a href="#13、如何获取自动生成的-主-键值" class="headerlink" title="13、如何获取自动生成的(主)键值?"></a>13、如何获取自动生成的(主)键值?</h3><p>insert 方法总是返回一个 int 值 ， 这个值代表的是插入的行数。</p><p>如果采用自增长策略，自动生成的键值在 insert 方法执行完后可以被设置到传入的参数对象中。</p><p>示例：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">”insertname”</span>  <span class="attr">usegeneratedkeys</span>=<span class="string">”true”</span>  <span class="attr">keyproperty</span>=<span class="string">”</span> <span class="attr">id</span>”&gt;</span></span><br><span class="line"> insert into names (name) values (#&#123;name&#125;)</span><br><span class="line"> <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line">name name = new name(); name.setname(“fred”);</span><br><span class="line">int rows = mapper.insertname(name);</span><br><span class="line">// 完成后,id 已经被设置到对象中system.out.println(“rows inserted =  ”  + rows);</span><br><span class="line">system.out.println(“generated key value =  ”  + name.getid());</span><br></pre></td></tr></table></figure><h3 id="14、在-mapper-中如何传递多个参数"><a href="#14、在-mapper-中如何传递多个参数" class="headerlink" title="14、在 mapper 中如何传递多个参数?"></a>14、在 mapper 中如何传递多个参数?</h3><p>1、第一种：DAO 层的函数</p><p>public UserselectUser(String name,String area);</p><p>对应的 xml,#{0}代表接收的是 dao 层中的第一个参数，#{1}代表 dao 层中第二参数，更多参数一致往后加即可。</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span><span class="attr">resultMap</span>=<span class="string">&quot;BaseResultMap&quot;</span>&gt;</span> </span><br><span class="line">select *   from user_user_t   whereuser_name = #&#123;0&#125;</span><br><span class="line">and user_area=#&#123;1&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure><p>2、第二种：使用 @param 注解:</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface usermapper &#123;</span><br><span class="line">user selectuser(@param(“username”) string username,@param(“hashedpassword”) string hashedpassword);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后,就可以在 xml 像下面这样使用(推荐封装为一个 map,作为单个参数传递给mapper):</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">”selectuser”</span>  <span class="attr">resulttype</span>=<span class="string">”user”</span>&gt;</span> select id, username, hashedpassword from some_table</span><br><span class="line">where username = #&#123;username&#125;</span><br><span class="line">and hashedpassword = #&#123;hashedpassword&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure><p>3、第三种：多个参数封装成 map</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"> <span class="comment">//映射文件的命名空间.SQL 片段的 ID，就可以调用对应的映射文件中的</span></span><br><span class="line">SQL</span><br><span class="line"><span class="comment">//由于我们的参数超过了两个，而方法中只有一个 Object 参数收集，因此我们使用 Map 集合来装载我们的参数</span></span><br><span class="line">Map &lt; String, Object &gt; map = <span class="keyword">new</span> HashMap(); map.put(<span class="string">&quot;start&quot;</span>, start);</span><br><span class="line">map.put(<span class="string">&quot;end&quot;</span>, end);</span><br><span class="line"><span class="keyword">return</span> sqlSession.selectList(<span class="string">&quot;StudentID.pagination&quot;</span>, map);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123; e.printStackTrace(); sqlSession.rollback(); <span class="keyword">throw</span> e;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">MybatisUtil.closeSqlSession();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="15、Mybatis-动态sql-有什么用？执行原理？有哪些动态sql？"><a href="#15、Mybatis-动态sql-有什么用？执行原理？有哪些动态sql？" class="headerlink" title="15、Mybatis 动态sql 有什么用？执行原理？有哪些动态sql？"></a>15、Mybatis 动态sql 有什么用？执行原理？有哪些动态sql？</h3><p>Mybatis 动态 sql 可以在 Xml 映射文件内，以标签的形式编写动态 sql，执行原理是根据表达式的值 完成逻辑判断并动态拼接 sql 的功能。</p><p>Mybatis 提供了 9 种动态 sql 标签：trim | where | set | foreach | if | choose</p><p>| when | otherwise | bind 。</p><h3 id="16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？"><a href="#16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？" class="headerlink" title="16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？"></a>16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？</h3><p>答：、、、、</p><p>， 加上动态 sql 的 9 个标签， 其中为 sql 片段标签， 通过</p><p>标签引入  sql  片段，为不支持自增的主键生成策略标签。</p><p>17、Mybatis 的 Xml 映射文件中， 不同的 Xml 映射文件， id 是否可以重复？</p><p>不同的 Xml 映射文件， 如果配置了 namespace， 那么 id 可以重复；如果没有配置 namespace， 那么 id 不能重复；</p><p>原因就是 namespace+id 是作为 Map的 key 使用的， 如果没有 namespace， 就剩下 id， 那么， id 重复会导致数据互相覆盖。有了 namespace，自然 id 就可以重复，namespace 不同，namespace+id 自然也就不同。</p><h3 id="18、为什么说-Mybatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？"><a href="#18、为什么说-Mybatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？" class="headerlink" title="18、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？"></a>18、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？</h3><p>Hibernate 属于全自动 ORM 映射工具， 使用 Hibernate 查询关联对象或者关联集合对象时， 可以根据对象关系模型直接获取， 所以它是全自动的。而 Mybatis 在查询关联对象或关联集合对象时，需要手动编写 sql 来完成，所以，称之为半自动 ORM 映射工具。</p><h3 id="20、MyBatis-实现一对一有几种方式-具体怎么操作的？"><a href="#20、MyBatis-实现一对一有几种方式-具体怎么操作的？" class="headerlink" title="20、MyBatis 实现一对一有几种方式?具体怎么操作的？"></a>20、MyBatis 实现一对一有几种方式?具体怎么操作的？</h3><p>有联合查询和嵌套查询,联合查询是几个表联合查询,只查询一次, 通过在resultMap 里面配置 association 节点配置一对一的类就可以完成；</p><p>嵌套查询是先查一个表，根据这个表里面的结果的 外键 id，去再另外一个表里面查询数据,也是通过 association 配置，但另外一个表的查询通过 select 属性配置。</p><h3 id="21、MyBatis-实现一对多有几种方式-怎么操作的？"><a href="#21、MyBatis-实现一对多有几种方式-怎么操作的？" class="headerlink" title="21、MyBatis 实现一对多有几种方式,怎么操作的？"></a>21、MyBatis 实现一对多有几种方式,怎么操作的？</h3><p>有联合查询和嵌套查询。联合查询是几个表联合查询,只查询一次,通过在</p><p>resultMap 里面的 collection 节点配置一对多的类就可以完成；嵌套查询是先查一个表,根据这个表里面的 结果的外键 id,去再另外一个表里面查询数据,也是通过配置 collection,但另外一个表的查询通过 select 节点配置。</p><h3 id="22、Mybatis-是否支持延迟加载？如果支持，它的实现原理是什么？"><a href="#22、Mybatis-是否支持延迟加载？如果支持，它的实现原理是什么？" class="headerlink" title="22、Mybatis 是否支持延迟加载？如果支持，它的实现原理是什么？"></a>22、Mybatis 是否支持延迟加载？如果支持，它的实现原理是什么？</h3><p>答：Mybatis 仅支持 association 关联对象和 collection 关联集合对象的延迟加载， association 指的就是一对一， collection 指的就是一对多查询。在 Mybatis 配置文件中， 可以配置是否启用延迟加载  lazyLoadingEnabled=true|false。</p><p>它的原理是， 使用 CGLIB 创建目标对象的代理对象， 当调用目标方法时， 进入拦截器方法， 比如调用 a.getB().getName()， 拦截器 invoke()方法发现 a.getB()是null 值， 那么就会单独发送事先保存好的查询关联 B 对象的 sql， 把 B 查询上来， 然后调用 a.setB(b)，于是 a 的对象 b 属性就有值了，接着完成 a.getB().getName()方法的调用。这就是延迟加载的基本原理。</p><p>当然了， 不光是 Mybatis， 几乎所有的包括 Hibernate， 支持延迟加载的原理都是一样的。</p><h3 id="23、Mybatis-的一级、二级缓存"><a href="#23、Mybatis-的一级、二级缓存" class="headerlink" title="23、Mybatis 的一级、二级缓存:"></a>23、Mybatis 的一级、二级缓存:</h3><p>1）  一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存， 其存储作用域为Session， 当 Session flush  或  close  之后， 该  Session  中的所有  Cache  就将清空， 默认打开一级缓存。</p><p>2） 二级缓存与一级缓存其机制相同，默认也是采用 PerpetualCache，HashMap 存储， 不同在于其存储作用域为 Mapper(Namespace)， 并且可自定义存储源， 如 Ehcache。默认不打开二级缓存， 要开启二级缓存， 使用二级缓存属性类需要实现 Serializable 序列化接口(可用来保存对象的状态),可在它的映射文件中配置</p><p>3）  对于缓存数据更新机制， 当某一个作用域(一级缓存 Session/二级缓存</p><p>Namespaces)的进行了 C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear 。</p><h3 id="24、什么是-MyBatis-的接口绑定？有哪些实现方式？"><a href="#24、什么是-MyBatis-的接口绑定？有哪些实现方式？" class="headerlink" title="24、什么是 MyBatis 的接口绑定？有哪些实现方式？"></a>24、什么是 MyBatis 的接口绑定？有哪些实现方式？</h3><p>接口绑定，就是在 MyBatis 中任意定义接口,然后把接口里面的方法和 SQL 语句绑定, 我们直接调用接口方法就可以,这样比起原来了 SqlSession 提供的方法我们可以有更加灵活的选择和设置。</p><p>接口绑定有两种实现方式,一种是通过注解绑定， 就是在接口的方法上面加上@Select、@Update 等注解， 里面包含 Sql 语句来绑定；另外一种就是通过 xml 里面写 SQL 来绑定, 在这种情况下,要指定 xml 映射文件里面的 namespace 必须为接口的全路径名。当 Sql 语句比较简单时候,用注解绑定, 当 SQL 语句比较复杂时候,用 xml 绑定,一般用 xml 绑定的比较多。</p><h3 id="25、使用-MyBatis-的mapper-接口调用时有哪些要求？"><a href="#25、使用-MyBatis-的mapper-接口调用时有哪些要求？" class="headerlink" title="25、使用 MyBatis 的mapper 接口调用时有哪些要求？"></a>25、使用 MyBatis 的mapper 接口调用时有哪些要求？</h3><p>1、Mapper 接口方法名和 mapper.xml 中定义的每个 sql 的 id 相同；</p><p>2、Mapper 接口方法的输入参数类型和 mapper.xml 中定义的每个 sql 的parameterType 的类型相同；</p><p>3、Mapper 接口方法的输出参数类型和 mapper.xml 中定义的每个 sql 的resultType 的类型相同；</p><p>4、Mapper.xml 文件中的 namespace 即是 mapper 接口的类路径。</p><h3 id="26、Mapper-编写有哪几种方式？"><a href="#26、Mapper-编写有哪几种方式？" class="headerlink" title="26、Mapper 编写有哪几种方式？"></a>26、Mapper 编写有哪几种方式？</h3><p>第一种：接口实现类继承 SqlSessionDaoSupport：使用此种方法需要编写mapper 接口， mapper 接口实现类、mapper.xml 文件。</p><p>1、在 sqlMapConfig.xml 中配置 mapper.xml 的位置</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure><p>1、定义 mapper 接口</p><p>3、实现类集成 SqlSessionDaoSupport</p><p>mapper 方法中可以  this.getSqlSession()进行数据增删改查。</p><p>4、spring 配置</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot; &quot;</span> <span class="attr">class</span>=<span class="string">&quot;mapper 接口的实现&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure><p>第二种：使用 org.mybatis.spring.mapper.MapperFactoryBean：</p><p>1、在 sqlMapConfig.xml 中配置 mapper.xml 的位置， 如果 mapper.xml 和mappre 接口的名称相同且在同一个目录， 这里可以不用配置</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure><p>2、定义 mapper 接口：</p><p>1、mapper.xml 中的 namespace 为 mapper 接口的地址</p><p>2、mapper 接口中的方法名和 mapper.xml 中的定义的 statement 的 id 保持一致</p><p>3、Spring 中定义</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperInterface&quot;</span>              <span class="attr">value</span>=<span class="string">&quot;mapper 接口地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure><p>第三种：使用 mapper 扫描器：</p><p>1、mapper.xml 文件编写：</p><p>mapper.xml 中的 namespace 为 mapper 接口的地址；</p><p>mapper 接口中的方法名和 mapper.xml 中的定义的 statement 的 id 保持一致；</p><p>如果将 mapper.xml 和 mapper 接口的名称保持一致则不用在 sqlMapConfig.xml 中进行配置。</p><p>2、定义 mapper 接口：</p><p>注意 mapper.xml 的文件名和 mapper 的接口名称保持一致， 且放在同一个目录</p><p>3、配置 mapper 扫描器：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;mapper 接口包地址&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactoryBeanName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure><p>4、使用扫描器后从 spring 容器中获取 mapper 的实现对象。</p><h3 id="27、简述-Mybatis-的插件运行原理，以及如何编写一个插件。"><a href="#27、简述-Mybatis-的插件运行原理，以及如何编写一个插件。" class="headerlink" title="27、简述 Mybatis 的插件运行原理，以及如何编写一个插件。"></a>27、简述 Mybatis 的插件运行原理，以及如何编写一个插件。</h3><p>答：Mybatis 仅可以编写针对 ParameterHandler、ResultSetHandler、</p><p>StatementHandler、Executor 这 4 种接口的插件， Mybatis 使用 JDK 的动态代理， 为需要拦截的接口生成代理对象以实现接口方法拦截功能， 每当执行这 4 种接口对象的方法时，就会进入拦截方法，具体就是 InvocationHandler 的 invoke() 方法， 当然， 只会拦截那些你指定需要拦截的方法。</p><p>编写插件：实现 Mybatis 的 Interceptor 接口并复写 intercept()方法， 然后在给插件编写注解， 指定要拦截哪一个接口的哪些方法即可， 记住， 别忘了在配置文件中配置你编写的插件。</p>]]></content>
+      
+      
       <categories>
-        <category>生活</category>
+          
+          <category> 面试 </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mybatis面试整理(一)</title>
-    <url>/posts/22230/</url>
-    <content><![CDATA[<h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><h3 id="1、什么是Mybatis？"><a href="#1、什么是Mybatis？" class="headerlink" title="1、什么是Mybatis？"></a>1、什么是Mybatis？</h3><p>1、Mybatis 是一个半 ORM（ 对象关系映射）框架，它内部封装了 JDBC，开发时只需要关注 SQL 语句本身， 不需要花费精力去处理加载驱动、创建连接、创建</p>
-<p>statement 等繁杂的过程。程序员直接编写原生态 sql，可以严格控制 sql 执行性能， 灵活度高。</p>
-<p>2、MyBatis 可以使用 XML 或注解来配置和映射原生信息， 将 POJO 映射成数据库中的记录， 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。</p>
-<p>3、通过 xml 文件或注解的方式将要执行的各种 statement 配置起来， 并通过java 对象和 statement 中 sql 的动态参数进行映射生成最终执行的 sql 语句，最后由 mybatis 框架执行 sql 并将结果映射为 java 对象并返回。（ 从执行 sql 到返回 result 的过程）。</p>
-<h3 id="2、Mybaits-的优点："><a href="#2、Mybaits-的优点：" class="headerlink" title="2、Mybaits 的优点："></a>2、Mybaits 的优点：</h3><p>1、基于 SQL 语句编程，相当灵活，不会对应用程序或者数据库的现有设计造成任何影响，SQL 写在 XML 里，解除 sql 与程序代码的耦合，便于统一管理；提供 XML 标签， 支持编写动态 SQL 语句， 并可重用。</p>
-<p>2、与 JDBC 相比，减少了 50%以上的代码量，消除了 JDBC 大量冗余的代码，不需要手动开关连接；</p>
-<p>3、很好的与各种数据库兼容（ 因为 MyBatis 使用 JDBC 来连接数据库，所以只要JDBC 支持的数据库 MyBatis 都支持）。</p>
-<p>4、能够与 Spring 很好的集成；</p>
-<p>5、提供映射标签， 支持对象与数据库的 ORM 字段关系映射；提供对象关系映射标签， 支持对象关系组件维护。</p>
-<h3 id="3、MyBatis-框架的缺点："><a href="#3、MyBatis-框架的缺点：" class="headerlink" title="3、MyBatis 框架的缺点："></a>3、MyBatis 框架的缺点：</h3><p>1、SQL 语句的编写工作量较大， 尤其当字段多、关联表多时， 对开发人员编写SQL 语句的功底有一定要求。</p>
-<p>2、SQL 语句依赖于数据库， 导致数据库移植性差， 不能随意更换数据库。</p>
-<h3 id="4、MyBatis-框架适用场合："><a href="#4、MyBatis-框架适用场合：" class="headerlink" title="4、MyBatis 框架适用场合："></a>4、MyBatis 框架适用场合：</h3><p>1、MyBatis 专注于 SQL 本身， 是一个足够灵活的 DAO 层解决方案。</p>
-<p>2、对性能的要求很高，或者需求变化较多的项目，如互联网项目， MyBatis 将是不错的选择。</p>
-<h3 id="5、MyBatis-与Hibernate-有哪些不同？"><a href="#5、MyBatis-与Hibernate-有哪些不同？" class="headerlink" title="5、MyBatis 与Hibernate 有哪些不同？"></a>5、MyBatis 与Hibernate 有哪些不同？</h3><p>1、Mybatis 和 hibernate 不同，它不完全是一个 ORM 框架，因为 MyBatis 需要程序员自己编写 Sql 语句。</p>
-<p>2、Mybatis 直接编写原生态 sql， 可以严格控制 sql 执行性能， 灵活度高， 非常适合对关系数据模型要求不高的软件开发， 因为这类软件需求变化频繁， 一但需求变化要求迅速输出成果。但是灵活的前提是 mybatis 无法做到数据库无关性， 如果需要实现支持多种数据库的软件，则需要自定义多套 sql 映射文件，工作量大。</p>
-<p>3、Hibernate 对象/关系映射能力强， 数据库无关性好， 对于关系模型要求高的软件， 如果用 hibernate 开发可以节省很多代码， 提高效率。</p>
-<h3 id="6、-和-的区别是什么？"><a href="#6、-和-的区别是什么？" class="headerlink" title="6、#{}和${}的区别是什么？"></a>6、#{}和${}的区别是什么？</h3><h1 id="是预编译处理，-是字符串替换。"><a href="#是预编译处理，-是字符串替换。" class="headerlink" title="#{}是预编译处理， ${}是字符串替换。"></a>#{}是预编译处理， ${}是字符串替换。</h1><p>1）#{}是预编译处理，$ {}是字符串替换。</p>
-<p>2）mybatis在处理#{}时，会将sql中的#{}替换为?号，调用PreparedStatement的set方法来赋值；mybatis在处理 $ { } 时，就是把 ${ } 替换成变量的值。</p>
-<p>3）使用 #{} 可以有效的防止SQL注入，提高系统安全性。</p>
-<h3 id="7、当实体类中的属性名和表中的字段名不一样-，怎么办-？"><a href="#7、当实体类中的属性名和表中的字段名不一样-，怎么办-？" class="headerlink" title="7、当实体类中的属性名和表中的字段名不一样 ，怎么办 ？"></a>7、当实体类中的属性名和表中的字段名不一样 ，怎么办 ？</h3><p>第 1 种：通过在查询的 sql 语句中定义字段名的别名， 让字段名的别名和实体类的属性名一致。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">”selectorder”</span>  <span class="attr">parametertype</span>=<span class="string">”int”</span>  <span class="attr">resultetype</span>=<span class="string">”</span> <span class="attr">me.gacl.domain.order</span>”&gt;</span></span><br><span class="line">select order_id id, order_no orderno ,order_price price form orders where order_id=#&#123;id&#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>第 2 种：通过来映射字段名和实体类属性名的一一对应的关系。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getOrder&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;int&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;orderresultmap&quot;</span>&gt;</span></span><br><span class="line"> select * from orders where order_id=#&#123;id&#125;</span><br><span class="line"> <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">”me.gacl.domain.order”</span>  <span class="attr">id</span>=<span class="string">”orderresultmap”</span>&gt;</span></span><br><span class="line"> &lt;!–用 id 属性来映射主键字段–&gt;</span><br><span class="line"> <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">”id”</span>  <span class="attr">column</span>=<span class="string">”order_id”</span>&gt;</span></span><br><span class="line"> &lt;!–用 result 属性来映射非主键字段，property 为实体类属性名，column 为数据表中的属性–&gt;</span><br><span class="line"> <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> =  <span class="string">“orderno”</span>  <span class="attr">column</span> =<span class="string">”order_no”/</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">”price”</span>  <span class="attr">column</span>=<span class="string">”order_price”</span>  /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">reslutMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="9、通常一个Xml-映射文件，都会写一个Dao-接口与之对应，"><a href="#9、通常一个Xml-映射文件，都会写一个Dao-接口与之对应，" class="headerlink" title="9、通常一个Xml 映射文件，都会写一个Dao 接口与之对应，"></a>9、通常一个Xml 映射文件，都会写一个Dao 接口与之对应，</h3><p>请问，这个Dao 接口的工作原理是什么？Dao 接口里的方法， 参数不同时，方法能重载吗？</p>
-<p>Dao 接口即 Mapper 接口。接口的全限名，就是映射文件中的 namespace 的值；接口的方法名， 就是映射文件中 Mapper 的 Statement 的 id 值；接口方法内的参数， 就是传递给 sql 的参数.</p>
-<p>Mapper 接口是没有实现类的，当调用接口方法时，接口全限名+方法名拼接字符串作为 key 值， 可唯一定位一个 MapperStatement。在 Mybatis 中， 每一个<br>select、insert 、update、delete标签，  都会被解析为一个MapperStatement 对象.<br>举例：com.mybatis3.mappers.StudentDao.findStudentById， 可以唯一 找 到 namespace 为 com.mybatis3.mappers.StudentDao 下 面 id 为findStudentById 的 MapperStatement 。<br>Mapper 接口里的方法，是不能重载的，因为是使用 全限名+方法名<br>的保存和寻找策略。Mapper 接口的工作原理是 JDK 动态代理， Mybatis 运行时会使用 JDK 动态代理为 Mapper 接口生成代理对象 proxy， 代理对象会拦截接口方法， 转而执行 MapperStatement 所代表的 sql， 然后将 sql 执行结果返回。</p>
-<h3 id="10、Mybatis-是如何进行分页的？分页插件的原理是什么？"><a href="#10、Mybatis-是如何进行分页的？分页插件的原理是什么？" class="headerlink" title="10、Mybatis 是如何进行分页的？分页插件的原理是什么？"></a>10、Mybatis 是如何进行分页的？分页插件的原理是什么？</h3><p>Mybatis 使用 RowBounds 对象进行分页， 它是针对 ResultSet 结果集执行的内存分页，而非物理分页。可以在 sql 内直接书写带有物理分页的参数来完成物理分页功能， 也可以使用分页插件来完成物理分页。</p>
-<p>分页插件的基本原理是使用 Mybatis 提供的插件接口， 实现自定义插件， 在插件的拦截方法内拦截待执行的 sql，然后重写 sql，根据 dialect 方言，添加对应的物理分页语句和物理分页参数。</p>
-<h3 id="11、Mybatis-是如何将sql-执行结果封装为目标对象并返回的？都有哪些映射形式？"><a href="#11、Mybatis-是如何将sql-执行结果封装为目标对象并返回的？都有哪些映射形式？" class="headerlink" title="11、Mybatis 是如何将sql 执行结果封装为目标对象并返回的？都有哪些映射形式？"></a>11、Mybatis 是如何将sql 执行结果封装为目标对象并返回的？都有哪些映射形式？</h3><p>第一种是使用标签， 逐一定义数据库列名和对象属性名之间的映射关系。</p>
-<p>第二种是使用 sql 列的别名功能， 将列的别名书写为对象属性名。</p>
-<p>有了列名与属性名的映射关系后， Mybatis 通过反射创建对象， 同时使用反射给对象的属性逐一赋值并返回， 那些找不到映射关系的属性， 是无法完成赋值的。</p>
-<h3 id="13、如何获取自动生成的-主-键值"><a href="#13、如何获取自动生成的-主-键值" class="headerlink" title="13、如何获取自动生成的(主)键值?"></a>13、如何获取自动生成的(主)键值?</h3><p>insert 方法总是返回一个 int 值 ， 这个值代表的是插入的行数。</p>
-<p>如果采用自增长策略，自动生成的键值在 insert 方法执行完后可以被设置到传入的参数对象中。</p>
-<p>示例：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">”insertname”</span>  <span class="attr">usegeneratedkeys</span>=<span class="string">”true”</span>  <span class="attr">keyproperty</span>=<span class="string">”</span> <span class="attr">id</span>”&gt;</span></span><br><span class="line"> insert into names (name) values (#&#123;name&#125;)</span><br><span class="line"> <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line">name name = new name(); name.setname(“fred”);</span><br><span class="line">int rows = mapper.insertname(name);</span><br><span class="line">// 完成后,id 已经被设置到对象中system.out.println(“rows inserted =  ”  + rows);</span><br><span class="line">system.out.println(“generated key value =  ”  + name.getid());</span><br></pre></td></tr></table></figure>
-
-<h3 id="14、在-mapper-中如何传递多个参数"><a href="#14、在-mapper-中如何传递多个参数" class="headerlink" title="14、在 mapper 中如何传递多个参数?"></a>14、在 mapper 中如何传递多个参数?</h3><p>1、第一种：DAO 层的函数</p>
-<p>public UserselectUser(String name,String area);</p>
-<p>对应的 xml,#{0}代表接收的是 dao 层中的第一个参数，#{1}代表 dao 层中第二参数，更多参数一致往后加即可。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span><span class="attr">resultMap</span>=<span class="string">&quot;BaseResultMap&quot;</span>&gt;</span> </span><br><span class="line">select *   from user_user_t   whereuser_name = #&#123;0&#125;</span><br><span class="line">and user_area=#&#123;1&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>2、第二种：使用 @param 注解:</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">public interface usermapper &#123;</span><br><span class="line">user selectuser(@param(“username”) string username,@param(“hashedpassword”) string hashedpassword);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后,就可以在 xml 像下面这样使用(推荐封装为一个 map,作为单个参数传递给mapper):</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">”selectuser”</span>  <span class="attr">resulttype</span>=<span class="string">”user”</span>&gt;</span> select id, username, hashedpassword from some_table</span><br><span class="line">where username = #&#123;username&#125;</span><br><span class="line">and hashedpassword = #&#123;hashedpassword&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>3、第三种：多个参数封装成 map</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"> <span class="comment">//映射文件的命名空间.SQL 片段的 ID，就可以调用对应的映射文件中的</span></span><br><span class="line">SQL</span><br><span class="line"><span class="comment">//由于我们的参数超过了两个，而方法中只有一个 Object 参数收集，因此我们使用 Map 集合来装载我们的参数</span></span><br><span class="line">Map &lt; String, Object &gt; map = <span class="keyword">new</span> HashMap(); map.put(<span class="string">&quot;start&quot;</span>, start);</span><br><span class="line">map.put(<span class="string">&quot;end&quot;</span>, end);</span><br><span class="line"><span class="keyword">return</span> sqlSession.selectList(<span class="string">&quot;StudentID.pagination&quot;</span>, map);</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123; e.printStackTrace(); sqlSession.rollback(); <span class="keyword">throw</span> e;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">MybatisUtil.closeSqlSession();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="15、Mybatis-动态sql-有什么用？执行原理？有哪些动态sql？"><a href="#15、Mybatis-动态sql-有什么用？执行原理？有哪些动态sql？" class="headerlink" title="15、Mybatis 动态sql 有什么用？执行原理？有哪些动态sql？"></a>15、Mybatis 动态sql 有什么用？执行原理？有哪些动态sql？</h3><p>Mybatis 动态 sql 可以在 Xml 映射文件内，以标签的形式编写动态 sql，执行原理是根据表达式的值 完成逻辑判断并动态拼接 sql 的功能。</p>
-<p>Mybatis 提供了 9 种动态 sql 标签：trim | where | set | foreach | if | choose</p>
-<p>| when | otherwise | bind 。</p>
-<h3 id="16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？"><a href="#16、Xml-映射文件中，除了常见的-select-insert-updae-delete-标签之外，还有哪些标签？" class="headerlink" title="16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？"></a>16、Xml 映射文件中，除了常见的 select|insert|updae|delete 标签之外，还有哪些标签？</h3><p>答：、、、、</p>
-<p>， 加上动态 sql 的 9 个标签， 其中为 sql 片段标签， 通过</p>
-<p>标签引入  sql  片段，为不支持自增的主键生成策略标签。</p>
-<p>17、Mybatis 的 Xml 映射文件中， 不同的 Xml 映射文件， id 是否可以重复？</p>
-<p>不同的 Xml 映射文件， 如果配置了 namespace， 那么 id 可以重复；如果没有配置 namespace， 那么 id 不能重复；</p>
-<p>原因就是 namespace+id 是作为 Map的 key 使用的， 如果没有 namespace， 就剩下 id， 那么， id 重复会导致数据互相覆盖。有了 namespace，自然 id 就可以重复，namespace 不同，namespace+id 自然也就不同。</p>
-<h3 id="18、为什么说-Mybatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？"><a href="#18、为什么说-Mybatis-是半自动-ORM-映射工具？它与全自动的区别在哪里？" class="headerlink" title="18、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？"></a>18、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？</h3><p>Hibernate 属于全自动 ORM 映射工具， 使用 Hibernate 查询关联对象或者关联集合对象时， 可以根据对象关系模型直接获取， 所以它是全自动的。而 Mybatis 在查询关联对象或关联集合对象时，需要手动编写 sql 来完成，所以，称之为半自动 ORM 映射工具。</p>
-<h3 id="20、MyBatis-实现一对一有几种方式-具体怎么操作的？"><a href="#20、MyBatis-实现一对一有几种方式-具体怎么操作的？" class="headerlink" title="20、MyBatis 实现一对一有几种方式?具体怎么操作的？"></a>20、MyBatis 实现一对一有几种方式?具体怎么操作的？</h3><p>有联合查询和嵌套查询,联合查询是几个表联合查询,只查询一次, 通过在resultMap 里面配置 association 节点配置一对一的类就可以完成；</p>
-<p>嵌套查询是先查一个表，根据这个表里面的结果的 外键 id，去再另外一个表里面查询数据,也是通过 association 配置，但另外一个表的查询通过 select 属性配置。</p>
-<h3 id="21、MyBatis-实现一对多有几种方式-怎么操作的？"><a href="#21、MyBatis-实现一对多有几种方式-怎么操作的？" class="headerlink" title="21、MyBatis 实现一对多有几种方式,怎么操作的？"></a>21、MyBatis 实现一对多有几种方式,怎么操作的？</h3><p>有联合查询和嵌套查询。联合查询是几个表联合查询,只查询一次,通过在</p>
-<p>resultMap 里面的 collection 节点配置一对多的类就可以完成；嵌套查询是先查一个表,根据这个表里面的 结果的外键 id,去再另外一个表里面查询数据,也是通过配置 collection,但另外一个表的查询通过 select 节点配置。</p>
-<h3 id="22、Mybatis-是否支持延迟加载？如果支持，它的实现原理是什么？"><a href="#22、Mybatis-是否支持延迟加载？如果支持，它的实现原理是什么？" class="headerlink" title="22、Mybatis 是否支持延迟加载？如果支持，它的实现原理是什么？"></a>22、Mybatis 是否支持延迟加载？如果支持，它的实现原理是什么？</h3><p>答：Mybatis 仅支持 association 关联对象和 collection 关联集合对象的延迟加载， association 指的就是一对一， collection 指的就是一对多查询。在 Mybatis 配置文件中， 可以配置是否启用延迟加载  lazyLoadingEnabled=true|false。</p>
-<p>它的原理是， 使用 CGLIB 创建目标对象的代理对象， 当调用目标方法时， 进入拦截器方法， 比如调用 a.getB().getName()， 拦截器 invoke()方法发现 a.getB()是null 值， 那么就会单独发送事先保存好的查询关联 B 对象的 sql， 把 B 查询上来， 然后调用 a.setB(b)，于是 a 的对象 b 属性就有值了，接着完成 a.getB().getName()方法的调用。这就是延迟加载的基本原理。</p>
-<p>当然了， 不光是 Mybatis， 几乎所有的包括 Hibernate， 支持延迟加载的原理都是一样的。</p>
-<h3 id="23、Mybatis-的一级、二级缓存"><a href="#23、Mybatis-的一级、二级缓存" class="headerlink" title="23、Mybatis 的一级、二级缓存:"></a>23、Mybatis 的一级、二级缓存:</h3><p>1）  一级缓存: 基于 PerpetualCache 的 HashMap 本地缓存， 其存储作用域为Session， 当 Session flush  或  close  之后， 该  Session  中的所有  Cache  就将清空， 默认打开一级缓存。</p>
-<p>2） 二级缓存与一级缓存其机制相同，默认也是采用 PerpetualCache，HashMap 存储， 不同在于其存储作用域为 Mapper(Namespace)， 并且可自定义存储源， 如 Ehcache。默认不打开二级缓存， 要开启二级缓存， 使用二级缓存属性类需要实现 Serializable 序列化接口(可用来保存对象的状态),可在它的映射文件中配置</p>
-<p>3）  对于缓存数据更新机制， 当某一个作用域(一级缓存 Session/二级缓存</p>
-<p>Namespaces)的进行了 C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear 。</p>
-<h3 id="24、什么是-MyBatis-的接口绑定？有哪些实现方式？"><a href="#24、什么是-MyBatis-的接口绑定？有哪些实现方式？" class="headerlink" title="24、什么是 MyBatis 的接口绑定？有哪些实现方式？"></a>24、什么是 MyBatis 的接口绑定？有哪些实现方式？</h3><p>接口绑定，就是在 MyBatis 中任意定义接口,然后把接口里面的方法和 SQL 语句绑定, 我们直接调用接口方法就可以,这样比起原来了 SqlSession 提供的方法我们可以有更加灵活的选择和设置。</p>
-<p>接口绑定有两种实现方式,一种是通过注解绑定， 就是在接口的方法上面加上@Select、@Update 等注解， 里面包含 Sql 语句来绑定；另外一种就是通过 xml 里面写 SQL 来绑定, 在这种情况下,要指定 xml 映射文件里面的 namespace 必须为接口的全路径名。当 Sql 语句比较简单时候,用注解绑定, 当 SQL 语句比较复杂时候,用 xml 绑定,一般用 xml 绑定的比较多。</p>
-<h3 id="25、使用-MyBatis-的mapper-接口调用时有哪些要求？"><a href="#25、使用-MyBatis-的mapper-接口调用时有哪些要求？" class="headerlink" title="25、使用 MyBatis 的mapper 接口调用时有哪些要求？"></a>25、使用 MyBatis 的mapper 接口调用时有哪些要求？</h3><p>1、Mapper 接口方法名和 mapper.xml 中定义的每个 sql 的 id 相同；</p>
-<p>2、Mapper 接口方法的输入参数类型和 mapper.xml 中定义的每个 sql 的parameterType 的类型相同；</p>
-<p>3、Mapper 接口方法的输出参数类型和 mapper.xml 中定义的每个 sql 的resultType 的类型相同；</p>
-<p>4、Mapper.xml 文件中的 namespace 即是 mapper 接口的类路径。</p>
-<h3 id="26、Mapper-编写有哪几种方式？"><a href="#26、Mapper-编写有哪几种方式？" class="headerlink" title="26、Mapper 编写有哪几种方式？"></a>26、Mapper 编写有哪几种方式？</h3><p>第一种：接口实现类继承 SqlSessionDaoSupport：使用此种方法需要编写mapper 接口， mapper 接口实现类、mapper.xml 文件。</p>
-<p>1、在 sqlMapConfig.xml 中配置 mapper.xml 的位置</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>1、定义 mapper 接口</p>
-<p>3、实现类集成 SqlSessionDaoSupport</p>
-<p>mapper 方法中可以  this.getSqlSession()进行数据增删改查。</p>
-<p>4、spring 配置</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot; &quot;</span> <span class="attr">class</span>=<span class="string">&quot;mapper 接口的实现&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>第二种：使用 org.mybatis.spring.mapper.MapperFactoryBean：</p>
-<p>1、在 sqlMapConfig.xml 中配置 mapper.xml 的位置， 如果 mapper.xml 和mappre 接口的名称相同且在同一个目录， 这里可以不用配置</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;mapper.xml 文件的地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>2、定义 mapper 接口：</p>
-<p>1、mapper.xml 中的 namespace 为 mapper 接口的地址</p>
-<p>2、mapper 接口中的方法名和 mapper.xml 中的定义的 statement 的 id 保持一致</p>
-<p>3、Spring 中定义</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperFactoryBean&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;mapperInterface&quot;</span>              <span class="attr">value</span>=<span class="string">&quot;mapper 接口地址&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;sqlSessionFactory&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>第三种：使用 mapper 扫描器：</p>
-<p>1、mapper.xml 文件编写：</p>
-<p>mapper.xml 中的 namespace 为 mapper 接口的地址；</p>
-<p>mapper 接口中的方法名和 mapper.xml 中的定义的 statement 的 id 保持一致；</p>
-<p>如果将 mapper.xml 和 mapper 接口的名称保持一致则不用在 sqlMapConfig.xml 中进行配置。</p>
-<p>2、定义 mapper 接口：</p>
-<p>注意 mapper.xml 的文件名和 mapper 的接口名称保持一致， 且放在同一个目录</p>
-<p>3、配置 mapper 扫描器：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;basePackage&quot;</span> <span class="attr">value</span>=<span class="string">&quot;mapper 接口包地址&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;sqlSessionFactoryBeanName&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sqlSessionFactory&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>4、使用扫描器后从 spring 容器中获取 mapper 的实现对象。</p>
-<h3 id="27、简述-Mybatis-的插件运行原理，以及如何编写一个插件。"><a href="#27、简述-Mybatis-的插件运行原理，以及如何编写一个插件。" class="headerlink" title="27、简述 Mybatis 的插件运行原理，以及如何编写一个插件。"></a>27、简述 Mybatis 的插件运行原理，以及如何编写一个插件。</h3><p>答：Mybatis 仅可以编写针对 ParameterHandler、ResultSetHandler、</p>
-<p>StatementHandler、Executor 这 4 种接口的插件， Mybatis 使用 JDK 的动态代理， 为需要拦截的接口生成代理对象以实现接口方法拦截功能， 每当执行这 4 种接口对象的方法时，就会进入拦截方法，具体就是 InvocationHandler 的 invoke() 方法， 当然， 只会拦截那些你指定需要拦截的方法。</p>
-<p>编写插件：实现 Mybatis 的 Interceptor 接口并复写 intercept()方法， 然后在给插件编写注解， 指定要拦截哪一个接口的哪些方法即可， 记住， 别忘了在配置文件中配置你编写的插件。</p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 面试 </tag>
+            
+            <tag> Java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的第一个博客</title>
+      <link href="posts/57728/"/>
+      <url>posts/57728/</url>
+      
+        <content type="html"><![CDATA[<h2 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h2><h1 id="About-This-Blog"><a href="#About-This-Blog" class="headerlink" title="About This  Blog"></a>About This  Blog</h1><p>各位小伙伴们大家好,就叫我小小强好啦~<br>关于我:<code>2020届毕业</code>,<br>  专业:<code>交通工程+软件工程</code>。<br>  目前就职岗位:<code>Java后端开发</code>。<br>我的博客主要会记录自己的一些学习笔记,分享一些开发中常用的知识,可能还会有一些其他网络上的小tips..balabala..等等吧<br>我B站链接是:(待更新)<br>我会尝试着把教程录制成视频供学习记录。<br>也欢迎大家与我交流吖！</p>]]></content>
+      
+      
       <categories>
-        <category>面试</category>
+          
+          <category> 生活 </category>
+          
       </categories>
-      <tags>
-        <tag>面试</tag>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>字符串聚合函数</title>
-    <url>/posts/23432/</url>
-    <content><![CDATA[<h1 id="字符串聚合函数"><a href="#字符串聚合函数" class="headerlink" title="字符串聚合函数"></a>字符串聚合函数</h1><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>到年末了，甲方要一大堆的数据，项目经理让我给帮忙查完整理一下，来来回回也改了好几稿。最后给了我需要的数据的样式，经过尝试之后，最终那列就需要字符串拼接函数。大概的需求就是，通过查询之后，同一个人的最后一列是联合查询出来的，不一样的话都要显示出来，但是最后整理的数据需要将这一个人的那列合并在一起，就是一个人就一行数据。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>以前只是学过数字类型的聚合函数，像sum,count,max..而且竟然从来没有想过字符串去聚合的问题，虽然在开发中这种需求很少，但是如果是查询数据的话，我觉得还是有它的用武之地的,如果你不知道的话，就一起来看下吧~</p>
-<p>以Mysql示例：</p>
-<p>假设下面这张表是通过一个联合查询出来的表</p>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>userId</th>
-<th>userName</th>
-<th>ability</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>校长</td>
-<td>学校</td>
-</tr>
-<tr>
-<td>2</td>
-<td>2</td>
-<td>老师</td>
-<td>班级</td>
-</tr>
-<tr>
-<td>3</td>
-<td>3</td>
-<td>学生</td>
-<td>环境</td>
-</tr>
-<tr>
-<td>4</td>
-<td>1</td>
-<td>校长</td>
-<td>班级</td>
-</tr>
-<tr>
-<td>5</td>
-<td>2</td>
-<td>老师</td>
-<td>环境</td>
-</tr>
-<tr>
-<td>6</td>
-<td>1</td>
-<td>校长</td>
-<td>环境</td>
-</tr>
-</tbody></table>
-<p>现在需要将userId相同的行，把ability列合并显示，以逗号隔开。例如：</p>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>userId</th>
-<th>userName</th>
-<th>ability</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>1</td>
-<td>校长</td>
-<td>学校，班级，环境</td>
-</tr>
-</tbody></table>
-<p>在Mysql中，<code>group_concat</code>函数是典型的字符串连接函数。</p>
-<p><code>group_concat</code>函数完整的语法如下:</p>
-<p><code>group_concat([DISTINCT] 要连接的字段 [Order BY ASC/DESC 排序字段] [Separator &#39;分隔符&#39;])</code></p>
-<p>查询示例：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> userId,username,<span class="keyword">GROUP_CONCAT</span>(<span class="keyword">DISTINCT</span>(ability)) <span class="keyword">as</span> <span class="string">&#x27;ability&#x27;</span> <span class="keyword">from</span> <span class="string">`manager`</span> <span class="keyword">group</span> <span class="keyword">by</span> userId,username</span><br></pre></td></tr></table></figure>
-
-<p>查询结果是：</p>
-<table>
-<thead>
-<tr>
-<th>userId</th>
-<th>username</th>
-<th>ability</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>校长</td>
-<td>学生，班级，环境</td>
-</tr>
-<tr>
-<td>2</td>
-<td>老师</td>
-<td>班级，环境</td>
-</tr>
-<tr>
-<td>3</td>
-<td>学生</td>
-<td>环境</td>
-</tr>
-</tbody></table>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>如果你使用的oracle数据库，可以尝试使用<code>WM_CONCAT</code>这个函数,用法类似。</p>
-<blockquote>
-<p>任何傻瓜都能写出计算机可以理解的代码。好的程序员能写出人能读懂的代码 —— Martin Fowler</p>
-</blockquote>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>你好，hexo</title>
+      <link href="posts/18623/"/>
+      <url>posts/18623/</url>
+      
+        <content type="html"><![CDATA[<h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><p>欢迎使用 Hexo，此文档将帮助您快速上手。如果您在使用过程中遇到问题，请查看 <a href="https://hexo.io/zh-cn/docs/troubleshooting">问题解答</a> 中的解答，或者在 <a href="https://github.com/hexojs/hexo/issues">GitHub</a>、<a href="https://groups.google.com/group/hexo">Google Group</a> 上提问</p><h2 id="什么是-Hexo？"><a href="#什么是-Hexo？" class="headerlink" title="什么是 Hexo？"></a>什么是 Hexo？</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p><iframe src="https://www.youtube.com/embed/PsXWbI2Mqu0" loading="lazy" allowfullscreen="" frameborder="0"></iframe><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 Hexo 只需几分钟时间，若您在安装过程中遇到问题或无法找到解决方式，请<a href="https://github.com/hexojs/hexo/issues">提交问题</a>，我们会尽力解决您的问题。</p><h3 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h3><p>安装 Hexo 相当简单，只需要先安装下列应用程序即可：</p><ul><li><a href="http://nodejs.org/">Node.js</a> (Node.js 版本需不低于 8.10，建议使用 Node.js 10.0 及以上版本)</li><li><a href="http://git-scm.com/">Git</a></li></ul><p>如果您的电脑中已经安装上述必备程序，那么恭喜您！你可以直接前往 <a href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo">安装 Hexo</a> 步骤。</p><p>如果您的电脑中尚未安装所需要的程序，请根据以下安装指示完成安装。</p><h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><ul><li>Windows：下载并安装 <a href="https://git-scm.com/download/win">git</a>.</li><li>Mac：使用 <a href="http://mxcl.github.com/homebrew/">Homebrew</a>, <a href="http://www.macports.org/">MacPorts</a> 或者下载 <a href="http://sourceforge.net/projects/git-osx-installer/">安装程序</a>。</li><li>Linux (Ubuntu, Debian)：<code>sudo apt-get install git-core</code></li><li>Linux (Fedora, Red Hat, CentOS)：<code>sudo yum install git-core</code></li></ul><blockquote><p>Mac 用户</p><p>如果在编译时可能会遇到问题，请先到 App Store 安装 Xcode，Xcode 完成后，启动并进入 <strong>Preferences -&gt; Download -&gt; Command Line Tools -&gt; Install</strong> 安装命令行工具。</p></blockquote><blockquote><p>Windows 用户</p><p>对于中国大陆地区用户，可以前往 <a href="https://npm.taobao.org/mirrors/git-for-windows/">淘宝 Git for Windows 镜像</a> 下载 git 安装包。</p></blockquote><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>Node.js 为大多数平台提供了官方的 <a href="https://nodejs.org/en/download/">安装程序</a>。对于中国大陆地区用户，可以前往 <a href="https://npm.taobao.org/mirrors/node">淘宝 Node.js 镜像</a> 下载。</p><p>其它的安装方法：</p><ul><li>Windows：通过 <a href="https://github.com/jasongin/nvs/">nvs</a>（推荐）或者<a href="https://github.com/nvm-sh/nvm">nvm</a> 安装。</li><li>Mac：使用 <a href="https://brew.sh/">Homebrew</a> 或 <a href="http://www.macports.org/">MacPorts</a> 安装。</li><li>Linux（DEB/RPM-based）：从 <a href="https://github.com/nodesource/distributions">NodeSource</a> 安装。</li><li>其它：使用相应的软件包管理器进行安装，可以参考由 Node.js 提供的 <a href="https://nodejs.org/en/download/package-manager/">指导</a></li></ul><p>对于 Mac 和 Linux 同样建议使用 nvs 或者 nvm，以避免可能会出现的权限问题。</p><blockquote><p>Windows 用户</p><p>使用 Node.js 官方安装程序时，请确保勾选 <strong>Add to PATH</strong> 选项（默认已勾选）</p></blockquote><blockquote><p>For Mac / Linux 用户</p><p>如果在尝试安装 Hexo 的过程中出现 <code>EACCES</code> 权限错误，请遵循 <a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally">由 npmjs 发布的指导</a> 修复该问题。强烈建议 <strong>不要</strong> 使用 root、sudo 等方法覆盖权限</p></blockquote><h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure><h3 id="进阶安装和使用"><a href="#进阶安装和使用" class="headerlink" title="进阶安装和使用"></a>进阶安装和使用</h3><p>对于熟悉 npm 的进阶用户，可以仅局部安装 <code>hexo</code> 包。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo</span><br></pre></td></tr></table></figure><p>安装以后，可以使用以下两种方式执行 Hexo：</p><ol><li><p><code>npx hexo </code></p></li><li><p>将 Hexo 所在的目录下的 <code>node_modules</code> 添加到环境变量之中即可直接使用 <code>hexo </code>：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#39;PATH&#x3D;&quot;$PATH:.&#x2F;node_modules&#x2F;.bin&quot;&#39; &gt;&gt; ~&#x2F;.profile</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+      
+      
       <categories>
-        <category>MySQL</category>
+          
+          <category> hexo </category>
+          
       </categories>
-      <tags>
-        <tag>MySql基础知识</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
